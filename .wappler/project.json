@@ -27,7 +27,9 @@
       "checked": true
     },
     "platform": "electron",
-    "target": ""
+    "target": "",
+    "device": null,
+    "deviceId": null
   },
   "appFile": "/js/app.js",
   "extensions": []
