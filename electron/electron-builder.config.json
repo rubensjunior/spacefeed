@@ -12,7 +12,7 @@
   "publish": {
     "provider": "github",
     "owner": "rubensjunior",
-    "repo": "spacefeed"
+    "repo": "https://github.com/rubensjunior/spacefeed.git"
   },
   "nsis": {
     "allowElevation": true,
