@@ -1,0 +1,6 @@
+{
+  "appId": "com.spacefeed.app",
+  "appName": "spacefeed",
+  "webDir": "www",
+  "bundledWebRuntime": true
+}
