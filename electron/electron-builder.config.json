@@ -10,7 +10,9 @@
     "app/**/*"
   ],
   "publish": {
-    "provider": "github"
+    "provider": "github",
+    "owner": "rubensjunior",
+    "repo": "spacefeed"
   },
   "nsis": {
     "allowElevation": true,
