@@ -32,5 +32,6 @@
     "deviceId": null
   },
   "appFile": "/js/app.js",
-  "extensions": []
+  "extensions": [],
+  "activeGitRemote": "sgispacefeed"
 }
