@@ -26,7 +26,7 @@
     "capacitor": {
       "checked": true
     },
-    "platform": "electron",
+    "platform": "web",
     "target": "",
     "device": null,
     "deviceId": null
