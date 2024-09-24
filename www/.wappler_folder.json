@@ -2,5 +2,13 @@
   "dashboard.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "main.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "colaboradores.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

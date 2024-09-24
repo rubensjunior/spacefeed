@@ -19,6 +19,21 @@
 </head>
 
 <body is="dmx-app" id="index">
+	<script is="dmx-flow" id="redirectlogin" type="text/dmx-flow" autorun="true">{
+  condition: {
+    outputType: "boolean",
+    if: "{{loginusuario.data.id!=null}}",
+    then: {
+      steps: {
+        run: {
+          name: "redirecionar",
+          outputType: "text",
+          action: "{{navegacao.goto('dashboard.html')}}"
+        }
+      }
+    }
+  }
+}</script>
 	<dmx-notifications id="toast"></dmx-notifications>
 	<dmx-local-manager id="loginusuario"></dmx-local-manager>
 	<div is="dmx-browser" id="navegacao"></div>
@@ -30,7 +45,7 @@
 				<img src="assets/images/spacefeed-black.png" class="mb-5" width="180">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-md-8">
-						<form id="login" is="dmx-serverconnect-form" method="post" credentials="true" action="https://sun.spacefeed.app/api/usuarios/login" site="web" dmx-on:error="toast.danger(lastError.status+lastError.message+lastError.response);login.reset()" dmx-on:unauthorized="toast.warning('Login e/ou senha errado.');login.reset()" dmx-on:success="toast.success('Login realizado com sucesso.')">
+						<form id="login" is="dmx-serverconnect-form" method="post" credentials="true" action="https://sun.spacefeed.app/api/usuarios/login" site="web" dmx-on:error="toast.danger(lastError.status+lastError.message+lastError.response);login.reset()" dmx-on:unauthorized="toast.warning('Login e/ou senha errado.');login.reset()" dmx-on:success="toast.success('Bem-vindo!');login.reset();loginusuario.set('id',login.data.identity);navegacao.goto('dashboard.html')">
 							<div class="form-group mb-4">
 								<input type="email" class="form-control form-control-lg ipt-text py-2" id="loginemail" name="loginemail" aria-describedby="input1_help" placeholder="E-mail cadastrado">
 							</div>

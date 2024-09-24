@@ -13,9 +13,15 @@
     <script src="dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
     <script src="js/routes.js" defer></script>
     <script src="dmxAppConnect/dmxBootstrap5Collapse/dmxBootstrap5Collapse.js" defer></script>
+    <script src="dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
+    <script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
+    <script src="dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
 </head>
 
 <body is="dmx-app" id="dashboard" class="bg-inner">
+    <div is="dmx-browser" id="navegacao"></div>
+    <dmx-serverconnect id="usuario" url="https://sun.spacefeed.app/api/usuarios/identificar-usuario" site="web" dmx-param:id="loginusuario.data.id"></dmx-serverconnect>
+    <dmx-local-manager id="loginusuario"></dmx-local-manager>
 
     <div class="container-fluid">
         <header class="container-fluid navbar-dark fixed-top bg-black px-5 py-2">
@@ -23,7 +29,7 @@
                 <div class="row">
                     <div class="col">
                         <nav class="navbar navbar-expand-lg ">
-                            <a class="navbar-brand ms-auto" href="#">
+                            <a class="navbar-brand ms-auto" href="index.html">
                                 <img src="assets/images/spacefeed-white.png" height="32"></a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1_collapse" aria-controls="navbar1_collapse" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -34,6 +40,8 @@
                                     <a class="nav-item nav-link text-white" href="#">About</a>
                                     <a class="nav-item nav-link text-white" href="#">Contact</a>
                                 </div>
+                                <button id="btn6" class="btn ms-5 text-light" dmx-on:click="loginusuario.remove('id');navegacao.goto('index.html')">{{usuario.data.queryUsuario[0].nome}}<img src="assets/images/appIcon.ico" class="img-fluid ms-2" width="40"></button>
+
                             </div>
                         </nav>
                     </div>
@@ -44,25 +52,19 @@
             <div class="col-12 col-md-4 col-xl-3">
                 <div class="row">
                     <div class="col-9 bg-white rounded-3 p-4 mb-3 border-secondary">
-
-
-                        <div class="nav w-100 flex-column">
-                            <a class="nav-item nav-link txt-sidebar-link text-dark-emphasis" href="#"><img class=" img-fluid me-3 icon" src="assets/duotune/abstract/abs029.svg" width="20">Dashboard</a>
-                            <a class="nav-item nav-link txt-sidebar-link text-dark-emphasis" href="#"><img class=" img-fluid me-3 icon" src="assets/duotune/communication/com006.svg" width="20">Colaboradores</a>
-                            <a class="nav-item nav-link txt-sidebar-link text-dark-emphasis" href="#" data-bs-toggle="collapse" data-bs-target="#collapse1"><img class=" img-fluid me-3 icon" src="assets/duotune/abstract/abs042.svg" width="20">
-                                Projetos e tarefas
-                            </a>
-                            <div class="collapse ps-4 ms-3 mt-0" id="collapse1" is="dmx-bs5-collapse">
-                                <a href="" class="nav-item nav-link txt-sidebar-link text-dark-emphasis">Your link title</a>
-                                <a href="" class="nav-item nav-link txt-sidebar-link text-dark-emphasis">Your link title</a>
-                                <a href="" class="nav-item nav-link txt-sidebar-link text-dark-emphasis">Your link title</a>
-                            </div><a class="nav-item nav-link txt-sidebar-link text-dark-emphasis" href="#"><img class=" img-fluid me-3 icon" src="assets/duotune/abstract/abs023.svg" width="20">Leads</a>
-                            <a class="nav-item nav-link txt-sidebar-link text-dark-emphasis" href="#"><img class=" img-fluid me-3 icon" src="assets/duotune/abstract/abs020.svg" width="20">Chamados</a>
+                        <div class="d-flex flex-column">
+                            <button id="btn1" class="btn text-start btn-txt-02 mb-2 text-secondary"><img src="assets/duotune/abstract/abs029.svg" class="me-3 icon" width="20">Dashboard</button>
+                            <button id="btn2" class="btn text-start btn-txt-02 mb-2 text-secondary"><img src="assets/duotune/abstract/abs022.svg" class="me-3 icon" width="20">Colaboradores</button>
+                            <button id="btn3" class="btn text-start btn-txt-02 mb-2 text-secondary"><img src="assets/duotune/abstract/abs042.svg" class="me-3 icon" width="20">Projetos e tarefas</button>
+                            <button id="btn4" class="btn text-start btn-txt-02 mb-2 text-secondary"><img src="assets/duotune/abstract/abs023.svg" class="me-3 icon" width="20">Leads</button>
+                            <button id="btn5" class="btn text-start btn-txt-02 mb-2 text-secondary"><img src="assets/duotune/abstract/abs020.svg" class="me-3 icon" width="20">Chamados</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-8 col-xl-9"></div>
+            <div class="col-12 col-md-8 col-xl-9">
+                <div is="dmx-view" id="view"></div>
+            </div>
         </div>
     </div>
     <script src="bootstrap/5/js/bootstrap.bundle.min.js"></script>
