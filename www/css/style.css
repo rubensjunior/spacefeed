@@ -7,3 +7,16 @@ height: 44px;
     height: 48px;
     font-weight: 600;
 }
+.content-body{
+    margin-top: 112px;
+}
+.bg-inner{
+    background-color: #EDF0F4;
+}
+
+.txt-sidebar-link{
+    font-weight: 500;
+}
+.nav-item{
+    vertical-align: auto;
+}
