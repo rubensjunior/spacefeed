@@ -1,4 +1,5 @@
-<!-- Wappler include head-page="dashboard.html" is="dmx-app" id="colaboradores" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxFormatter:{},dmxBootstrap5TableGenerator:{},dmxValidator:{}}" -->
+<!-- Wappler include head-page="dashboard.html" is="dmx-app" id="colaboradores" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxFormatter:{},dmxBootstrap5TableGenerator:{},dmxValidator:{},dmxDataTraversal:{}}" -->
+<dmx-data-detail id="editarColagorador" dmx-bind:data="listarColaboradores.data.queryListarColaboradores.data" key="id"></dmx-data-detail>
 <dmx-serverconnect id="listarColaboradores" url="https://sun.spacefeed.app/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
 <dmx-notifications id="toasts"></dmx-notifications>
 <div class="modal" id="cadastrar" is="dmx-bs5-modal" tabindex="-1">
@@ -65,40 +66,112 @@
         </div>
     </div>
 </div>
+<div class="modal" id="editar" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar colaborador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-5">
+                <form method="post" action="https://sun.spacefeed.app/api/colaborador/cadastrar-colaborador" site="web">
+
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control ipt-text-02" id="nomecolaborador1" name="nomecolaborador1" aria-describedby="input2_help" placeholder="Nome completo do colaborador" dmx-bind:value="editarColagorador.data.nome">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="email" class="form-control ipt-text-02" id="emailcolaborador1" name="emailcolaborador1" aria-describedby="input2_help" placeholder="E-mail para login" dmx-bind:value="editarColagorador.data.email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="hidden" class="form-control ipt-text-02" id="empresa1" name="empresa1" aria-describedby="input2_help" placeholder="Enter some text" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
+                    </div>
+                    <div class="d-flex flex-row flex-wrap p-3 rounded-3 border-inner-form">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="academicocheck1" name="academicocheck1" value="1" dmx-bind:checked="editarColagorador.data.academico==true">
+                            <label class="form-check-label" for="academicocheck1">Acadêmico</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="1" id="admincheck1" name="admincheck1" dmx-bind:checked="editarColagorador.data.administrativo==true">
+                            <label class="form-check-label" for="admincheck1">Administrativo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="1" id="atendimentocheck1" name="atendimentocheck1" dmx-bind:checked="editarColagorador.data.atendimento==true">
+                            <label class="form-check-label" for="atendimentocheck1">Atendimento</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="1" id="comercialcheck1" name="comercialcheck1" dmx-bind:checked="editarColagorador.data.comercial==true">
+                            <label class="form-check-label" for="comercialcheck1">Comercial</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="1" id="diretoriacheck1" name="diretoriacheck1" dmx-bind:checked="editarColagorador.data.diretoria==true">
+                            <label class="form-check-label" for="diretoriacheck1">Diretoria</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="1" id="financeirocheck1" name="financeirocheck1" dmx-bind:checked="editarColagorador.data.financeiro==true">
+                            <label class="form-check-label" for="financeirocheck1">Financeiro</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="1" id="mktcheck1" name="mktcheck1" dmx-bind:checked="editarColagorador.data.marketing==true">
+                            <label class="form-check-label" for="mktcheck1">Marketing</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="1" id="ticheck1" name="ticheck1" dmx-bind:checked="editarColagorador.data.ti==true">
+                            <label class="form-check-label" for="ticheck1">T.I</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" dmx-on:click="cadcolaborador.submit()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <main>
     <div class="container-fluid bg-white p-4 rounded-3">
         <div class="row">
             <div class="col">
-                <div class="d-flex flex-row align-items-center justify-content-between mb-5">
-                    <form id="form1">
-                        <div class="form-group">
-                            <input type="text" class="form-control ipt-text-02" id="input1" name="input1" aria-describedby="input1_help" placeholder="Pesquisar por nome">
-                        </div>
-                    </form>
+                <div class="d-flex flex-row align-items-center mb-5 justify-content-between">
+                    <h3 class="p-0 m-0">Gestão de colaboradores</h3>
                     <button id="btn1" class="btn btn-primary btn-txt" data-bs-toggle="modal" data-bs-target="#cadastrar">Adicionar Colaborador</button>
                 </div>
-                <div class="row pb-3 align-items-center border-bottom">
-                    <div class="col-3 align-self-center p-0 m-0">
+                <div class="row pb-3 align-items-center border-bottom mx-0">
+                    <div class="col-3 align-self-center p-0">
                         <h6>Nome</h6>
                     </div>
-                    <div class="col-3 align-self-center p-0 m-0">
+                    <div class="col-3 align-self-center p-0">
                         <h6>E-mail</h6>
                     </div>
-                    <div class="col-3 align-self-center p-0 m-0">
+                    <div class="col-3 align-self-center p-0">
                         <h6>Ativo</h6>
+                    </div>
+                    <div class="col-3 align-self-center p-0">
+                        <h6>Ações</h6>
                     </div>
                 </div>
                 <div class="row" key="id">
                     <div class="col" is="dmx-repeat" id="listaColaboradores" dmx-bind:repeat="listarColaboradores.data.queryListarColaboradores.data" key="id">
-                        <div class="row py-3 align-items-center border-bottom">
-                            <div class="col-3 align-self-center">
+                        <div class="row py-3 align-items-center border-bottom mx-0">
+                            <div class="col-3 align-self-center p-0">
                                 <p class="p-0 m-0">{{nome}}</p>
                             </div>
-                            <div class="col-3 align-self-center">
+                            <div class="col-3 align-self-center p-0">
                                 <p class="p-0 m-0">{{email}}</p>
                             </div>
-                            <div class="col-3 align-self-center">
+                            <div class="col-3 align-self-center p-0">
                                 <input class="form-check-input" type="checkbox" value="" id="input2" name="input2" dmx-bind:checked="isAtivo==1">
+                            </div>
+                            <div class="col-3 align-self-center p-0">
+
+                                <div class="dropdown ">
+                                    <button id="editar" class="btn dropdown-toggle btn-sm btn-light" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown1">
+                                        <button id="btn2" class="btn w-100 text-start" dmx-on:click="editarColagorador.select(id);editar.show()" data-bs-target="#editar" type="submit" data-bs-toggle="modal">Editar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

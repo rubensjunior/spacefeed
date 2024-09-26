@@ -176,6 +176,91 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "editarColagorador": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "nome"
+        },
+        {
+          "type": "text",
+          "name": "email"
+        },
+        {
+          "type": "boolean",
+          "name": "isAdmin"
+        },
+        {
+          "type": "boolean",
+          "name": "isColaborador"
+        },
+        {
+          "type": "number",
+          "name": "empresa"
+        },
+        {
+          "type": "boolean",
+          "name": "isAtivo"
+        },
+        {
+          "type": "text",
+          "name": "passSecurity"
+        },
+        {
+          "type": "number",
+          "name": "idempresa"
+        },
+        {
+          "type": "boolean",
+          "name": "academico"
+        },
+        {
+          "type": "boolean",
+          "name": "administrativo"
+        },
+        {
+          "type": "boolean",
+          "name": "comercial"
+        },
+        {
+          "type": "boolean",
+          "name": "diretoria"
+        },
+        {
+          "type": "boolean",
+          "name": "financeiro"
+        },
+        {
+          "type": "boolean",
+          "name": "marketing"
+        },
+        {
+          "type": "boolean",
+          "name": "atendimento"
+        },
+        {
+          "type": "boolean",
+          "name": "ti"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });
