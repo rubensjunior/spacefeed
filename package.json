@@ -8,6 +8,6 @@
   "devDependencies": {
     "@capacitor/cli": "^6.1.2",
     "electron-builder": "^25.0.5",
-    "electron-updater": "^6.3.4"
+    "electron-updater": "^6.3.9"
   }
 }
