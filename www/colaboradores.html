@@ -6,7 +6,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Adicionar novo colaborador</h5>
+                <h5 class="modal-title">Adicionar novo colaborador - {{cadcolaborador.academicocheck1.value}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5">
@@ -22,37 +22,38 @@
                         <input type="hidden" class="form-control ipt-text-02" id="empresa" name="empresa" aria-describedby="input2_help" placeholder="Enter some text" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
                     </div>
                     <div class="d-flex flex-row flex-wrap p-3 rounded-3 border-inner-form">
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="academicocheck" name="academicocheck" value="1">
-                            <label class="form-check-label" for="academicocheck">Acadêmico</label>
+                            <dmx-value id="academicocheck"></dmx-value><label class="form-check-label" for="academicocheck">Acadêmico</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="admincheck" name="admincheck">
+                            <input class="form-check-input" type="checkbox" id="admincheck" name="admincheck" value="1">
                             <label class="form-check-label" for="admincheck">Administrativo</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="atendimentocheck" name="atendimentocheck">
+                            <input class="form-check-input" type="checkbox" id="atendimentocheck" name="atendimentocheck" value="1">
                             <label class="form-check-label" for="atendimentocheck">Atendimento</label>
                         </div>
 
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="comercialcheck" name="comercialcheck">
+                            <input class="form-check-input" type="checkbox" id="comercialcheck" name="comercialcheck" value="1">
                             <label class="form-check-label" for="comercialcheck">Comercial</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="diretoriacheck" name="diretoriacheck">
+                            <input class="form-check-input" type="checkbox" id="diretoriacheck" name="diretoriacheck" value="1">
                             <label class="form-check-label" for="diretoriacheck">Diretoria</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="financeirocheck" name="financeirocheck">
+                            <input class="form-check-input" type="checkbox" id="financeirocheck" name="financeirocheck" value="1">
                             <label class="form-check-label" for="financeirocheck">Financeiro</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="mktcheck" name="mktcheck">
+                            <input class="form-check-input" type="checkbox" id="mktcheck" name="mktcheck" value="1">
                             <label class="form-check-label" for="mktcheck">Marketing</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="ticheck" name="ticheck">
+                            <input class="form-check-input" type="checkbox" id="ticheck" name="ticheck" value="1">
                             <label class="form-check-label" for="ticheck">T.I</label>
                         </div>
                     </div>
@@ -67,57 +68,71 @@
     </div>
 </div>
 <div class="modal" id="editar" is="dmx-bs5-modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Editar colaborador</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-5">
-                <form method="post" action="https://sun.spacefeed.app/api/colaborador/cadastrar-colaborador" site="web">
+            <div class="modal-body px-5 py-4">
+                <form method="post" action="https://sun.spacefeed.app/api/colaborador/atualizar-dados" site="web" is="dmx-serverconnect-form" id="editarestecolaborador" dmx-on:error="toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="editarColagorador.select(editarColagorador.data.id);editar.hide();editarestecolaborador.reset();toasts.success('Atualizado com sucesso!');listarColaboradores.load({})">
+
 
                     <div class="form-group mb-3">
-                        <input type="text" class="form-control ipt-text-02" id="nomecolaborador1" name="nomecolaborador1" aria-describedby="input2_help" placeholder="Nome completo do colaborador" dmx-bind:value="editarColagorador.data.nome">
+                        <input type="text" class="form-control ipt-text-02" id="editnomecolaborador" name="editnomecolaborador" aria-describedby="input2_help" placeholder="Nome completo do colaborador" dmx-bind:value="editarColagorador.data.nome">
                     </div>
                     <div class="form-group mb-3">
-                        <input type="email" class="form-control ipt-text-02" id="emailcolaborador1" name="emailcolaborador1" aria-describedby="input2_help" placeholder="E-mail para login" dmx-bind:value="editarColagorador.data.email">
+                        <input type="hidden" class="form-control" id="editacademicocheck" name="editacademicocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="academico.value">
+                        <input type="hidden" class="form-control" id="editadministrativo" name="editadministrativo" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="adm.value">
+                        <input type="hidden" class="form-control" id="editatendimentocheck" name="editatendimentocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="atendimento.value">
+                        <input type="hidden" class="form-control" id="editcomercialcheck" name="editcomercialcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="comercial.value">
+                        <input type="hidden" class="form-control" id="editdiretoriacheck" name="editdiretoriacheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="diretoria.value">
+                        <input type="hidden" class="form-control" id="editfinanceirocheck" name="editfinanceirocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="financeiro.value">
+                        <input type="hidden" class="form-control" id="editmktcheck" name="editmktcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="marketing.value">
+                        <input type="hidden" class="form-control" id="editticheck" name="editticheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ti.value">
                     </div>
                     <div class="form-group mb-3">
-                        <input type="hidden" class="form-control ipt-text-02" id="empresa1" name="empresa1" aria-describedby="input2_help" placeholder="Enter some text" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
+                        <input type="email" class="form-control ipt-text-02" id="editemailcolaborador" name="editemailcolaborador" aria-describedby="input2_help" placeholder="E-mail para login" dmx-bind:value="editarColagorador.data.email">
+                        <input type="hidden" class="form-control ipt-text-02" id="id" name="id" aria-describedby="input2_help" placeholder="E-mail para login" dmx-bind:value="editarColagorador.data.id">
                     </div>
-                    <div class="d-flex flex-row flex-wrap p-3 rounded-3 border-inner-form">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="academicocheck1" name="academicocheck1" value="1" dmx-bind:checked="editarColagorador.data.academico==true">
-                            <label class="form-check-label" for="academicocheck1">Acadêmico</label>
+                    <div class="row p-2 m-0 rounded-3 border-inner-form">
+                        <div class="col-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="academico" name="academico" dmx-on:checked="academico.setValue(1)" dmx-on:unchecked="academico.setValue(0)" dmx-bind:value="editarColagorador.data.academico" dmx-bind:checked="editarColagorador.data.academico==1">
+                                <label class="form-check-label" for="academico">Acadêmico</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="adm" name="adm" dmx-on:checked="adm.setValue(1)" dmx-on:unchecked="adm.setValue(0)" dmx-bind:value="editarColagorador.data.administrativo" dmx-bind:checked="editarColagorador.data.administrativo==1">
+                                <label class="form-check-label" for="adm">Administrativo</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="atendimento" name="atendimento" dmx-on:checked="atendimento.setValue(1)" dmx-on:unchecked="atendimento.setValue(0)" dmx-bind:value="editarColagorador.data.atendimento" dmx-bind:checked="editarColagorador.data.atendimento==1">
+                                <label class="form-check-label" for="atendimento">Atendimento<br></label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="admincheck1" name="admincheck1" dmx-bind:checked="editarColagorador.data.administrativo==true">
-                            <label class="form-check-label" for="admincheck1">Administrativo</label>
+                        <div class="col-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="comercial" name="comercial" dmx-on:checked="comercial.setValue(1)" dmx-on:unchecked="comercial.setValue(0)" dmx-bind:value="editarColagorador.data.comercial" dmx-bind:checked="editarColagorador.data.comercial==1">
+                                <label class="form-check-label" for="comercial">Comercial</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="diretoria" name="diretoria" dmx-on:checked="diretoria.setValue(1)" dmx-on:unchecked="diretoria.setValue(0)" dmx-bind:value="editarColagorador.data.diretoria" dmx-bind:checked="editarColagorador.data.diretoria==1">
+                                <label class="form-check-label" for="diretoria">Diretoria</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="financeiro" name="financeiro" dmx-on:checked="financeiro.setValue(1)" dmx-on:unchecked="financeiro.setValue(0)" dmx-bind:value="editarColagorador.data.financeiro" dmx-bind:checked="editarColagorador.data.financeiro==1">
+                                <label class="form-check-label" for="financeiro">Financeiro</label>
+                            </div>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="atendimentocheck1" name="atendimentocheck1" dmx-bind:checked="editarColagorador.data.atendimento==true">
-                            <label class="form-check-label" for="atendimentocheck1">Atendimento</label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="comercialcheck1" name="comercialcheck1" dmx-bind:checked="editarColagorador.data.comercial==true">
-                            <label class="form-check-label" for="comercialcheck1">Comercial</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="diretoriacheck1" name="diretoriacheck1" dmx-bind:checked="editarColagorador.data.diretoria==true">
-                            <label class="form-check-label" for="diretoriacheck1">Diretoria</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="financeirocheck1" name="financeirocheck1" dmx-bind:checked="editarColagorador.data.financeiro==true">
-                            <label class="form-check-label" for="financeirocheck1">Financeiro</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="mktcheck1" name="mktcheck1" dmx-bind:checked="editarColagorador.data.marketing==true">
-                            <label class="form-check-label" for="mktcheck1">Marketing</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="1" id="ticheck1" name="ticheck1" dmx-bind:checked="editarColagorador.data.ti==true">
-                            <label class="form-check-label" for="ticheck1">T.I</label>
+                        <div class="col-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="marketing" name="marketing" dmx-on:checked="marketing.setValue(1)" dmx-on:unchecked="marketing.setValue(0)" dmx-bind:value="editarColagorador.data.marketing" dmx-bind:checked="editarColagorador.data.marketing==1">
+                                <label class="form-check-label" for="marketing">Marketing</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="ti" name="ti" dmx-on:checked="ti.setValue(1)" dmx-on:unchecked="" dmx-bind:value="editarColagorador.data.ti" dmx-bind:checked="editarColagorador.data.ti==1">
+                                <label class="form-check-label" for="ti">T.I</label>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -125,7 +140,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" dmx-on:click="cadcolaborador.submit()">Adicionar</button>
+                <button type="submit" class="btn btn-primary" dmx-on:click="editarestecolaborador.submit()">Adicionar</button>
             </div>
         </div>
     </div>

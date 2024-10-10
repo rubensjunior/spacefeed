@@ -261,6 +261,38 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "editacademicocheck": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "editadministrativo": {
+      "meta": null,
+      "outputType": "object"
+    },
+    "editatendimentocheck": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "editcomercialcheck": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "editdiretoriacheck": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "editfinanceirocheck": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "editmktcheck": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "editticheck": {
+      "meta": null,
+      "outputType": "text"
     }
   }
 });
