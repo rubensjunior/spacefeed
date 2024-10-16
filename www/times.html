@@ -1,10 +1,10 @@
 <!-- Wappler include head-page="dashboard.html" is="dmx-app" id="times" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxAnimateCSS:{}}" -->
-<dmx-serverconnect id="atualizarUsuarioTime" url="https://sun.spacefeed.app/api/projetos/atualizar-usuario-time" site="web" noload="true"></dmx-serverconnect>
+<dmx-serverconnect id="atualizarUsuarioTime" url="http://localhost:8100/api/projetos/atualizar-usuario-time" site="web" noload="true"></dmx-serverconnect>
 
-<dmx-serverconnect id="listaUsuarioTime" noload="true" url="https://sun.spacefeed.app/api/projetos/listar-usuario-time" site="web" dmx-param:empresa="" dmx-param:time=""></dmx-serverconnect>
-<dmx-serverconnect id="listarColaboradores" url="https://sun.spacefeed.app/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listaUsuarioTime" noload="true" url="http://localhost:8100/api/projetos/listar-usuario-time" site="web" dmx-param:empresa="" dmx-param:time=""></dmx-serverconnect>
+<dmx-serverconnect id="listarColaboradores" url="http://localhost:8100/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
 
-<dmx-serverconnect id="listarTimes" url="https://sun.spacefeed.app/api/projetos/listar-times" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listarTimes" url="http://localhost:8100/api/projetos/listar-times" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
 <dmx-data-detail id="data_time" dmx-bind:data="listarTimes.data.queryTimes.data" key="id"></dmx-data-detail>
 <dmx-notifications id="toasts"></dmx-notifications>
 <div class="modal" id="criarMoldal" is="dmx-bs5-modal" tabindex="-1">
@@ -15,7 +15,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarNovoTime.reset()"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form id="criarNovoTime" is="dmx-serverconnect-form" method="post" action="https://sun.spacefeed.app/api/projetos/times" site="web" dmx-on:error="criarMoldal.hide();criarNovoTime.reset();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="toasts.success('Cadastrado com sucesso!');criarNovoTime.reset();criarMoldal.hide();listarTimes.load({})">
+                <form id="criarNovoTime" is="dmx-serverconnect-form" method="post" action="http://localhost:8100/api/projetos/times" site="web" dmx-on:error="criarMoldal.hide();criarNovoTime.reset();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="toasts.success('Cadastrado com sucesso!');criarNovoTime.reset();criarMoldal.hide();listarTimes.load({})">
                     <div class="form-group mb-3">
                         <input type="text" class="form-control ipt-text-02" id="nometime" name="nometime" aria-describedby="input1_help" placeholder="Nome do time" required="" data-msg-required="Este é um campo obrigatório.">
                         <input type="hidden" class="form-control ipt-text-02" id="empresa" name="empresa" aria-describedby="input1_help" placeholder="Nome do time" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
@@ -40,7 +40,7 @@
             </div>
             <div class="modal-body px-5 py-4">
 
-                <form method="post" action="https://sun.spacefeed.app/api/projetos/atualizar-time" site="web" id="editarTIme" is="dmx-serverconnect-form" dmx-on:error="editarTIme.reset();editarMoldalTime.hide();data_time.select(0);toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="editarTIme.reset();data_time.select(0);editarMoldalTime.hide();toasts.success('Time atualizado com sucesso!');listarTimes.load({})">
+                <form method="post" action="http://localhost:8100/api/projetos/atualizar-time" site="web" id="editarTIme" is="dmx-serverconnect-form" dmx-on:error="editarTIme.reset();editarMoldalTime.hide();data_time.select(0);toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="editarTIme.reset();data_time.select(0);editarMoldalTime.hide();toasts.success('Time atualizado com sucesso!');listarTimes.load({})">
 
                     <div class="form-group mb-3">
                         <input type="text" class="form-control ipt-text-02" id="editnome" name="editnome" aria-describedby="input1_help" placeholder="Nome do time" required="" data-msg-required="Este é um campo obrigatório." dmx-bind:value="data_time.data.nome">
@@ -73,7 +73,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="addMembro.reset();data_time.select(0)"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form method="post" is="dmx-serverconnect-form" id="addMembro" action="https://sun.spacefeed.app/api/projetos/usuario-time" site="web" dmx-on:error="addMembro.reset();addMembroTime.hide();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="listaUsuarioTime.load({time: data_time.data.id});addMembro.reset();toasts.success('Membro atualizado com sucesso!')">
+                <form method="post" is="dmx-serverconnect-form" id="addMembro" action="http://localhost:8100/api/projetos/usuario-time" site="web" dmx-on:error="addMembro.reset();addMembroTime.hide();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="listaUsuarioTime.load({time: data_time.data.id});addMembro.reset();toasts.success('Membro atualizado com sucesso!')">
                     <div class="form-group mb-3">
                         <select id="select1" class="form-select ipt-text-02" dmx-bind:options="listarColaboradores.data.queryListarColaboradores.data" optiontext="nome" optionvalue="id" required="" data-msg-required="Este é um campo obrigatório.">
                         </select>

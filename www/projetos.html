@@ -1,17 +1,17 @@
 <!-- Wappler include head-page="dashboard.html" is="dmx-app" id="times" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{}}" -->
 <dmx-value id="visibilidadeItens" dmx-bind:value="0"></dmx-value>
 <dmx-value id="visibilidade" dmx-bind:value="0"></dmx-value>
-<dmx-serverconnect id="listarTarefas" noload="true" url="https://sun.spacefeed.app/api/projetos/listar-tarefas" site="web"></dmx-serverconnect>
+<dmx-serverconnect id="listarTarefas" noload="true" url="http://localhost:8100/api/projetos/listar-tarefas" site="web"></dmx-serverconnect>
 
 
 
 <dmx-data-detail id="data_projeto" dmx-bind:data="listarprojetos.data.query" key="id"></dmx-data-detail>
-<dmx-serverconnect id="listarStatus" url="https://sun.spacefeed.app/api/projetos/listar-status" site="web"></dmx-serverconnect>
-<dmx-serverconnect id="listarMembroTime" noload="true" url="https://sun.spacefeed.app/api/projetos/listar-usuario-time" site="web"></dmx-serverconnect>
-<dmx-serverconnect id="listarTime" url="https://sun.spacefeed.app/api/projetos/listar-times" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
-<dmx-serverconnect id="listarprojetos" url="https://sun.spacefeed.app/api/projetos/listar-projetos" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listarStatus" url="http://localhost:8100/api/projetos/listar-status" site="web"></dmx-serverconnect>
+<dmx-serverconnect id="listarMembroTime" noload="true" url="http://localhost:8100/api/projetos/listar-usuario-time" site="web"></dmx-serverconnect>
+<dmx-serverconnect id="listarTime" url="http://localhost:8100/api/projetos/listar-times" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listarprojetos" url="http://localhost:8100/api/projetos/listar-projetos" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
 
-<dmx-serverconnect id="listarColaboradores" url="https://sun.spacefeed.app/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listarColaboradores" url="http://localhost:8100/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
 
 <dmx-notifications id="toasts"></dmx-notifications>
 <div class="modal" id="criarMoldalProjeto" is="dmx-bs5-modal" tabindex="-1">
@@ -22,7 +22,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarProjeto.reset()"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form method="post" action="https://sun.spacefeed.app/api/projetos/projetos" site="web" dmx-on:error="criarProjeto.reset();criarMoldalProjeto.hide();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="criarProjeto.reset();criarMoldalProjeto.hide();toasts.success('Projeto criado com sucesso!');listarprojetos.load({})" is="dmx-serverconnect-form" id="criarProjeto">
+                <form method="post" action="http://localhost:8100/api/projetos/projetos" site="web" dmx-on:error="criarProjeto.reset();criarMoldalProjeto.hide();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="criarProjeto.reset();criarMoldalProjeto.hide();toasts.success('Projeto criado com sucesso!');listarprojetos.load({})" is="dmx-serverconnect-form" id="criarProjeto">
                     <div class="form-group mb-3">
                         <input type="hidden" class="form-control" id="responsavel" name="responsavel" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectresponsavel.selectedValue">
                         <input type="hidden" class="form-control" id="times" name="times" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selecttimes.selectedValue">
@@ -65,7 +65,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarProjeto.reset();data_projeto.select(0)"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form method="post" action="https://sun.spacefeed.app/api/projetos/atualizar-projeto" site="web" dmx-on:error="editarProjeto.reset();editarMoldalProjeto.hide();toasts.danger(lastError.status+lastError.message+lastError.response);data_projeto.select(0)" dmx-on:success="editarProjeto.reset();editarMoldalProjeto.hide();toasts.success('Projeto editado com sucesso!');listarprojetos.load({});data_projeto.select(0)" is="dmx-serverconnect-form" id="editarProjeto">
+                <form method="post" action="http://localhost:8100/api/projetos/atualizar-projeto" site="web" dmx-on:error="editarProjeto.reset();editarMoldalProjeto.hide();toasts.danger(lastError.status+lastError.message+lastError.response);data_projeto.select(0)" dmx-on:success="editarProjeto.reset();editarMoldalProjeto.hide();toasts.success('Projeto editado com sucesso!');listarprojetos.load({});data_projeto.select(0)" is="dmx-serverconnect-form" id="editarProjeto">
                     <div class="form-group mb-3">
                         <input class="form-control" id="editresposavel" name="editresposavel" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectresponsavel1.selectedValue" type="hidden">
                         <input class="form-control" id="edittime" name="edittime" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selecttimes1.selectedValue" type="hidden">
@@ -117,7 +117,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarNovaTarefa.reset();data_projeto.select(0)"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form id="criarNovaTarefa" is="dmx-serverconnect-form" method="post" action="https://sun.spacefeed.app/api/projetos/tarefas" site="web" dmx-on:error="criarNovaTarefa.reset();criarModalTarefa.hide();toasts.danger(lastError.status+lastError.message+lastError.response);data_projeto.select(0)" dmx-on:success="criarModalTarefa.hide();criarNovaTarefa.reset();toasts.success('Tarefa cadastrada com sucesso!');data_projeto.select(0)">
+                <form id="criarNovaTarefa" is="dmx-serverconnect-form" method="post" action="http://localhost:8100/api/projetos/tarefas" site="web" dmx-on:error="criarNovaTarefa.reset();criarModalTarefa.hide();toasts.danger(lastError.status+lastError.message+lastError.response);data_projeto.select(0)" dmx-on:success="criarModalTarefa.hide();criarNovaTarefa.reset();toasts.success('Tarefa cadastrada com sucesso!');data_projeto.select(0)">
                     <div class="form-group mb-3">
                         <input class="form-control" id="empresa" name="empresa" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.empresa" type="hidden">
                         <input class="form-control" id="projeto" name="projeto" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.id" type="hidden">

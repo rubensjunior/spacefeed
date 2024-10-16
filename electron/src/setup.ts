@@ -224,8 +224,30 @@ export function setupContentSecurityPolicy(customScheme: string): void {
         ...details.responseHeaders,
         'Content-Security-Policy': [
           electronIsDev
-            ? `default-src ${customScheme}://* https://sun.spacefeed.app/* 'unsafe-inline' devtools://* 'unsafe-eval' http://* 'unsafe-eval' https://* 'unsafe-eval' ws://* 'unsafe-eval' wss://* 'unsafe-eval' data:`
-            : `default-src ${customScheme}://* https://sun.spacefeed.app//* 'unsafe-inline' http://* 'unsafe-eval' https://* 'unsafe-eval' ws://* 'unsafe-eval' wss://* 'unsafe-eval' data:`,
+            ? `
+              default-src 'self' ${customScheme}://* http://localhost:8100;
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' ${customScheme}://* http://localhost:8100;
+              connect-src 'self' ${customScheme}://* http://localhost:8100 ws://localhost:8100 https://sun.spacefeed.app/* http://* ws://* wss://*;
+              style-src 'self' 'unsafe-inline' ${customScheme}://* http://localhost:8100 data: https://fonts.googleapis.com;
+              font-src 'self' data: ${customScheme}://* http://localhost:8100 https://fonts.gstatic.com file:;
+              img-src 'self' ${customScheme}://* http://localhost:8100 data: blob: file:;
+              media-src 'self' ${customScheme}://* http://localhost:8100;
+              worker-src 'self' blob: ${customScheme}://*;
+              frame-src 'self' ${customScheme}://* http://localhost:8100;
+              object-src 'self' ${customScheme}://*;
+            `.replace(/\s+/g, ' ').trim()
+            : `
+              default-src 'self' ${customScheme}://* http://localhost:8100;
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' ${customScheme}://* http://localhost:8100;
+              connect-src 'self' ${customScheme}://* http://localhost:8100 ws://localhost:8100 https://sun.spacefeed.app/* http://* ws://* wss://*;
+              style-src 'self' 'unsafe-inline' ${customScheme}://* http://localhost:8100 data: https://fonts.googleapis.com;
+              font-src 'self' data: ${customScheme}://* http://localhost:8100 https://fonts.gstatic.com file:;
+              img-src 'self' ${customScheme}://* http://localhost:8100 data: blob: file:;
+              media-src 'self' ${customScheme}://* http://localhost:8100;
+              worker-src 'self' blob: ${customScheme}://*;
+              frame-src 'self' ${customScheme}://* http://localhost:8100;
+              object-src 'self' ${customScheme}://*;
+            `.replace(/\s+/g, ' ').trim()
         ],
       },
     });

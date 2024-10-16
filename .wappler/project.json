@@ -18,6 +18,10 @@
     {
       "name": "capacitor",
       "type": "local"
+    },
+    {
+      "name": "bootstrap_icons",
+      "type": "local"
     }
   ],
   "runtime": "capacitor",

@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="dashboard.html" is="dmx-app" id="colaboradores" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxFormatter:{},dmxBootstrap5TableGenerator:{},dmxValidator:{},dmxDataTraversal:{}}" -->
 <dmx-data-detail id="editarColagorador" dmx-bind:data="listarColaboradores.data.queryListarColaboradores.data" key="id"></dmx-data-detail>
-<dmx-serverconnect id="listarColaboradores" url="https://sun.spacefeed.app/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listarColaboradores" url="http://localhost:8100/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
 <dmx-notifications id="toasts"></dmx-notifications>
 <div class="modal" id="criar" is="dmx-bs5-modal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -10,7 +10,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarColaborador.reset()"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form method="post" site="web" id="criarColaborador" is="dmx-serverconnect-form" action="https://sun.spacefeed.app/api/colaborador/cadastrar-colaborador" dmx-on:error="toasts.danger(lastError.status+lastError.message+lastError.response);criarColaborador.reset();criar.hide()" dmx-on:success="toasts.success('Colaborador cadsatrado com sucesso!');criarColaborador.reset();criar.hide();listarColaboradores.load({})">
+                <form method="post" site="web" id="criarColaborador" is="dmx-serverconnect-form" action="http://localhost:8100/api/colaborador/cadastrar-colaborador" dmx-on:error="toasts.danger(lastError.status+lastError.message+lastError.response);criarColaborador.reset();criar.hide()" dmx-on:success="toasts.success('Colaborador cadsatrado com sucesso!');criarColaborador.reset();criar.hide();listarColaboradores.load({})">
 
                     <div class="form-group mb-3">
                         <input class="form-control" id="academicocheck" name="academicocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="academico1.value" type="hidden">
@@ -97,7 +97,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarColagorador.select(0);editarestecolaborador.reset()"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form method="post" action="https://sun.spacefeed.app/api/colaborador/atualizar-dados" site="web" is="dmx-serverconnect-form" id="editarestecolaborador" dmx-on:error="editarestecolaborador.reset();editarModal.hide();editarColagorador.select(0);toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="editarColagorador.select(editarColagorador.data.id);editarestecolaborador.reset();editarModal.hide();toasts.success('Atualizado com sucesso!');listarColaboradores.load({})">
+                <form method="post" action="http://localhost:8100/api/colaborador/atualizar-dados" site="web" is="dmx-serverconnect-form" id="editarestecolaborador" dmx-on:error="editarestecolaborador.reset();editarModal.hide();editarColagorador.select(0);toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="editarColagorador.select(editarColagorador.data.id);editarestecolaborador.reset();editarModal.hide();toasts.success('Atualizado com sucesso!');listarColaboradores.load({})">
 
 
                     <div class="form-group mb-3">
