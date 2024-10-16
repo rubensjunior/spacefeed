@@ -1,11 +1,14 @@
-<!-- Wappler include head-page="dashboard.html" is="dmx-app" id="times" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{}}" -->
+<!-- Wappler include head-page="dashboard.html" is="dmx-app" id="times" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{},dmxFormatter:{}}" -->
 <dmx-value id="visibilidadeItens" dmx-bind:value="0"></dmx-value>
+
 <dmx-value id="visibilidade" dmx-bind:value="0"></dmx-value>
+<dmx-data-detail id="data_tarefa" dmx-bind:data="listarTarefas.data.queryTarefas" key="id"></dmx-data-detail>
+<dmx-data-detail id="data_projeto" dmx-bind:data="listarprojetos.data.query" key="id"></dmx-data-detail>
 <dmx-serverconnect id="listarTarefas" noload="true" url="http://localhost:8100/api/projetos/listar-tarefas" site="web"></dmx-serverconnect>
 
 
 
-<dmx-data-detail id="data_projeto" dmx-bind:data="listarprojetos.data.query" key="id"></dmx-data-detail>
+
 <dmx-serverconnect id="listarStatus" url="http://localhost:8100/api/projetos/listar-status" site="web"></dmx-serverconnect>
 <dmx-serverconnect id="listarMembroTime" noload="true" url="http://localhost:8100/api/projetos/listar-usuario-time" site="web"></dmx-serverconnect>
 <dmx-serverconnect id="listarTime" url="http://localhost:8100/api/projetos/listar-times" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
@@ -15,7 +18,7 @@
 
 <dmx-notifications id="toasts"></dmx-notifications>
 <div class="modal" id="criarMoldalProjeto" is="dmx-bs5-modal" tabindex="-1">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title pe-3">Criar projeto</h6>
@@ -58,10 +61,10 @@
     </div>
 </div>
 <div class="modal" id="editarMoldalProjeto" is="dmx-bs5-modal" tabindex="-1">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title pe-3">Editar projeto {{data_projeto.data['nome-projeto']}}&nbsp;</h6>
+                <h6 class="modal-title pe-3">Editar projeto: <b>{{data_projeto.data['nome-projeto']}}&nbsp;</b></h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarProjeto.reset();data_projeto.select(0)"></button>
             </div>
             <div class="modal-body px-5 py-4">
@@ -77,7 +80,7 @@
                         <input type="hidden" class="form-control ipt-text-02" id="empresa1" name="empresa1" aria-describedby="input1_help" placeholder="Nome do time" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
                     </div>
                     <div class="form-group mb-3">
-                        <textarea id="editdescricao" class="form-control textarea-text" placeholder="Descrição do projeto" name="editdescricao" dmx-bind:value="data_projeto.data['descricao-projeto']"></textarea>
+                        <textarea id="editdescricao" type="text" class="form-control textarea-text" placeholder="Descrição do projeto" name="editdescricao" dmx-bind:value="data_projeto.data['descricao-projeto']"></textarea>
                     </div>
                     <div class="form-group mb-3">
                         <select id="selecttimes1" class="form-select ipt-text-02" aria-placeholder="Escolha o time" placeholder="Escolha o time" dmx-bind:options="listarTime.data.queryTimes.data" optiontext="nome" optionvalue="id" dmx-bind:value="data_projeto.data.times">
@@ -113,11 +116,11 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Criar tarefa</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarNovaTarefa.reset();data_projeto.select(0)"></button>
+                <h6 class="modal-title">Criar tarefa para o projeto: <b>{{data_projeto.data['nome-projeto']}}</b></h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarNovaTarefa.reset()"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form id="criarNovaTarefa" is="dmx-serverconnect-form" method="post" action="http://localhost:8100/api/projetos/tarefas" site="web" dmx-on:error="criarNovaTarefa.reset();criarModalTarefa.hide();toasts.danger(lastError.status+lastError.message+lastError.response);data_projeto.select(0)" dmx-on:success="criarModalTarefa.hide();criarNovaTarefa.reset();toasts.success('Tarefa cadastrada com sucesso!');data_projeto.select(0)">
+                <form id="criarNovaTarefa" is="dmx-serverconnect-form" method="post" action="http://localhost:8100/api/projetos/tarefas" site="web" dmx-on:error="criarNovaTarefa.reset();criarModalTarefa.hide();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="criarModalTarefa.hide();criarNovaTarefa.reset();toasts.success('Tarefa cadastrada com sucesso!');listarTarefas.load({projeto: data_projeto.data.id})">
                     <div class="form-group mb-3">
                         <input class="form-control" id="empresa" name="empresa" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.empresa" type="hidden">
                         <input class="form-control" id="projeto" name="projeto" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.id" type="hidden">
@@ -129,7 +132,7 @@
                         <input type="text" class="form-control ipt-text-02" id="titulotarefa" name="titulotarefa" aria-describedby="input1_help" placeholder="Título da tarefa">
                     </div>
                     <div class="form-group mb-3">
-                        <input id="descricaotarefa" name="descricaotarefa" type="text" class="form-control textarea-text" placeholder="Descrição da tarefa">
+                        <textarea id="text2" class="form-control textarea-text" id="descricaotarefa" name="descricaotarefa" placeholder="Descrição da tarefa"></textarea>
                     </div>
                     <div class="row">
                         <div class="col">
@@ -145,7 +148,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <select id="selectstatus" class="form-select ipt-text-02" dmx-bind:options="listarStatus.data.queryStatus" optiontext="status" optionvalue="id">
-                            <option selected="" value="" disabled>Selecio um status</option>
+                            <option selected="" value="" disabled>Selecione um status</option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
@@ -157,8 +160,61 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="criarNovaTarefa.reset();data_projeto.select(0)">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="criarNovaTarefa.reset()">Cancelar</button>
                 <button type="button" class="btn btn-primary" dmx-on:click="criarNovaTarefa.submit()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="editarModalTarefa" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Editar tarefa: <b>{{data_tarefa.data.titulo}}</b></h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarNovaTarefa.reset();data_tarefa.select(0)"></button>
+            </div>
+            <div class="modal-body px-5 py-4">
+                <form id="criarNovaTarefa1" is="dmx-serverconnect-form" method="post" action="http://localhost:8100/api/projetos/atualizar-tarefas" site="web" dmx-on:error="data_tarefa.select(0);criarNovaTarefa1.reset();listarTarefas.load({projeto: data_projeto.data.id});toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="criarNovaTarefa1.reset();data_tarefa.select(0);editarModalTarefa.hide();toasts.success('Tarefa atualizada com sucesso!')">
+                    <div class="form-group mb-3">
+                        <input class="form-control" id="editprojeto" name="editprojeto" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.id" type="hidden">
+                        <input class="form-control" id="editresponsavel" name="editresponsavel" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectresponsaveltarefa1.selectedValue" type="hidden">
+                        <input class="form-control" id="editstatus" name="editstatus" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectstatus1.selectedValue" type="hidden">
+                        <input class="form-control" id="editid" name="editid" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_tarefa.data.id" type="hidden">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control ipt-text-02" id="edittitulotarefa" name="edittitulotarefa" aria-describedby="input1_help" placeholder="Título da tarefa" dmx-bind:value="data_tarefa.data.titulo">
+                    </div>
+                    <div class="form-group mb-3">
+                        <textarea id="editdescricaotarefa" name="editdescricaotarefa" type="text" class="form-control textarea-text" dmx-bind:value="data_tarefa.data['descricao-tarefa']"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <input type="date" class="form-control ipt-text-02" id="datainicio1" name="datainicio1" aria-describedby="input1_help" placeholder="Data de início" dmx-bind:value="data_tarefa.data['data-inicio']">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <input type="date" class="form-control ipt-text-02" id="datafim1" name="datafim1" aria-describedby="input1_help" placeholder="Data de fim" dmx-bind:value="data_tarefa.data['data-fim']">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selectstatus1" class="form-select ipt-text-02" dmx-bind:options="listarStatus.data.queryStatus" optiontext="status" optionvalue="id" dmx-bind:value="data_tarefa.data.status">
+                            <option selected="" value="" disabled="">Selecione um status</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selectresponsaveltarefa1" class="form-select ipt-text-02" dmx-bind:options="listarMembroTime.data.queryUsuariosTimes" optiontext="nome" optionvalue="membro" dmx-bind:value="data_tarefa.data.responsavel">
+                            <option value="">Escolha o responsável da tarefa</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="criarNovaTarefa.reset();data_tarefa.select(0)">Cancelar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="criarNovaTarefa1.submit()">Adicionar</button>
             </div>
         </div>
     </div>
@@ -192,7 +248,7 @@
                         <p class="txt-tab text-start">{{_['descricao-projeto']}}</p>
 
                         <div class="d-flex flex-row justify-content-between mb-3">
-                            <button id="btn2" class="btn btn-txt btn-dark btn-sm" dmx-on:click="visibilidade.setValue(1);listarTarefas.load({projeto: id});data_projeto.select(id)">Detalhes do projeto</button>
+                            <button id="btn2" class="btn btn-txt btn-dark btn-sm" dmx-on:click="visibilidade.setValue(1);listarTarefas.load({projeto: id});data_projeto.select(id);visibilidadeItens.setValue(1);listarMembroTime.load({time: times})">Detalhes do projeto</button>
 
 
 
@@ -213,13 +269,13 @@
                     <p class="btn-txt-min mb-2">{{view.data_projeto.data.nome}}</p>
                 </div>
 
-                <h5 class="text-start txt-card-title">{{view.data_projeto.data['nome-projeto']}}</h5>
+                <h5 class="text-start txt-card-title mb-1">{{view.data_projeto.data['nome-projeto']}}</h5>
                 <p class="txt-tab text-start">{{view.data_projeto.data['descricao-projeto']}}</p>
             </div>
             <div class="col align-self-center">
                 <div class="row ps-4 align-items-center">
                     <div class="col text-end align-self-center">
-                        <button id="btn3" class="btn btn-txt btn-dark">Criar tarefa</button>
+                        <button id="btn3" class="btn btn-txt btn-dark" data-bs-toggle="modal" data-bs-target="#criarModalTarefa" dmx-on:click="listarMembroTime.load({time: data_projeto.data.times})">Criar tarefa</button>
                     </div>
                 </div>
             </div>
@@ -227,10 +283,11 @@
         </div>
         <div class="row mt-2">
             <div class="col">
+
                 <div class="nav w-100 border-top">
-                    <a class="nav-item nav-link text-black" href="#">Tarefas</a>
-                    <a class="nav-item nav-link text-black" href="#">Reunião</a>
-                    <a class="nav-item nav-link text-black" href="#">Arquivos</a>
+                    <button id="btn4" class="btn btn-txt" dmx-on:click="listarTarefas.load({projeto: data_projeto.data.id});visibilidadeItens.setValue(1)">Tarefas</button>
+                    <button id="btn5" class="btn btn-txt" dmx-on:click="visibilidadeItens.setValue(2)">Reuniões</button>
+                    <button id="btn6" class="btn btn-txt" dmx-on:click="visibilidadeItens.setValue(3)">Arquivos</button>
                 </div>
             </div>
         </div>
@@ -238,49 +295,63 @@
 
 
     </div>
-    <div class="container-fluid bg-white p-4 rounded-3 new-shadow" dmx-show="view.visibilidade.value==1">
+    <div class="container-fluid bg-white p-4 rounded-3 new-shadow" dmx-show="view.visibilidadeItens.value==1">
         <div class="row">
             <div class="col">
                 <div class="row pb-3 gx-2 align-items-center border-bottom mx-0">
-                    <div class="col align-self-center p-0">
-                        <h6 class="p-1 m-0 txt-tab-title">Nome</h6>
+                    <div class="col-3 align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title">Tarefa</h6>
                     </div>
-                    <div class="col align-self-center p-0">
-                        <h6 class="p-1 m-0 txt-tab-title">E-mail</h6>
+                    <div class="col-4 align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title">descrição</h6>
                     </div>
-                    <div class="col align-self-center p-0">
-                        <h6 class="p-1 m-0 txt-tab-title text-center">Ativo</h6>
+                    <div class="col-2 align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title text-start">responsável</h6>
                     </div>
-                    <div class="col align-self-center p-0">
+                    <div class="col-2 align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title text-start">Prazo</h6>
+                    </div>
+                    <div class="col-1 align-self-center p-0">
                         <h6 class="p-1 m-0 txt-tab-title text-end">Ações</h6>
                     </div>
                 </div>
             </div>
 
+
         </div>
-        <div class="row gx-2 py-3 align-items-center border-bottom mx-0">
-            <div class="col align-self-center p-0">
-                <p class="p-1 m-0 txt-tab">{{nome}}</p>
-            </div>
-            <div class="col align-self-center p-0">
-                <p class="p-1 m-0 txt-tab">{{email}}</p>
-            </div>
-            <div class="col align-self-center p-0 text-center">
-                <input class="form-check-input" type="checkbox" value="" id="input2" name="input2" dmx-bind:checked="isAtivo==1" readonly="true" disabled="true">
-            </div>
-            <div class="col align-self-center p-0">
-                <div class="d-flex justify-content-end">
-                    <div class="dropdown">
-                        <button id="editar" class="btn dropdown-toggle btn-sm btn-light txt-tab-button" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdown1">
-                            <button id="btn2" class="btn w-100 text-start" dmx-on:click="editarColagorador.select(id);editar.show()" data-bs-target="#editarModal" type="submit" data-bs-toggle="modal">Editar</button>
+        <div class="row">
+            <div class="col" is="dmx-repeat" id="listatarefas" dmx-bind:repeat="listarTarefas.data.queryTarefas" key="id">
+                <div class="row gx-2 py-3 align-items-center border-bottom mx-0">
+                    <div class="col-3 align-self-center p-0">
+                        <p class="pe-2 m-0 txt-tab">{{titulo}}</p>
+                    </div>
+                    <div class="col-4 align-self-center p-0">
+                        <p class="pe-2 m-0 txt-tab">{{_['descricao-tarefa']}}</p>
+
+                    </div>
+                    <div class="col-2 align-self-center p-0">
+                        <p class="pe-2 m-0 txt-tab">{{nome}}</p>
+                    </div>
+                    <div class="col-2 align-self-center p-0">
+                        <p class="pe-2 m-0 txt-tab">{{_['data-fim']}}</p>
+                    </div>
+                    <div class="col-1 align-self-center p-0">
+                        <div class="d-flex justify-content-end">
+                            <div class="dropdown">
+                                <button id="editar" class="btn dropdown-toggle btn-sm btn-light txt-tab-button" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdown1">
+                                    <button id="btn2" class="btn w-100 text-start" dmx-on:click="data_tarefa.select(id);editarModalTarefa.show()" data-bs-target="#editarModalTarefa" type="submit">Editar</button>
+                                </div>
+                            </div>
                         </div>
+
+
                     </div>
                 </div>
-
-
             </div>
         </div>
+
+
 
 
 
