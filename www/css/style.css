@@ -1,3 +1,10 @@
+h1, h2, h3, h4{
+    font-weight: 600;
+}
+
+.cursor{
+    cursor: pointer;
+}
 .ipt-text{
 font-size: 14px;
 height: 44px;
@@ -7,20 +14,43 @@ font-size: 14px;
 height: 44px;
 background-color: #f9f9f9;
 }
+
+.textarea-text{
+font-size: 14px;
+height: 90px;
+background-color: #f9f9f9;
+}
 .btn-txt{
+    font-size: 14px;
+    height: 46px;
+    font-weight: 500;
+}
+.btn-dark{
+    background-color: black;
+}
+.btn-warning{
+    background-color: orangered;
+}
+.btn-light{
+    background-color: white;
+}
+.btn-txt-small{
+    font-size: 14px;
+    height: 40px;
+    font-weight: 500;
+}
+.btn-txt-medium{
     font-size: 16px;
-    height: 48px;
-    font-weight: 600;
+    height: 40px;
+    font-weight: 400;
 }
 .content-body{
     margin-top: 120px;
 }
-.bg-inner{
-    background-color: #f3f6f9;
-}
 
 .btn-txt-02{
     font-weight: 500;
+    font-size: 15px;
 }
 .icon{
     color: #c4cada;
@@ -30,4 +60,61 @@ background-color: #f9f9f9;
     border: solid;
     border-color: rgba(0, 0, 0, 0.15);
     border-width: 1px;
+}
+.btn-txt-min{
+    font-size: 12px;
+    font-weight: 500;
+    background-color: orangered;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+.btn-txt-min-02{
+    font-size: 13px;
+    font-weight: 500;
+}
+.txt-tab{
+    font-size: 14px;
+    color: #78829d;
+    font-weight: 200;
+}
+.txt-tab-button{
+    font-weight: 500;
+    font-size: 13px;
+}
+.txt-tab-title{
+    font-size: 13px;
+    color: #78829d;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.sub-title{
+    font-size: 15px;
+    line-height: 26px;
+    display: block;
+    font-weight: 500;
+}
+.new-shadow{
+    -webkit-box-shadow: 0 6px 12px rgba(120, 130, 157, 0.1);
+            box-shadow: 0 6px 12px rgba(120, 130, 157, 0.1);
+}
+.f-color{
+    color: #78829d;
+}
+body{
+background: radial-gradient(150% 150% at 30% 70%, #ffffff 0%, rgba(255, 255, 255, 0) 100%), 
+            radial-gradient(120% 120% at 70% 30%, #d6f9ff 0%, rgba(223, 248, 254, 0) 100%), 
+            radial-gradient(130% 130% at 50% 50%, #f3f6ee 0%, rgba(235, 241, 255, 0) 100%);
+background-color: #F0F8FF; /* Azul muito claro */
+    
+    /* Se você quiser que o fundo cubra toda a tela */
+    height: 85vh; /* Altura da viewport */
+    margin: 0; /* Remove a margem padrão do body */
+    background-size: cover;
+}
+.bg-inner{
+    background-color: #ffffff;
+}
+.txt-card-title{
+    font-weight: 600;
 }

@@ -1,0 +1,134 @@
+<!-- Wappler include head-page="dashboard.html" is="dmx-app" id="times" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxAnimateCSS:{}}" -->
+<dmx-serverconnect id="atualizarUsuarioTime" url="https://sun.spacefeed.app/api/projetos/atualizar-usuario-time" site="web" noload="true"></dmx-serverconnect>
+
+<dmx-serverconnect id="listaUsuarioTime" noload="true" url="https://sun.spacefeed.app/api/projetos/listar-usuario-time" site="web" dmx-param:empresa="" dmx-param:time=""></dmx-serverconnect>
+<dmx-serverconnect id="listarColaboradores" url="https://sun.spacefeed.app/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+
+<dmx-serverconnect id="listarTimes" url="https://sun.spacefeed.app/api/projetos/listar-times" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-data-detail id="data_time" dmx-bind:data="listarTimes.data.queryTimes.data" key="id"></dmx-data-detail>
+<dmx-notifications id="toasts"></dmx-notifications>
+<div class="modal" id="criarMoldal" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title pe-3">Criar time</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarNovoTime.reset()"></button>
+            </div>
+            <div class="modal-body px-5 py-4">
+                <form id="criarNovoTime" is="dmx-serverconnect-form" method="post" action="https://sun.spacefeed.app/api/projetos/times" site="web" dmx-on:error="criarMoldal.hide();criarNovoTime.reset();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="toasts.success('Cadastrado com sucesso!');criarNovoTime.reset();criarMoldal.hide();listarTimes.load({})">
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control ipt-text-02" id="nometime" name="nometime" aria-describedby="input1_help" placeholder="Nome do time" required="" data-msg-required="Este é um campo obrigatório.">
+                        <input type="hidden" class="form-control ipt-text-02" id="empresa" name="empresa" aria-describedby="input1_help" placeholder="Nome do time" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
+                        <input type="hidden" class="form-control ipt-text-02" id="timecriadopor" name="timecriadopor" aria-describedby="input1_help" placeholder="Nome do time" dmx-bind:value="usuario.data.queryUsuario[0].id">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="criarNovoTime.reset()">Cancelar</button>
+                <button type="submit" class="btn btn-primary" dmx-on:click="criarNovoTime.submit()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="editarMoldalTime" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title pe-3">Editar time {{data_time.data.nome}}</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarTIme.reset();data_time.select(0)"></button>
+            </div>
+            <div class="modal-body px-5 py-4">
+
+                <form method="post" action="https://sun.spacefeed.app/api/projetos/atualizar-time" site="web" id="editarTIme" is="dmx-serverconnect-form" dmx-on:error="editarTIme.reset();editarMoldalTime.hide();data_time.select(0);toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="editarTIme.reset();data_time.select(0);editarMoldalTime.hide();toasts.success('Time atualizado com sucesso!');listarTimes.load({})">
+
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control ipt-text-02" id="editnome" name="editnome" aria-describedby="input1_help" placeholder="Nome do time" required="" data-msg-required="Este é um campo obrigatório." dmx-bind:value="data_time.data.nome">
+                        <input type="hidden" class="form-control ipt-text-02" id="edittime" name="edittime" aria-describedby="input1_help" dmx-bind:value="data_time.data.id">
+                        <input type="hidden" class="form-control ipt-text-02" id="editativo" name="editativo" aria-describedby="input1_help" dmx-bind:value="switchativo.value">
+                    </div>
+                    <div class="row mb-3 p-2 m-0 rounded-3 border-inner-form align-items-center">
+                        <div class="col align-self-center p-0">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" value="" id="switchativo" name="switchativo" dmx-bind:value="value" dmx-bind:checked="data_time.data.ativo==1" dmx-on:checked="switchativo.setValue(1)" dmx-on:unchecked="switchativo.setValue(0)">
+                                <label class="form-check-label" for="switchativo">Ativo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="editarTIme.reset();data_time.select(0)">Cancelar</button>
+                <button type="submit" class="btn btn-primary" dmx-on:click="editarTIme.submit()">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="addMembroTime" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title pe-3">Adicionar membro ao time {{data_time.data.nome}}</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="addMembro.reset();data_time.select(0)"></button>
+            </div>
+            <div class="modal-body px-5 py-4">
+                <form method="post" is="dmx-serverconnect-form" id="addMembro" action="https://sun.spacefeed.app/api/projetos/usuario-time" site="web" dmx-on:error="addMembro.reset();addMembroTime.hide();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="listaUsuarioTime.load({time: data_time.data.id});addMembro.reset();toasts.success('Membro atualizado com sucesso!')">
+                    <div class="form-group mb-3">
+                        <select id="select1" class="form-select ipt-text-02" dmx-bind:options="listarColaboradores.data.queryListarColaboradores.data" optiontext="nome" optionvalue="id" required="" data-msg-required="Este é um campo obrigatório.">
+                        </select>
+                        <input type="hidden" class="form-control" id="membro" name="membro" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="select1.value">
+                        <input type="hidden" class="form-control" id="time" name="time" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_time.data.id">
+                        <input type="hidden" class="form-control" id="empresa" name="empresa" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_time.data.empresa">
+                        <input type="hidden" class="form-control" id="usuariocriadopor" name="usuariocriadopor" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="usuario.data.queryUsuario[0].id">
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col" is="dmx-repeat" id="listagemMembrosTime" dmx-bind:repeat="listaUsuarioTime.data.queryUsuariosTimes" key="id">
+                        <div class="row py-2 align-items-center border-bottom">
+                            <div class="col-9 align-self-center text-start">
+                                <h1 class="txt-tab m-0">{{nome}}</h1>
+                            </div>
+                            <div class="col-3 align-self-center text-end">
+                                <img src="assets/duotune/general/gen034.svg" class="icon cursor" dmx-on:click="atualizarUsuarioTime.load({editartime: times, editarmembro: membro, editarativo: 0});listaUsuarioTime.load({time: times})" width="22">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="addMembro.reset();data_time.select(0)">Cancelar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="addMembro.submit()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<main>
+    <div class="mb-4 d-flex flex-row justify-content-between align-items-start">
+        <h4 class="p-0 m-0">Times<small class="text-body-secondary sub-title">Gestão de equipes para projetos</small>
+        </h4><button id="btn1" class="btn btn-txt btn-dark" data-bs-toggle="modal" data-bs-target="#criarMoldal">Criar novo</button>
+
+    </div>
+    <div class="container-fluid px-0">
+        <div class="row px-1" is="dmx-repeat" id="liagetemTimes" dmx-bind:repeat="listarTimes.data.queryTimes.data" key="id">
+            <div class="col-4 px-2 pb-4">
+                <div class="row p-0 m-0">
+                    <div class="col bg-white p-4 rounded-3 new-shadow">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h4 class="m-0 pe-3">{{nome}}</h4>
+                            <img width="22" src="assets/duotune/general/gen055.svg" class="icon cursor" dmx-on:click="data_time.select(id);editarMoldalTime.show()">
+                        </div>
+                        <button id="btn2" class="btn btn-txt btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#addMembroTime" dmx-on:click="data_time.select(id);listaUsuarioTime.load({time: id})">Adicionar membro</button>
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</main>

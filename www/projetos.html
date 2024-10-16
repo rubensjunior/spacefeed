@@ -1,0 +1,289 @@
+<!-- Wappler include head-page="dashboard.html" is="dmx-app" id="times" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5Navigation:{}}" -->
+<dmx-value id="visibilidadeItens" dmx-bind:value="0"></dmx-value>
+<dmx-value id="visibilidade" dmx-bind:value="0"></dmx-value>
+<dmx-serverconnect id="listarTarefas" noload="true" url="https://sun.spacefeed.app/api/projetos/listar-tarefas" site="web"></dmx-serverconnect>
+
+
+
+<dmx-data-detail id="data_projeto" dmx-bind:data="listarprojetos.data.query" key="id"></dmx-data-detail>
+<dmx-serverconnect id="listarStatus" url="https://sun.spacefeed.app/api/projetos/listar-status" site="web"></dmx-serverconnect>
+<dmx-serverconnect id="listarMembroTime" noload="true" url="https://sun.spacefeed.app/api/projetos/listar-usuario-time" site="web"></dmx-serverconnect>
+<dmx-serverconnect id="listarTime" url="https://sun.spacefeed.app/api/projetos/listar-times" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-serverconnect id="listarprojetos" url="https://sun.spacefeed.app/api/projetos/listar-projetos" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+
+<dmx-serverconnect id="listarColaboradores" url="https://sun.spacefeed.app/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+
+<dmx-notifications id="toasts"></dmx-notifications>
+<div class="modal" id="criarMoldalProjeto" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title pe-3">Criar projeto</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarProjeto.reset()"></button>
+            </div>
+            <div class="modal-body px-5 py-4">
+                <form method="post" action="https://sun.spacefeed.app/api/projetos/projetos" site="web" dmx-on:error="criarProjeto.reset();criarMoldalProjeto.hide();toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="criarProjeto.reset();criarMoldalProjeto.hide();toasts.success('Projeto criado com sucesso!');listarprojetos.load({})" is="dmx-serverconnect-form" id="criarProjeto">
+                    <div class="form-group mb-3">
+                        <input type="hidden" class="form-control" id="responsavel" name="responsavel" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectresponsavel.selectedValue">
+                        <input type="hidden" class="form-control" id="times" name="times" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selecttimes.selectedValue">
+                        <input type="hidden" class="form-control" id="criado-por" name="criado-por" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectresponsavel.selectedValue">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control ipt-text-02" id="nomeprojeto" name="nome-projeto" aria-describedby="input1_help" placeholder="Nome do time" required="" data-msg-required="Este é um campo obrigatório.">
+                        <input type="hidden" class="form-control ipt-text-02" id="empresa" name="empresa" aria-describedby="input1_help" placeholder="Nome do time" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
+                    </div>
+                    <div class="form-group mb-3">
+                        <textarea id="text1" class="form-control textarea-text" placeholder="Descrição do projeto" name="descricao-projeto"></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selecttimes" class="form-select ipt-text-02" aria-placeholder="Escolha o time" placeholder="Escolha o time" dmx-bind:options="listarTime.data.queryTimes.data" optiontext="nome" optionvalue="id">
+                            <option selected="" value="" disabled selected>Escolha um time</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selectresponsavel" class="form-select ipt-text-02" aria-placeholder="Escolha o responsável" placeholder="Escolha o responsável" dmx-bind:options="listarColaboradores.data.queryListarColaboradores.data" optiontext="nome" optionvalue="id">
+                            <option selected="" value="" disabled selected>Escolha um responsável</option>
+                        </select>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="criarProjeto.reset()">Cancelar</button>
+                <button type="submit" class="btn btn-primary" dmx-on:click="criarProjeto.submit()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="editarMoldalProjeto" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title pe-3">Editar projeto {{data_projeto.data['nome-projeto']}}&nbsp;</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarProjeto.reset();data_projeto.select(0)"></button>
+            </div>
+            <div class="modal-body px-5 py-4">
+                <form method="post" action="https://sun.spacefeed.app/api/projetos/atualizar-projeto" site="web" dmx-on:error="editarProjeto.reset();editarMoldalProjeto.hide();toasts.danger(lastError.status+lastError.message+lastError.response);data_projeto.select(0)" dmx-on:success="editarProjeto.reset();editarMoldalProjeto.hide();toasts.success('Projeto editado com sucesso!');listarprojetos.load({});data_projeto.select(0)" is="dmx-serverconnect-form" id="editarProjeto">
+                    <div class="form-group mb-3">
+                        <input class="form-control" id="editresposavel" name="editresposavel" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectresponsavel1.selectedValue" type="hidden">
+                        <input class="form-control" id="edittime" name="edittime" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selecttimes1.selectedValue" type="hidden">
+                        <input class="form-control" id="editativo" name="editativo" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ativoswitch.value" type="hidden">
+                        <input class="form-control" id="projetoid" name="projetoid" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.id" type="hidden">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control ipt-text-02" id="editnome" name="editnome" aria-describedby="input1_help" placeholder="Nome do time" required="" data-msg-required="Este é um campo obrigatório." dmx-bind:value="data_projeto.data['nome-projeto']">
+                        <input type="hidden" class="form-control ipt-text-02" id="empresa1" name="empresa1" aria-describedby="input1_help" placeholder="Nome do time" dmx-bind:value="usuario.data.queryUsuario[0].empresa">
+                    </div>
+                    <div class="form-group mb-3">
+                        <textarea id="editdescricao" class="form-control textarea-text" placeholder="Descrição do projeto" name="editdescricao" dmx-bind:value="data_projeto.data['descricao-projeto']"></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selecttimes1" class="form-select ipt-text-02" aria-placeholder="Escolha o time" placeholder="Escolha o time" dmx-bind:options="listarTime.data.queryTimes.data" optiontext="nome" optionvalue="id" dmx-bind:value="data_projeto.data.times">
+                            <option selected="" value="" disabled="">Escolha um time</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selectresponsavel1" class="form-select ipt-text-02" aria-placeholder="Escolha o responsável" placeholder="Escolha o responsável" dmx-bind:options="listarColaboradores.data.queryListarColaboradores.data" optiontext="nome" optionvalue="id" dmx-bind:value="data_projeto.data.responsavel">
+                            <option selected="" value="" disabled="">Escolha um responsável</option>
+                        </select>
+                    </div>
+                    <div class="row mb-3 p-2 m-0 rounded-3 border-inner-form align-items-center">
+                        <div class="col align-self-center">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" value="" id="ativoswitch" name="ativoswitch" dmx-bind:value="data_projeto.data.ativo" dmx-bind:checked="data_projeto.data.ativo==1" dmx-on:checked="ativoswitch.setValue(1)" dmx-on:unchecked="ativoswitch.setValue(0)">
+                                <label class="form-check-label" for="ativoswitch">Ativo</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="editarProjeto.reset();data_projeto.select(0)">Cancelar</button>
+                <button type="submit" class="btn btn-primary" dmx-on:click="editarProjeto.submit()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="criarModalTarefa" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Criar tarefa</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarNovaTarefa.reset();data_projeto.select(0)"></button>
+            </div>
+            <div class="modal-body px-5 py-4">
+                <form id="criarNovaTarefa" is="dmx-serverconnect-form" method="post" action="https://sun.spacefeed.app/api/projetos/tarefas" site="web" dmx-on:error="criarNovaTarefa.reset();criarModalTarefa.hide();toasts.danger(lastError.status+lastError.message+lastError.response);data_projeto.select(0)" dmx-on:success="criarModalTarefa.hide();criarNovaTarefa.reset();toasts.success('Tarefa cadastrada com sucesso!');data_projeto.select(0)">
+                    <div class="form-group mb-3">
+                        <input class="form-control" id="empresa" name="empresa" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.empresa" type="hidden">
+                        <input class="form-control" id="projeto" name="projeto" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="data_projeto.data.id" type="hidden">
+                        <input class="form-control" id="responsavel" name="responsavel" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectresponsaveltarefa.selectedValue" type="hidden">
+                        <input class="form-control" id="status" name="status" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="selectstatus.selectedValue" type="hidden">
+                        <input class="form-control" id="criadopor" name="criadopor" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="usuario.data.queryUsuario[0].id" type="hidden">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control ipt-text-02" id="titulotarefa" name="titulotarefa" aria-describedby="input1_help" placeholder="Título da tarefa">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input id="descricaotarefa" name="descricaotarefa" type="text" class="form-control textarea-text" placeholder="Descrição da tarefa">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <input type="date" class="form-control ipt-text-02" id="datainicio" name="datainicio" aria-describedby="input1_help" placeholder="Data de início">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <input type="date" class="form-control ipt-text-02" id="datafim" name="datafim" aria-describedby="input1_help" placeholder="Data de fim">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selectstatus" class="form-select ipt-text-02" dmx-bind:options="listarStatus.data.queryStatus" optiontext="status" optionvalue="id">
+                            <option selected="" value="" disabled>Selecio um status</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <select id="selectresponsaveltarefa" class="form-select ipt-text-02" dmx-bind:options="listarMembroTime.data.queryUsuariosTimes" optiontext="nome" optionvalue="membro">
+                            <option value="">Escolha o responsável da tarefa</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" dmx-on:click="criarNovaTarefa.reset();data_projeto.select(0)">Cancelar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="criarNovaTarefa.submit()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<main>
+    <div class="mb-4 d-flex flex-row justify-content-between align-items-start" dmx-show="view.visibilidade.value==0">
+        <h4 class="p-0 m-0">Projetos<small class="text-body-secondary sub-title">Gestão de projetos e atividades</small>
+        </h4><button id="btn1" class="btn btn-txt btn-dark" data-bs-toggle="modal" data-bs-target="#criarMoldalProjeto">Criar novo</button>
+
+    </div>
+
+    <div class="container-fluid p-0" dmx-show="view.visibilidade.value==0">
+        <div class="row px-1 mb-4" is="dmx-repeat" id="liagetemProjetos" dmx-bind:repeat="listarprojetos.data.query" key="id">
+            <div class="col-4 px-2 pb-4">
+                <div class="row p-0 m-0">
+                    <div class="col bg-white p-4 rounded-3 new-shadow">
+                        <div class="d-flex flex-row justify-content-between mb-3">
+                            <p class="btn-txt-min text-start m-0">{{nome}}</p>
+
+                            <img src="assets/duotune/general/gen055.svg" width="22" class="icon cursor" dmx-on:click="data_projeto.select(id);editarMoldalProjeto.show()">
+
+
+
+
+                        </div>
+
+
+
+                        <h5 class="text-start txt-card-title">{{_['nome-projeto']}}</h5>
+
+                        <p class="txt-tab text-start">{{_['descricao-projeto']}}</p>
+
+                        <div class="d-flex flex-row justify-content-between mb-3">
+                            <button id="btn2" class="btn btn-txt btn-dark btn-sm" dmx-on:click="visibilidade.setValue(1);listarTarefas.load({projeto: id});data_projeto.select(id)">Detalhes do projeto</button>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container-fluid bg-white p-4 pb-2 rounded-3 new-shadow mb-4" dmx-show="view.visibilidade.value==1">
+        <div class="row ">
+            <div class="col-6">
+                <div class="d-flex">
+                    <p class="btn-txt-min mb-2">{{view.data_projeto.data.nome}}</p>
+                </div>
+
+                <h5 class="text-start txt-card-title">{{view.data_projeto.data['nome-projeto']}}</h5>
+                <p class="txt-tab text-start">{{view.data_projeto.data['descricao-projeto']}}</p>
+            </div>
+            <div class="col align-self-center">
+                <div class="row ps-4 align-items-center">
+                    <div class="col text-end align-self-center">
+                        <button id="btn3" class="btn btn-txt btn-dark">Criar tarefa</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <div class="nav w-100 border-top">
+                    <a class="nav-item nav-link text-black" href="#">Tarefas</a>
+                    <a class="nav-item nav-link text-black" href="#">Reunião</a>
+                    <a class="nav-item nav-link text-black" href="#">Arquivos</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="container-fluid bg-white p-4 rounded-3 new-shadow" dmx-show="view.visibilidade.value==1">
+        <div class="row">
+            <div class="col">
+                <div class="row pb-3 gx-2 align-items-center border-bottom mx-0">
+                    <div class="col align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title">Nome</h6>
+                    </div>
+                    <div class="col align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title">E-mail</h6>
+                    </div>
+                    <div class="col align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title text-center">Ativo</h6>
+                    </div>
+                    <div class="col align-self-center p-0">
+                        <h6 class="p-1 m-0 txt-tab-title text-end">Ações</h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row gx-2 py-3 align-items-center border-bottom mx-0">
+            <div class="col align-self-center p-0">
+                <p class="p-1 m-0 txt-tab">{{nome}}</p>
+            </div>
+            <div class="col align-self-center p-0">
+                <p class="p-1 m-0 txt-tab">{{email}}</p>
+            </div>
+            <div class="col align-self-center p-0 text-center">
+                <input class="form-check-input" type="checkbox" value="" id="input2" name="input2" dmx-bind:checked="isAtivo==1" readonly="true" disabled="true">
+            </div>
+            <div class="col align-self-center p-0">
+                <div class="d-flex justify-content-end">
+                    <div class="dropdown">
+                        <button id="editar" class="btn dropdown-toggle btn-sm btn-light txt-tab-button" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdown1">
+                            <button id="btn2" class="btn w-100 text-start" dmx-on:click="editarColagorador.select(id);editar.show()" data-bs-target="#editarModal" type="submit" data-bs-toggle="modal">Editar</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</main>

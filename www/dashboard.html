@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
     <script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
     <script src="dmxAppConnect/dmxDataTraversal/dmxDataTraversal.js" defer></script>
+    <script src="dmxAppConnect/dmxVideo/dmxVideo.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxAnimateCSS/animate.min.css" />
+    <script src="dmxAppConnect/dmxAnimateCSS/dmxAnimateCSS.js" defer></script>
 </head>
 
 <body is="dmx-app" id="dashboard" class="bg-inner">
@@ -32,7 +35,7 @@
     <dmx-local-manager id="loginusuario"></dmx-local-manager>
 
     <div class="container-fluid">
-        <header class="container-fluid navbar-dark fixed-top bg-black px-5 py-2">
+        <header class="container-fluid navbar-dark fixed-top bg-black px-5 py-1">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
@@ -43,12 +46,10 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbar1_collapse">
-                                <div class="navbar-nav">
-                                    <a class="nav-item nav-link active text-white" href="#">Home</a>
-                                    <a class="nav-item nav-link text-white" href="#">About</a>
-                                    <a class="nav-item nav-link text-white" href="#">Contact</a>
+                                <div class="navbar-nav align-items-center justify-content-center">
+                                    <img src="assets/duotune/communication/com012.svg" class="me-3" width="22">
                                 </div>
-                                <button id="btn6" class="btn ms-5 text-light btn-dark" dmx-on:click="loginusuario.remove('id');navegacao.goto('index.html')">{{usuario.data.queryUsuario[0].nome}}<img src="assets/images/blank.png" class="img-fluid ms-2 rounded-2" width="40"></button>
+                                <button id="btn6" class="btn ms-5 text-light btn-black btn-txt-min-02" dmx-on:click="loginusuario.remove('id');navegacao.goto('index.html')">{{usuario.data.queryUsuario[0].nome}}<img src="assets/images/blank.png" class="img-fluid ms-2 rounded-2" width="40"></button>
 
                             </div>
                         </nav>
@@ -59,14 +60,19 @@
         <div class="row h-100 content-body px-5">
             <div class="col-12 col-md-2">
                 <div class="row">
-                    <div class="col bg-white rounded-3 p-4 mb-3 border-secondary">
+                    <div class="col bg-white rounded-3 p-4 mb-3 border-secondary new-shadow">
                         <div class="d-flex flex-column">
+                            <button id="btn1" class="btn text-start btn-txt-02 mb-2 f-color" dmx-on:click="navegacao.goto('/',true)"><img src="assets/duotune/abstract/abs029.svg" class="me-2 icon" width="20">Dashboard</button>
+                            <button id="btn2" class="btn text-start btn-txt-02 mb-2 f-color" dmx-on:click="navegacao.goto('/colaboradores',true)" dmx-show="usuario.data.queryUsuario[0].isAdmin==1"><img src="assets/duotune/abstract/abs022.svg" class="me-2 icon" width="20">Colaboradores</button>
+                            <button id="btn3" class="btn text-start btn-txt-02 mb-2 f-color" data-bs-toggle="collapse" data-bs-target="#projetoscoll"><img src="assets/duotune/abstract/abs042.svg" class="me-2 icon" width="20">Projetos e tarefas</button>
 
-                            <button id="btn1" class="btn text-start btn-txt-02 mb-2 text-secondary" dmx-on:click="navegacao.goto('/',true)"><img src="assets/duotune/abstract/abs029.svg" class="me-3 icon" width="20">Dashboard</button>
-                            <button id="btn2" class="btn text-start btn-txt-02 mb-2 text-secondary" dmx-on:click="navegacao.goto('/colaboradores',true)"><img src="assets/duotune/abstract/abs022.svg" class="me-3 icon" width="20">Colaboradores</button>
-                            <button id="btn3" class="btn text-start btn-txt-02 mb-2 text-secondary"><img src="assets/duotune/abstract/abs042.svg" class="me-3 icon" width="20">Projetos e tarefas</button>
-                            <button id="btn4" class="btn text-start btn-txt-02 mb-2 text-secondary"><img src="assets/duotune/abstract/abs023.svg" class="me-3 icon" width="20">Leads</button>
-                            <button id="btn5" class="btn text-start btn-txt-02 mb-3 text-secondary"><img src="assets/duotune/abstract/abs020.svg" class="me-3 icon" width="20">Chamados</button><button id="btn7" class="btn btn-txt-02 btn-light text-secondary py-2">Suporte Spacefeed</button>
+                            <div class="collapse border-start ms-3" id="projetoscoll" is="dmx-bs5-collapse">
+                                <button id="btn8" class="btn text-start btn-txt-02 ms-4 mb-1" dmx-on:click="navegacao.goto('/times',true);projetoscoll.hide()">Times</button>
+                                <button id="btn9" class="btn text-start btn-txt-02 ms-4 mb-1" dmx-on:click="navegacao.goto('/projetos',true);projetoscoll.hide()">Projetos</button>
+                                <button id="btn10" class="btn text-start btn-txt-02 ms-4 mb-1">Tarefas</button>
+                            </div>
+                            <button id="btn4" class="btn text-start btn-txt-02 mb-2 f-color"><img src="assets/duotune/abstract/abs023.svg" class="me-2 icon" width="20">Leads</button>
+                            <button id="btn5" class="btn text-start btn-txt-02 mb-3 f-color"><img src="assets/duotune/abstract/abs020.svg" class="me-2 icon" width="20">Chamados</button><button id="btn7" class="btn btn-txt-02 btn-light py-2">Suporte Spacefeed</button>
                         </div>
                     </div>
                 </div>
