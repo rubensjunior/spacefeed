@@ -2,7 +2,7 @@
   "bootstrap5": {
     "basic": {
       "font-family-base": "Inter:500",
-      "headings-font-family": "Inter:900"
+      "headings-font-family": "Inter:600"
     },
     "advanced": {}
   }

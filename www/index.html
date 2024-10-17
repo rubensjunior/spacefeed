@@ -16,6 +16,8 @@
 	<script src="dmxAppConnect/dmxNotifications/dmxNotifications.js" defer></script>
 	<script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
 	<script src="dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
+	<link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
+	<script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
 </head>
 
 <body is="dmx-app" id="index">
@@ -45,12 +47,12 @@
 				<img src="assets/images/spacefeed-black.png" class="mb-5" width="180">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-md-8">
-						<form id="login" is="dmx-serverconnect-form" method="post" credentials="true" action="http://localhost:8100/api/usuarios/login" site="web" dmx-on:error="toast.danger(lastError.status+lastError.message+lastError.response);login.reset()" dmx-on:unauthorized="toast.warning('Login e/ou senha errado.');login.reset()" dmx-on:success="toast.success('Bem-vindo!');login.reset();loginusuario.set('id',login.data.identity);navegacao.goto('dashboard.html')">
+						<form method="post" id="login" is="dmx-serverconnect-form" credentials="true" action="http://localhost:8100/api/desktop/auth/login" site="sfapis" dmx-on:error="login.reset();toast.danger('Ocorreu um erro durante o login: '+lastError.status+lastError.message+lastError.response)" dmx-on:unauthorized="login.reset();toast.warning('Login ou senha errados.')" dmx-on:success="login.reset();loginusuario.set('id',login.data.identity);navegacao.goto('dashboard.html')">
 							<div class="form-group mb-4">
-								<input type="email" class="form-control form-control-lg ipt-text py-2" id="loginemail" name="loginemail" aria-describedby="input1_help" placeholder="E-mail cadastrado">
+								<input type="email" class="form-control form-control-lg ipt-text py-2" id="email" name="email" aria-describedby="input1_help" placeholder="E-mail cadastrado" required="" data-msg-required="Este é um campo obrigatório." data-rule-email="" data-msg-email="Insira uma senha válida.">
 							</div>
 							<div class="form-group mb-4">
-								<input type="password" class="form-control form-control-lg ipt-text" id="password" name="password" aria-describedby="input1_help" placeholder="Insira sua senha">
+								<input type="password" class="form-control form-control-lg ipt-text" id="senha" name="senha" aria-describedby="input1_help" placeholder="Insira sua senha" required="" data-msg-required="Este é um campo obrigatório.">
 							</div>
 							<div class="form-group mb-3"> <button id="btn1" class="btn form-control btn-dark py-2 btn-lg btn-txt" type="submit">Fazer login</button>
 							</div>
