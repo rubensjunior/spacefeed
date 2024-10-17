@@ -30,12 +30,55 @@
 </head>
 
 <body is="dmx-app" id="dashboard" class="gradiente">
+
     <div is="dmx-browser" id="navegacao"></div>
     <dmx-serverconnect id="usuario" url="http://localhost:8100/api/usuarios/identificar-usuario" site="web" dmx-param:id="loginusuario.data.id"></dmx-serverconnect>
     <dmx-local-manager id="loginusuario"></dmx-local-manager>
 
 
-    <header class="container-fluid navbar-dark bg-black px-5 py-1 m-0">
+
+    <div class="container-fluid bg-black border-bottom border-dark py-1">
+        <div class="row">
+            <div class="col-3">
+                <div class="nav w-100">
+                    <div class="nav-item dropdown tool-menu">
+                        <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" id="dropdown1" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown1">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown tool-menu">
+                        <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" id="dropdown2" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown1">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown tool-menu">
+                        <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" id="dropdown3" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown1">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col align-self-lg-center">
+                <h5 class="text-white text-lg-center m-0">Empresa</h5>
+            </div>
+            <div class="col-3 align-self-lg-center text-lg-end">
+                <img src="assets/duotune/general/gen036.svg" width="24" class="me-4">
+                <img src="assets/duotune/general/gen034.svg" width="24">
+            </div>
+        </div>
+    </div>
+    <header class="container-fluid navbar-dark bg-black py-3">
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
@@ -45,11 +88,11 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar1_collapse" aria-controls="navbar1_collapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbar1_collapse">
+                        <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbar1_collapse1">
                             <div class="navbar-nav align-items-center justify-content-center">
                                 <img src="assets/duotune/communication/com012.svg" class="me-3" width="22">
                             </div>
-                            <button id="btn6" class="btn ms-5 text-light btn-black btn-txt-min-02" dmx-on:click="loginusuario.remove('id');navegacao.goto('index.html')">{{usuario.data.queryUsuario[0].nome}}<img src="assets/images/blank.png" class="img-fluid ms-2 rounded-2" width="40"></button>
+                            <button id="btn11" class="btn ms-5 pe-0 text-light btn-black btn-txt-min-02" dmx-on:click="loginusuario.remove('id');navegacao.goto('index.html')">{{usuario.data.queryUsuario[0].nome}}<img src="assets/images/blank.png" class="img-fluid ms-2 rounded-2" width="40"></button>
 
                         </div>
                     </nav>
@@ -60,7 +103,7 @@
     <div class="container-fluid h-100">
 
 
-        <div class="row h-100 mt-5 ps-4 m-0">
+        <div class="row h-100 mt-4 m-0">
             <div class="col-12 col-md-2 h-100">
                 <div class="row">
                     <div class="col bg-white rounded-3 p-4 mb-3 border-secondary new-shadow">
@@ -75,7 +118,7 @@
                                 <button id="btn10" class="btn text-start btn-txt-02 ms-4 mb-1">Tarefas</button>
                             </div>
                             <button id="btn4" class="btn text-start btn-txt-02 mb-2 f-color"><img src="assets/duotune/abstract/abs023.svg" class="me-2 icon" width="20">Leads</button>
-                            <button id="btn5" class="btn text-start btn-txt-02 mb-3 f-color"><img src="assets/duotune/abstract/abs020.svg" class="me-2 icon" width="20">Chamados</button><button id="btn7" class="btn btn-txt-02 btn-light py-2">Suporte Spacefeed</button>
+                            <button id="btn5" class="btn text-start btn-txt-02 mb-3 f-color"><img src="assets/duotune/abstract/abs020.svg" class="me-2 icon" width="20">Chamados</button>
                         </div>
                     </div>
                 </div>
