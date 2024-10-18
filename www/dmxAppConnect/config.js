@@ -305,6 +305,18 @@ dmx.config({
         {
           "type": "number",
           "name": "empresa"
+        },
+        {
+          "type": "number",
+          "name": "ativo"
+        },
+        {
+          "type": "datetime",
+          "name": "criado-em"
+        },
+        {
+          "type": "number",
+          "name": "criado-por"
         }
       ],
       "outputType": "array"
@@ -322,6 +334,18 @@ dmx.config({
         {
           "type": "number",
           "name": "empresa"
+        },
+        {
+          "type": "number",
+          "name": "ativo"
+        },
+        {
+          "type": "datetime",
+          "name": "criado-em"
+        },
+        {
+          "type": "number",
+          "name": "criado-por"
         }
       ],
       "outputType": "array"
@@ -516,16 +540,16 @@ dmx.config({
           "name": "empresa"
         },
         {
-          "type": "text",
-          "name": "nome"
-        },
-        {
           "type": "number",
           "name": "ativo"
         },
         {
+          "type": "datetime",
+          "name": "criado-em"
+        },
+        {
           "type": "number",
-          "name": "isAtivo"
+          "name": "criado-por"
         }
       ],
       "outputType": "array"
@@ -755,6 +779,35 @@ dmx.config({
         {
           "type": "number",
           "name": "responsavel"
+        },
+        {
+          "type": "text",
+          "name": "nome"
+        }
+      ],
+      "outputType": "array"
+    },
+    "data_membro": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "times"
+        },
+        {
+          "type": "number",
+          "name": "membro"
+        },
+        {
+          "type": "number",
+          "name": "empresa"
+        },
+        {
+          "type": "number",
+          "name": "ativo"
         },
         {
           "type": "text",
