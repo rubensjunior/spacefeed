@@ -108,7 +108,7 @@ html, body {
   overflow: hidden; /* Impede o scroll vertical */
 }
 
-body {
+body {  
   background: radial-gradient(circle at center top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 40%, rgba(201, 209, 217, 0.8) 100%);
   background-color: #f9f9f9; /* Cor de fundo */
   background-size: cover;
@@ -186,4 +186,35 @@ border-radius: 24px;
 
 .navbar-collapse {
     padding: 0;
+}
+
+.card-news {
+    position: relative; /* Necessário para o overlay */
+    background-image: url(../assets/images/space.jpg); /* Imagem de fundo */
+    background-position: center;
+    background-size: cover;
+    height: 100%; /* Altura conforme necessário */
+    color: white; /* Cor do texto */
+}
+
+.card-news::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.0); /* Cor preta com opacidade */
+    z-index: 1; /* Overlay fica atrás do conteúdo */
+    border-radius: inherit; /* Mantém o arredondamento do card */
+}
+
+.card-news .row {
+    position: relative;
+    z-index: 2; /* Conteúdo (texto) fica acima do overlay */
+}
+.font-mini{
+    font-size: 10px;
+    font-weight: 200;
+    line-height: 16px;
 }
