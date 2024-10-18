@@ -1,27 +1,28 @@
 <!-- Wappler include head-page="dashboard.html" is="dmx-app" id="colaboradores" appConnect="local" bootstrap5="local" capacitor="local" components="{dmxBootstrap5Modal:{},dmxNotifications:{},dmxFormatter:{},dmxBootstrap5TableGenerator:{},dmxValidator:{},dmxDataTraversal:{}}" -->
-<dmx-data-detail id="editarColagorador" dmx-bind:data="listarColaboradores.data.queryListarColaboradores.data" key="id"></dmx-data-detail>
-<dmx-serverconnect id="listarColaboradores" url="http://localhost:8100/api/colaborador/listar-colaboradores" site="web" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
+<dmx-data-detail id="editarColagorador" dmx-bind:data="listarColaboradores.data.queryListarColaboradores" key="id"></dmx-data-detail>
+<dmx-serverconnect id="listarColaboradores" url="http://localhost:8100/api/desktop/colaboradores/listar-colaboradores" site="sfapis" dmx-param:empresa="usuario.data.queryUsuario[0].empresa"></dmx-serverconnect>
 <dmx-notifications id="toasts"></dmx-notifications>
 <div class="modal" id="criar" is="dmx-bs5-modal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title pe-3">Criar colaborador</h6>
+                <h6 class="modal-title pe-3 fw-bold">Criar colaborador</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="criarColaborador.reset()"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form method="post" site="web" id="criarColaborador" is="dmx-serverconnect-form" action="http://localhost:8100/api/colaborador/cadastrar-colaborador" dmx-on:error="toasts.danger(lastError.status+lastError.message+lastError.response);criarColaborador.reset();criar.hide()" dmx-on:success="toasts.success('Colaborador cadsatrado com sucesso!');criarColaborador.reset();criar.hide();listarColaboradores.load({})">
+                <form method="post" site="sfapis" id="criarColaborador" is="dmx-serverconnect-form" action="http://localhost:8100/api/desktop/colaboradores/cadastrar-colaborador" dmx-on:error="toasts.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response);criarColaborador.reset();criar.hide()" dmx-on:success="toasts.success('Colaborador cadsatrado com sucesso!');criarColaborador.reset();criar.hide();listarColaboradores.load({empresa: usuario.data.queryUsuario[0].empresa})">
 
                     <div class="form-group mb-3">
-                        <input class="form-control" id="academicocheck" name="academicocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="academico1.value" type="hidden">
-                        <input class="form-control" id="admincheck" name="admincheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="admin1.value" type="hidden">
-                        <input class="form-control" id="atendimentocheck" name="atendimentocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="atendimento1.value" type="hidden">
-                        <input class="form-control" id="comercialcheck" name="comercialcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="comercial1.value" type="hidden">
-                        <input class="form-control" id="diretoriacheck" name="diretoriacheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="diretoria1.value" type="hidden">
-                        <input class="form-control" id="financeirocheck" name="financeirocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="financeiro1.value" type="hidden">
-                        <input class="form-control" id="mktcheck" name="mktcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="mkt1.value" type="hidden">
-                        <input class="form-control" id="admcheck" name="admcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="admin.value" type="hidden">
-                        <input class="form-control" id="ticheck" name="ticheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ti1.value" type="hidden">
+                        <input class="form-control" id="academicocheck" name="academicocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="academico1.value">
+                        <input class="form-control" id="admincheck" name="admincheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="admin1.value">
+                        <input class="form-control" id="atendimentocheck" name="atendimentocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="atendimento1.value">
+                        <input class="form-control" id="comercialcheck" name="comercialcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="comercial1.value">
+                        <input class="form-control" id="diretoriacheck" name="diretoriacheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="diretoria1.value">
+                        <input class="form-control" id="financeirocheck" name="financeirocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="financeiro1.value">
+                        <input class="form-control" id="mktcheck" name="mktcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="mkt1.value">
+                        <input class="form-control" id="admcheck" name="admcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="admin.value">
+                        <input class="form-control" id="ticheck" name="ticheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ti1.value">
+                        <input class="form-control" id="criadopor" name="criadopor" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="usuario.data.queryUsuario[0].id">
                     </div>
                     <div class="form-group mb-3">
                         <input type="text" class="form-control ipt-text-02" id="nomecolaborador" name="nomecolaborador" aria-describedby="input2_help" placeholder="Nome completo do colaborador" required="" data-msg-required="Campo obrigatório.">
@@ -93,31 +94,31 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title pe-3">Editar colaborador {{editarColagorador.data.nome}}</h6>
+                <h6 class="modal-title pe-3"><b>Editar colaborador:</b> {{editarColagorador.data.nome}}</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarColagorador.select(0);editarestecolaborador.reset()"></button>
             </div>
             <div class="modal-body px-5 py-4">
-                <form method="post" action="http://localhost:8100/api/colaborador/atualizar-dados" site="web" is="dmx-serverconnect-form" id="editarestecolaborador" dmx-on:error="editarestecolaborador.reset();editarModal.hide();editarColagorador.select(0);toasts.danger(lastError.status+lastError.message+lastError.response)" dmx-on:success="editarColagorador.select(editarColagorador.data.id);editarestecolaborador.reset();editarModal.hide();toasts.success('Atualizado com sucesso!');listarColaboradores.load({})">
+                <form method="post" action="http://localhost:8100/api/desktop/colaboradores/atualizar-colaborador" site="sfapis" is="dmx-serverconnect-form" id="editarestecolaborador" dmx-on:success="editarestecolaborador.reset();editarModal.hide();toasts.success('Cadastrado com sucesso!');listarColaboradores.load({empresa: usuario.data.queryUsuario[0].empresa});editarColagorador.select(0)" dmx-on:error="editarestecolaborador.reset();editarColagorador.select();editarModal.hide();toasts.danger('Ocorreu um erro: '+lastError.status+lastError.message+lastError.response)">
 
 
                     <div class="form-group mb-3">
                         <input type="text" class="form-control ipt-text-02" id="editnomecolaborador" name="editnomecolaborador" aria-describedby="input2_help" placeholder="Nome completo do colaborador" dmx-bind:value="editarColagorador.data.nome" required="" data-msg-required="Campo obrigatório.">
                     </div>
                     <div class="form-group mb-3">
-                        <input type="hidden" class="form-control" id="editacademicocheck" name="editacademicocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="academico.value">
-                        <input type="hidden" class="form-control" id="editadministrativo" name="editadministrativo" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="adm.value">
-                        <input type="hidden" class="form-control" id="editatendimentocheck" name="editatendimentocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="atendimento.value">
-                        <input type="hidden" class="form-control" id="editcomercialcheck" name="editcomercialcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="comercial.value">
-                        <input type="hidden" class="form-control" id="editdiretoriacheck" name="editdiretoriacheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="diretoria.value">
-                        <input type="hidden" class="form-control" id="editfinanceirocheck" name="editfinanceirocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="financeiro.value">
-                        <input type="hidden" class="form-control" id="editmktcheck" name="editmktcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="marketing.value">
-                        <input type="hidden" class="form-control" id="editticheck" name="editticheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ti.value">
-                        <input type="hidden" class="form-control" id="editadmcheck" name="editadmcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="admin2.value">
-                        <input type="hidden" class="form-control" id="editativocheck" name="editativocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ativo1.value">
+                        <input class="form-control" id="editacademicocheck" name="editacademicocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="academico.value">
+                        <input class="form-control" id="editadministrativo" name="editadministrativo" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="adm.value">
+                        <input class="form-control" id="editatendimentocheck" name="editatendimentocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="atendimento.value">
+                        <input class="form-control" id="editcomercialcheck" name="editcomercialcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="comercial.value">
+                        <input class="form-control" id="editdiretoriacheck" name="editdiretoriacheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="diretoria.value">
+                        <input class="form-control" id="editfinanceirocheck" name="editfinanceirocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="financeiro.value">
+                        <input class="form-control" id="editmktcheck" name="editmktcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="marketing.value">
+                        <input class="form-control" id="editticheck" name="editticheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ti.value">
+                        <input class="form-control" id="editadmcheck" name="editadmcheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="admin2.value">
+                        <input class="form-control" id="editativocheck" name="editativocheck" aria-describedby="input1_help" placeholder="Enter some text" dmx-bind:value="ativo1.value"><input class="form-control ipt-text-02" id="id" name="id" aria-describedby="input2_help" placeholder="E-mail para login" dmx-bind:value="editarColagorador.data.id">
                     </div>
                     <div class="form-group mb-3">
-                        <input type="email" class="form-control ipt-text-02" id="editemailcolaborador" name="editemailcolaborador" aria-describedby="input2_help" placeholder="E-mail para login" dmx-bind:value="editarColagorador.data.email" data-rule-email="" data-msg-email="Insira um e-mail válido." required="" data-msg-required="Campo obrigatório.">
-                        <input type="hidden" class="form-control ipt-text-02" id="id" name="id" aria-describedby="input2_help" placeholder="E-mail para login" dmx-bind:value="editarColagorador.data.id">
+                        <input type="email" class="form-control ipt-text-02" id="editemailcolaborador" name="editemailcolaborador" aria-describedby="input2_help" placeholder="E-mail para login" data-rule-email="" data-msg-email="Insira um e-mail válido." required="" data-msg-required="Campo obrigatório." dmx-bind:value="editarColagorador.data.email">
+
                     </div>
                     <div class="row mb-3 p-2 m-0 rounded-3 border-inner-form">
                         <div class="col-4">
@@ -208,7 +209,7 @@
                     </div>
                 </div>
                 <div class="row" key="id">
-                    <div class="col" is="dmx-repeat" id="listaColaboradores" dmx-bind:repeat="listarColaboradores.data.queryListarColaboradores.data" key="id">
+                    <div class="col" is="dmx-repeat" id="listaColaboradores" dmx-bind:repeat="listarColaboradores.data.queryListarColaboradores" key="id">
                         <div class="row gx-2 py-3 align-items-center border-bottom mx-0">
                             <div class="col align-self-center p-0">
                                 <p class="p-1 m-0 txt-tab">{{nome}}</p>
@@ -224,7 +225,7 @@
                                     <div class="dropdown">
                                         <button id="editar" class="btn dropdown-toggle btn-sm btn-light txt-tab-button" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</button>
                                         <div class="dropdown-menu" aria-labelledby="dropdown1">
-                                            <button id="btn2" class="btn w-100 text-start" dmx-on:click="editarColagorador.select(id);editar.show()" data-bs-target="#editarModal" type="submit" data-bs-toggle="modal">Editar</button>
+                                            <button id="btn2" class="btn w-100 text-start" dmx-on:click="editarColagorador.select(id);editarModal.show()" data-bs-target="#editarModal" type="submit">Editar</button>
                                         </div>
                                     </div>
                                 </div>

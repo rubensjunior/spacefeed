@@ -33,7 +33,7 @@
 <body is="dmx-app" id="dashboard" class="gradiente">
 
     <div is="dmx-browser" id="navegacao"></div>
-    <dmx-serverconnect id="usuario" url="http://localhost:8100/api/usuarios/identificar-usuario" site="web" dmx-param:id="loginusuario.data.id"></dmx-serverconnect>
+    <dmx-serverconnect id="usuario" url="http://localhost:8100/api/desktop/auth/identificar-usuario" site="sfapis" dmx-param:id="loginusuario.data.id"></dmx-serverconnect>
     <dmx-local-manager id="loginusuario"></dmx-local-manager>
 
 
@@ -49,9 +49,9 @@
         </div>
     </div>
     <div class="container-fluid bg-black border-bottom border-dark py-1">
-        <div class="row">
-            <div class="col-3">
-                <div class="nav w-100">
+        <div class="row align-items-center">
+            <div class="col-3 align-self-center">
+                <div class="nav w-100 align-items-center">
                     <div class="nav-item dropdown tool-menu"><a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" id="dropdown4" role="button" aria-haspopup="true" aria-expanded="false">Financeiro</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown1">
                             <a class="dropdown-item" href="#">Action</a>
@@ -80,11 +80,11 @@
                 </div>
             </div>
             <div class="col align-self-lg-center">
-                <h6 class="text-white text-lg-center m-0 fw-bold">Empresa</h6>
+                <h6 class="text-white text-lg-center m-0 fw-bold">{{usuario.data.queryUsuario[0].nomeFantasia}}</h6>
             </div>
             <div class="col-3 align-self-lg-center text-lg-end">
-                <img src="assets/duotune/general/gen036.svg" width="24" class="me-3" id="minimizarBtn" alt="Minimizar">
-                <img src="assets/duotune/general/gen034.svg" width="24" id="fecharBtn" alt="Fechar">
+                <img src="assets/duotune/general/gen036.svg" width="22" class="me-2" id="minimizarBtn" alt="Minimizar">
+                <img src="assets/duotune/general/gen034.svg" width="22" id="fecharBtn" alt="Fechar">
             </div>
         </div>
     </div>
