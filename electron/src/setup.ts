@@ -217,6 +217,7 @@ export class ElectronCapacitorApp {
   }
 }
 
+
 // Set a CSP up for our application based on the custom scheme
 export function setupContentSecurityPolicy(customScheme: string): void {
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
