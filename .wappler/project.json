@@ -22,6 +22,10 @@
     {
       "name": "bootstrap_icons",
       "type": "local"
+    },
+    {
+      "name": "jquery_35",
+      "type": "local"
     }
   ],
   "runtime": "capacitor",

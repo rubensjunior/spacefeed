@@ -10,7 +10,7 @@
 <dmx-data-detail id="data_time" key="id" dmx-bind:data="listarTimes.data.queryTimes"></dmx-data-detail>
 <dmx-notifications id="toasts"></dmx-notifications>
 <div class="modal" id="criarMoldal" is="dmx-bs5-modal" tabindex="-1">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title pe-3">Criar time</h6>
@@ -34,10 +34,10 @@
     </div>
 </div>
 <div class="modal" id="editarMoldalTime" is="dmx-bs5-modal" tabindex="-1">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title pe-3">Editar time {{data_time.data.nome}}</h6>
+                <h6 class="modal-title pe-3"><b>Editar time:</b> {{data_time.data.nome}}</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarTIme.reset();data_time.select(0)"></button>
             </div>
             <div class="modal-body px-5 py-4">
@@ -68,10 +68,10 @@
     </div>
 </div>
 <div class="modal" id="addMembroTime" is="dmx-bs5-modal" tabindex="-1">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title pe-3">Adicionar membro ao time {{data_time.data.nome}}</h6>
+                <h6 class="modal-title pe-3"><b>Adicionar membro ao time:</b> {{data_time.data.nome}}</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="addMembro.reset();data_time.select(0)"></button>
             </div>
             <div class="modal-body px-5 py-4">
@@ -92,7 +92,7 @@
                                 <h1 class="txt-tab m-0">{{nome}}</h1>
                             </div>
                             <div class="col-3 align-self-center text-end">
-                                <img src="assets/duotune/general/gen034.svg" class="icon cursor" dmx-on:click="data_membro.select(id);atualizarUsuarioTime.load({id: data_membro.data.id});listaUsuarioTime.load({times: data_membro.data.times})" width="22">
+                                <img src="assets/duotune/general/gen034.svg" class="icon cursor" dmx-on:click="run([{run:{outputType:'text',action:`atualizarUsuarioTime.load({id: id})`}},{wait:{delay:600}},{run:{outputType:'text',action:`listaUsuarioTime.load({times: data_time.data.id})`}}])" width="22">
                             </div>
                         </div>
                     </div>
