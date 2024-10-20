@@ -30,7 +30,7 @@
         run: {
           name: "redirecionar",
           outputType: "text",
-          action: "{{navegacao.goto('dashboard.html')}}"
+          action: "{{navegacao.goto('backoffice.html')}}"
         }
       }
     }
@@ -47,7 +47,7 @@
 				<img src="assets/images/spacefeed-black.png" class="mb-5" width="180">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-md-8">
-						<form method="post" id="login" is="dmx-serverconnect-form" credentials="true" action="http://localhost:8100/api/desktop/auth/login" site="sfapis" dmx-on:error="login.reset();toast.danger('Ocorreu um erro durante o login: '+lastError.status+lastError.message+lastError.response)" dmx-on:unauthorized="login.reset();toast.warning('Login ou senha errados.')" dmx-on:success="login.reset();loginusuario.set('id',login.data.identity);navegacao.goto('dashboard.html')">
+						<form method="post" id="login" is="dmx-serverconnect-form" credentials="true" action="http://localhost:8100/api/desktop/auth/login" site="sfapis" dmx-on:error="login.reset();toast.danger('Ocorreu um erro durante o login: '+lastError.status+lastError.message+lastError.response)" dmx-on:unauthorized="login.reset();toast.warning('Login ou senha errados.')" dmx-on:success="login.reset();loginusuario.set('id',login.data.identity);navegacao.goto('backoffice.html')">
 							<div class="form-group mb-4">
 								<input type="email" class="form-control form-control-lg ipt-text py-2" id="email" name="email" aria-describedby="input1_help" placeholder="E-mail cadastrado" required="" data-msg-required="Este é um campo obrigatório." data-rule-email="" data-msg-email="Insira uma senha válida.">
 							</div>

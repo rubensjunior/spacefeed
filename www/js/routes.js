@@ -20,5 +20,9 @@ dmx.routing.routes = [
   {
     "path": "/times",
     "url": "./times.html"
+  },
+  {
+    "path": "/backoffice",
+    "url": "./backoffice.html"
   }
 ]

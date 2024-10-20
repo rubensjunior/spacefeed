@@ -110,7 +110,6 @@ export class ElectronCapacitorApp {
     this.MainWindow = new BrowserWindow({
       icon,
       show: false,
-      frame: false,
       x: this.mainWindowState.x,
       y: this.mainWindowState.y,
       width: this.mainWindowState.width,
