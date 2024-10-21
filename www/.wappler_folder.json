@@ -7,6 +7,17 @@
     "layoutPage": "",
     "description": ""
   },
+<<<<<<< HEAD
+=======
+  "principal.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "conteudo.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+>>>>>>> origin/main
   "colaboradores.html": {
     "layoutPage": "",
     "description": ""
@@ -14,5 +25,32 @@
   "times.html": {
     "layoutPage": "",
     "description": ""
+<<<<<<< HEAD
+=======
+  },
+  "Projetos.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "tarefas.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "projetos.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "leads.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "chamados.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "financeiro.html": {
+    "layoutPage": "",
+    "description": ""
+>>>>>>> origin/main
   }
 }

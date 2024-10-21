@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 h1, h2, h3, h4, h5{
     font-weight: 600;
 }
@@ -218,3 +219,39 @@ border-radius: 24px;
     font-weight: 200;
     line-height: 16px;
 }
+=======
+.nav-color{
+    color: #78829d;
+    font-size: 14px;
+    font-weight: 500;
+}
+.nav-color:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.borda-container{
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.bg-input{
+    background-color: #F1F1F4;
+    border: none;
+    font-size: 13px;
+    height: 48px;
+}
+.btn-size{
+    height: 48px;
+    font-size: 14px;
+}
+.btn-small{
+    height: 40px;
+    font-size: 14px;
+}
+.borda-interna{
+    border: solid;
+    border-color: #F1F1F4;
+    border-width: 1px;
+    font-size: 14px;
+}
+>>>>>>> origin/main

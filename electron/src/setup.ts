@@ -225,6 +225,7 @@ export function setupContentSecurityPolicy(customScheme: string): void {
         ...details.responseHeaders,
         'Content-Security-Policy': [
           electronIsDev
+<<<<<<< HEAD
             ? `
               default-src 'self' ${customScheme}://* http://localhost:8100;
               script-src 'self' 'unsafe-inline' 'unsafe-eval' ${customScheme}://* http://localhost:8100;
@@ -249,6 +250,10 @@ export function setupContentSecurityPolicy(customScheme: string): void {
               frame-src 'self' ${customScheme}://* http://localhost:8100;
               object-src 'self' ${customScheme}://*;
             `.replace(/\s+/g, ' ').trim()
+=======
+            ? `default-src ${customScheme}://* https://sun.spacefeed.app/* 'unsafe-inline' devtools://* 'unsafe-eval' http://* 'unsafe-eval' https://* 'unsafe-eval' ws://* 'unsafe-eval' wss://* 'unsafe-eval' data:`
+            : `default-src ${customScheme}://* https://sun.spacefeed.app/* 'unsafe-inline' http://* 'unsafe-eval' https://* 'unsafe-eval' ws://* 'unsafe-eval' wss://* 'unsafe-eval' data:`,
+>>>>>>> origin/main
         ],
       },
     });

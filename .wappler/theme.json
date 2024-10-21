@@ -1,8 +1,14 @@
 {
   "bootstrap5": {
     "basic": {
+<<<<<<< HEAD
       "font-family-base": "Inter:500",
       "headings-font-family": "Inter:600"
+=======
+      "headings-font-family": "Inter:700",
+      "font-family-base": "Inter:400",
+      "font-family-sans-serif": "Inter:400"
+>>>>>>> origin/main
     },
     "advanced": {}
   }
