@@ -1,0 +1,16 @@
+{
+  "name": "supabase",
+  "module": "dbconnector",
+  "action": "connect",
+  "options": {
+    "client": "postgres",
+    "connection": {
+      "host": "aws-0-sa-east-1.pooler.supabase.com",
+      "port": 5432,
+      "user": "postgres.qwxqwcyrgwogyyjengbo",
+      "password": "@Bakihamma025@",
+      "database": "postgres"
+    },
+    "tz": "utc"
+  }
+}
