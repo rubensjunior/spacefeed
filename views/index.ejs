@@ -1,2 +1,29 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appConnect="local" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appConnect="local" components="{dmxValidator:{}}" -->
 <meta name="ac:route" content="/">
+<div class="container-fluid vh-100">
+    <div class="row h-100">
+        <div class="col-4 align-self-center">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h1 class="mb-4 fw-bold">Bem-vindo(a)</h1>
+                    <form id="form1">
+                        <div class="form-group mb-3"> <label for="input1" class="form-label mb-1">E-mail</label>
+                            <input type="email" class="form-control" id="input1" name="input1" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório." data-rule-email="" data-msg-email="Insira um e-mail válido.">
+                        </div>
+                        <div class="form-group mb-3"> <label for="input2" class="form-label mb-1">Senha</label>
+                            <input type="password" class="form-control" id="input2" name="input1" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório.">
+                        </div>
+                        <div class="form-group mb-3"> <label class="form-label">Recuperar senha&nbsp;</label>
+                            <label class="form-label">&nbsp;|&nbsp;</label>
+                            <label class="form-label">&nbsp;Criar conta</label>
+                        </div>
+                        <div class="form-group mb-3"> <button id="btn2" class="btn w-100 py-2 btn-primary">Fazer login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col bg-black style1 p-5">
+        </div>
+    </div>
+</div>

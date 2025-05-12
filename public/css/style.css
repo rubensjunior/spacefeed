@@ -1,0 +1,10 @@
+.style1 {
+    background-image: url("../assets/images/space-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+.form-control{
+    min-height: 48px;
+    background-color: #f9f9f9;
+    border: none;
+}
