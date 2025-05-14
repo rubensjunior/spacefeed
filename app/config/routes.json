@@ -10,6 +10,26 @@
       "path": "/sing-up",
       "page": "sing-up",
       "layout": "main"
+    },
+    {
+      "path": "/backoffice/",
+      "page": "dashboard/dashboard",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/backoffice/empresa",
+      "page": "dashboard/empresa",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/backoffice/colaborador",
+      "page": "dashboard/colaborador",
+      "layout": "backoffice"
     }
-  ]
+  ],
+  "layouts": {
+    "backoffice": {
+      "exec": "/api/seguranca/pagina-restrita"
+    }
+  }
 }

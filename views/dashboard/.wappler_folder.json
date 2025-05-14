@@ -1,0 +1,14 @@
+{
+  "dashboard.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "empresa.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "colaborador.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  }
+}

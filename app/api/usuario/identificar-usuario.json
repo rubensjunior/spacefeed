@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "auth"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "queryUsuario",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "id_usuario"
+              },
+              {
+                "table": "usuarios",
+                "column": "nome_completo"
+              },
+              {
+                "table": "usuarios",
+                "column": "apelido"
+              },
+              {
+                "table": "usuarios",
+                "column": "email"
+              },
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa"
+              },
+              {
+                "table": "usuarios",
+                "column": "tipo_usuario"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{identity}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [],
+            "query": "select \"id_usuario\", \"nome_completo\", \"apelido\", \"email\", \"ref_id_empresa_ativa\", \"tipo_usuario\" from \"usuarios\" where \"usuarios\".\"id_usuario\" = ?",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.id_usuario",
+                  "field": "usuarios.id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identity}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "uuid",
+                      "default": "gen_random_uuid()",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id_usuario"
+                    }
+                  },
+                  "operation": "=",
+                  "table": "usuarios"
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            }
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_usuario"
+          },
+          {
+            "type": "text",
+            "name": "nome_completo"
+          },
+          {
+            "type": "text",
+            "name": "apelido"
+          },
+          {
+            "type": "text",
+            "name": "email"
+          },
+          {
+            "type": "number",
+            "name": "ref_id_empresa_ativa"
+          },
+          {
+            "type": "text",
+            "name": "tipo_usuario"
+          }
+        ],
+        "type": "dbconnector_single",
+        "outputType": "object"
+      },
+      {
+        "name": "queryEmpresaAtual",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "empresas",
+                "column": "razao_social"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_fantasia"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_polo"
+              },
+              {
+                "table": "empresas",
+                "column": "cnpj"
+              },
+              {
+                "table": "empresas",
+                "column": "endereco"
+              },
+              {
+                "table": "empresas",
+                "column": "cep"
+              },
+              {
+                "table": "empresas",
+                "column": "whatsapp"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{queryUsuario.ref_id_empresa_ativa}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "empresas"
+            },
+            "primary": "id_empresa",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "empresas.id_empresa",
+                  "field": "empresas.id_empresa",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{queryUsuario.ref_id_empresa_ativa}}",
+                  "data": {
+                    "table": "empresas",
+                    "column": "id_empresa",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "uuid",
+                      "default": "gen_random_uuid()",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id_empresa"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"razao_social\", \"nome_fantasia\", \"nome_polo\", \"cnpj\", \"endereco\", \"cep\", \"whatsapp\" from \"empresas\" where \"empresas\".\"id_empresa\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "razao_social"
+          },
+          {
+            "type": "text",
+            "name": "nome_fantasia"
+          },
+          {
+            "type": "text",
+            "name": "nome_polo"
+          },
+          {
+            "type": "text",
+            "name": "cnpj"
+          },
+          {
+            "type": "text",
+            "name": "endereco"
+          },
+          {
+            "type": "text",
+            "name": "cep"
+          },
+          {
+            "type": "text",
+            "name": "whatsapp"
+          }
+        ],
+        "outputType": "object"
+      }
+    ]
+  }
+}
