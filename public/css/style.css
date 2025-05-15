@@ -29,3 +29,13 @@
     font-weight: 500;
     text-decoration: none;
 }
+.titulo-tabela{
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #99a1b7 !important;
+}
+.texto-celula{
+    font-size: 13px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "idempresaselecionada"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "auth"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "update",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa",
+                "type": "text",
+                "value": "{{$_GET.idempresaselecionada}}"
+              }
+            ],
+            "table": "usuarios",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "id_usuario",
+                  "field": "id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identity}}",
+                  "data": {
+                    "column": "id_usuario"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "returning": "id_usuario",
+            "query": "update \"usuarios\" set \"ref_id_empresa_ativa\" = ? where \"id_usuario\" = ?",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_GET.idempresaselecionada}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{identity}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
+}

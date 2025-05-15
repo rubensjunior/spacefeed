@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/dashboard/empresa.ejs",
+      "linkedForm": "cadastrarFormEmpresa"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "razaoSocial",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "razaoSocial"
+      },
+      {
+        "type": "text",
+        "fieldName": "nomeFantasia",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "nomeFantasia"
+      },
+      {
+        "type": "text",
+        "fieldName": "nomePolo",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "nomePolo"
+      },
+      {
+        "type": "text",
+        "fieldName": "cnpj",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "cnpj"
+      },
+      {
+        "type": "text",
+        "fieldName": "endereco",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "endereco"
+      },
+      {
+        "type": "text",
+        "fieldName": "cep",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "cep"
+      },
+      {
+        "type": "text",
+        "fieldName": "whatsapp",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "whatsapp"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "auth"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "insertEmpresa",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "empresas",
+                "column": "razao_social",
+                "type": "text",
+                "value": "{{$_POST.razaoSocial}}"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_fantasia",
+                "type": "text",
+                "value": "{{$_POST.nomeFantasia}}"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_polo",
+                "type": "text",
+                "value": "{{$_POST.nomePolo}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cnpj",
+                "type": "text",
+                "value": "{{$_POST.cnpj}}"
+              },
+              {
+                "table": "empresas",
+                "column": "endereco",
+                "type": "text",
+                "value": "{{$_POST.endereco}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cep",
+                "type": "text",
+                "value": "{{$_POST.cep}}"
+              },
+              {
+                "table": "empresas",
+                "column": "whatsapp",
+                "type": "text",
+                "value": "{{$_POST.whatsapp}}"
+              },
+              {
+                "table": "empresas",
+                "column": "status_empresa",
+                "type": "text",
+                "value": "Ativo"
+              }
+            ],
+            "table": "empresas",
+            "returning": "id_empresa",
+            "query": "insert into \"empresas\" (\"cep\", \"cnpj\", \"endereco\", \"nome_fantasia\", \"nome_polo\", \"razao_social\", \"status_empresa\", \"whatsapp\") values (?, ?, ?, ?, ?, ?, ?, ?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.razaoSocial}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.nomeFantasia}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.nomePolo}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{$_POST.cnpj}}",
+                "test": ""
+              },
+              {
+                "name": ":P5",
+                "type": "expression",
+                "value": "{{$_POST.endereco}}",
+                "test": ""
+              },
+              {
+                "name": ":P6",
+                "type": "expression",
+                "value": "{{$_POST.cep}}",
+                "test": ""
+              },
+              {
+                "name": ":P7",
+                "type": "expression",
+                "value": "{{$_POST.whatsapp}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "insertEmpresaUsuario",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_usuario",
+                "type": "text",
+                "value": "{{identity}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_empresa",
+                "type": "text",
+                "value": "{{insertEmpresa.identity}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario",
+                "type": "text",
+                "value": "Ativo"
+              }
+            ],
+            "table": "usuarios_empresas",
+            "returning": "id_usuario_empresa",
+            "query": "insert into \"usuarios_empresas\" (\"ref_id_empresa\", \"ref_id_usuario\", \"status_usuario\") values (?, ?, ?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{insertEmpresa.identity}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
+}
