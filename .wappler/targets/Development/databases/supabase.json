@@ -41,7 +41,52 @@
         "db": {}
       },
       "auth.audit_log_entries": {
-        "db": {}
+        "db": {},
+        "columns": {
+          "instance_id": {
+            "db": {
+              "type": "uuid",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "id": {
+            "db": {
+              "type": "uuid",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "payload": {
+            "db": {
+              "type": "json",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "created_at": {
+            "db": {
+              "type": "timestamp",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "ip_address": {
+            "db": {
+              "type": "string",
+              "default": "",
+              "maxLength": 64,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          }
+        }
       },
       "auth.flow_state": {
         "db": {},

@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="cadastrarFormEmpresa.reset()"></button>
             </div>
             <div class="modal-body px-4">
-                <form id="cadastrarFormEmpresa" is="dmx-serverconnect-form" method="post" action="/api/empresa/criar-empresa" dmx-on:error="cadastrarFormEmpresa.reset();criarModalEmpresa.hide();notificacao.danger('Ocorreu um erro: '+criarModalEmpresa.cadastrarFormEmpresa.lastError.responsecriarModalEmpresa.cadastrarFormEmpresa.lastError.messagecriarModalEmpresa.cadastrarFormEmpresa.lastError.status+' entre em contato com o suporte: suporte@spacefeed.app.')" dmx-on:success="minhasEmpresas.load({});cadastrarFormEmpresa.reset();criarModalEmpresa.hide();notificacao.success('Unidade/Polo cadastrado com sucesso!')">
+                <form id="cadastrarFormEmpresa" is="dmx-serverconnect-form" method="post" action="/api/empresa/criar-empresa" dmx-on:error="notificacao.danger(criarModalEmpresa.cadastrarFormEmpresa.lastError.status+criarModalEmpresa.cadastrarFormEmpresa.lastError.message+criarModalEmpresa.cadastrarFormEmpresa.lastError.response)" dmx-on:success="notificacao.success('Cadastro realizado com sucesso!');navegacao.reload()" dmx-on:invalid="run({run:{outputType:'text',action:`notificacao.warning(\'Este CNPJ já está cadastrado. Entre em contato com o suporte para mais informações: suporte@spacefeed.app.\')`}})">
 
                     <div class="row">
                         <div class="col">
@@ -67,7 +67,7 @@
             <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criarModalEmpresa">Adicionar</button>
         </div>
     </div>
-    <div class="row">
+    <div class="row m-0">
         <div class="col p-3 bg-white rounded-3">
             <table class="table">
                 <thead>
