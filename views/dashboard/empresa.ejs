@@ -1,4 +1,8 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="empresa" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{},dmxValidator:{}}" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="empresa" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{},dmxValidator:{},dmxDataTraversal:{}}" -->
+
+
+
+<dmx-data-detail id="data_empresa" dmx-bind:data="minhasEmpresas.data.query" key="id_empresa"></dmx-data-detail>
 <div class="modal" id="criarModalEmpresa" is="dmx-bs5-modal" tabindex="-1">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -11,39 +15,39 @@
 
                     <div class="row">
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="razaoSocial" class="form-label">Razão social</label>
+                            <div class="form-group mb-3"> <label for="editrazaoSocial" class="form-label">Razão social</label>
                                 <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!">
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="nomeFantasia" class="form-label">Nome fantasia</label>
+                            <div class="form-group mb-3"> <label for="editnomeFantasia" class="form-label">Nome fantasia</label>
                                 <input type="text" class="form-control" id="nomeFantasia" name="nomeFantasia" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="nomePolo" class="form-label">Nome do polo</label>
+                            <div class="form-group mb-3"> <label for="editnomePolo" class="form-label">Nome do polo</label>
                                 <input type="text" class="form-control" id="nomePolo" name="nomePolo" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!">
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="nomePolo" class="form-label">CNPJ</label>
+                            <div class="form-group mb-3"> <label for="editnomePolo" class="form-label">CNPJ</label>
                                 <input type="text" class="form-control" id="cnpj" name="cnpj" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!">
                             </div>
                         </div>
                     </div>
-                    <div class="form-group mb-3"> <label for="endereco" class="form-label">Endereço completo com número</label>
+                    <div class="form-group mb-3"> <label for="editendereco" class="form-label">Endereço completo com número</label>
                         <input type="text" class="form-control" id="endereco" name="endereco" aria-describedby="input5_help" required="" data-msg-required="Este é um campo obrigatório!">
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="cep" class="form-label">CEP<br></label>
+                            <div class="form-group mb-3"> <label for="editcep" class="form-label">CEP<br></label>
                                 <input type="text" class="form-control" id="cep" name="cep" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!">
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group mb-3"> <label for="cep" class="form-label">Whatsapp</label>
+                            <div class="form-group mb-3"> <label for="editcep" class="form-label">Whatsapp</label>
                                 <input type="text" class="form-control" id="whatsapp" name="whatsapp" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!">
                             </div>
                         </div>
@@ -58,6 +62,64 @@
     </div>
 </div>
 <meta name="ac:route" content="/backoffice/empresa">
+<div class="modal" id="editarModalEmpresa" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header py-4">
+                <h5 class="modal-title">Editando: {{data_empresa.data.nome_polo}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarFormEmpresa.reset();data_empresa.select(0)"></button>
+            </div>
+            <div class="modal-body px-4">
+                <form method="post" id="editarFormEmpresa">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="editrazaoSocial" class="form-label">Razão social</label>
+                                <input type="text" class="form-control" id="editrazaoSocial" name="editrazaoSocial" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="editnomeFantasia" class="form-label">Nome fantasia</label>
+                                <input type="text" class="form-control" id="editnomeFantasia" name="editnomeFantasia" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="editnomePolo" class="form-label">Nome do polo</label>
+                                <input type="text" class="form-control" id="editnomePolo" name="editnomePolo" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="editnomePolo" class="form-label">CNPJ</label>
+                                <input type="text" class="form-control" id="editcnpj" name="editcnpj" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3"> <label for="editendereco" class="form-label">Endereço completo com número</label>
+                        <input type="text" class="form-control" id="editendereco" name="editendereco" aria-describedby="input5_help" required="" data-msg-required="Este é um campo obrigatório!">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="editcep" class="form-label">CEP<br></label>
+                                <input type="text" class="form-control" id="editcep" name="editcep" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="editcep" class="form-label">Whatsapp</label>
+                                <input type="text" class="form-control" id="editwhatsapp" name="editwhatsapp" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <main>
     <div class="row mb-4">
         <div class="col align-self-center">
@@ -81,7 +143,7 @@
                 </thead>
                 <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="minhasEmpresas.data.query" id="tableRepeat2">
                     <tr>
-                        <td dmx-text="nome_polo" class="texto-celula fw-semibold py-3"></td>
+                        <td dmx-text="nome_polo" class="texto-celula fw-semibold py-3" dmx-on:click="data_empresa.select(id_empresa);editarModalEmpresa.show()"></td>
                         <td dmx-text="cnpj" class="texto-celula py-3"></td>
                         <td dmx-text="endereco+&quot; - &quot;+cep" class="texto-celula py-3"></td>
                         <td dmx-text="whatsapp" class="texto-celula py-3"></td>
