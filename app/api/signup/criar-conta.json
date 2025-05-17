@@ -80,6 +80,30 @@
         "outputType": "text"
       },
       {
+        "name": "validateCNPJ",
+        "module": "validator",
+        "action": "validate",
+        "options": {
+          "data": [
+            {
+              "name": "validate_1",
+              "value": "{{$_POST.cnpj}}",
+              "rules": {
+                "db:notexists": {
+                  "param": {
+                    "connection": "supabase",
+                    "table": "empresas",
+                    "column": "cnpj"
+                  },
+                  "message": "Este CNPJ já está cadastrado. Entre em contato com o nosso time de suporte!"
+                }
+              },
+              "fieldName": "cnpj"
+            }
+          ]
+        }
+      },
+      {
         "name": "insertCriarConta",
         "module": "dbupdater",
         "action": "insert",

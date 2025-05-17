@@ -75,39 +75,39 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group mb-3"> <label for="editrazaoSocial" class="form-label">Razão social</label>
-                                <input type="text" class="form-control" id="editrazaoSocial" name="editrazaoSocial" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!">
+                                <input type="text" class="form-control" id="editrazaoSocial" name="editrazaoSocial" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.razao_social">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group mb-3"> <label for="editnomeFantasia" class="form-label">Nome fantasia</label>
-                                <input type="text" class="form-control" id="editnomeFantasia" name="editnomeFantasia" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!">
+                                <input type="text" class="form-control" id="editnomeFantasia" name="editnomeFantasia" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.nome_fantasia">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group mb-3"> <label for="editnomePolo" class="form-label">Nome do polo</label>
-                                <input type="text" class="form-control" id="editnomePolo" name="editnomePolo" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!">
+                                <input type="text" class="form-control" id="editnomePolo" name="editnomePolo" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.nome_polo">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group mb-3"> <label for="editnomePolo" class="form-label">CNPJ</label>
-                                <input type="text" class="form-control" id="editcnpj" name="editcnpj" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!">
+                                <input type="text" class="form-control" id="editcnpj" name="editcnpj" aria-describedby="input1_help2" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.cnpj">
                             </div>
                         </div>
                     </div>
                     <div class="form-group mb-3"> <label for="editendereco" class="form-label">Endereço completo com número</label>
-                        <input type="text" class="form-control" id="editendereco" name="editendereco" aria-describedby="input5_help" required="" data-msg-required="Este é um campo obrigatório!">
+                        <input type="text" class="form-control" id="editendereco" name="editendereco" aria-describedby="input5_help" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.endereco">
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group mb-3"> <label for="editcep" class="form-label">CEP<br></label>
-                                <input type="text" class="form-control" id="editcep" name="editcep" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!">
+                                <input type="text" class="form-control" id="editcep" name="editcep" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.cep">
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group mb-3"> <label for="editcep" class="form-label">Whatsapp</label>
-                                <input type="text" class="form-control" id="editwhatsapp" name="editwhatsapp" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!">
+                                <input type="text" class="form-control" id="editwhatsapp" name="editwhatsapp" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.whatsapp">
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Atualizar</button>
+                <button type="button" class="btn btn-primary" dmx-on:click="editarFormEmpresa.submit()">Atualizar</button>
             </div>
         </div>
     </div>
@@ -143,7 +143,7 @@
                 </thead>
                 <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="minhasEmpresas.data.query" id="tableRepeat2">
                     <tr>
-                        <td dmx-text="nome_polo" class="texto-celula fw-semibold py-3" dmx-on:click="data_empresa.select(id_empresa);editarModalEmpresa.show()"></td>
+                        <td dmx-text="nome_polo" class="texto-celula fw-semibold text-decoration-underline py-3 cursor-pointer" dmx-on:click="data_empresa.select(id_empresa);editarModalEmpresa.show()"></td>
                         <td dmx-text="cnpj" class="texto-celula py-3"></td>
                         <td dmx-text="endereco+&quot; - &quot;+cep" class="texto-celula py-3"></td>
                         <td dmx-text="whatsapp" class="texto-celula py-3"></td>
@@ -162,4 +162,7 @@
     $('#cep').mask('00000-000');
     $('#whatsapp').mask('(00) 0 0000-0000');
     $('#cnpj').mask('00.000.000/0000-00');
+    $('#editcep').mask('00000-000');
+    $('#editwhatsapp').mask('(00) 0 0000-0000');
+    $('#editcnpj').mask('00.000.000/0000-00');
 </script>
