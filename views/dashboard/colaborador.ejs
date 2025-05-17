@@ -1,14 +1,34 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaborador" appConnect="local" -->
-<meta name="ac:route" content="/dashboard/colaborador">
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaborador" appConnect="local" components="{dmxBootstrap5TableGenerator:{}}" -->
+<meta name="ac:route" content="/backoffice/colaborador">
 <main>
-<div class="jumbotron">
-  <h1 class="display-3">Colaborador</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
-</div>
-</main>
+  <div class="row mb-4">
+    <div class="col align-self-center">
+      <h4 class="m-0">Gestão de colaboradores</h4>
+    </div>
+    <div class="col text-end align-self-center">
+      <button id="btn1" class="btn btn-primary">Adicionar</button>
+    </div>
 
+  </div>
+  <div class="row m-0">
+    <div class="col p-3 bg-white rounded-3">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="titulo-tabela py-3">Nome completo</th>
+            <th class="titulo-tabela py-3">Apelido</th>
+            <th class="titulo-tabela py-3">Email</th>
+          </tr>
+        </thead>
+        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listarColaboradores.data.queryColaboradores" id="tableRepeat1">
+          <tr>
+            <td dmx-text="nome_completo" class="texto-celula fw-semibold text-decoration-underline py-3 cursor-pointer"></td>
+            <td dmx-text="apelido" class="texto-celula py-3"></td>
+            <td dmx-text="email" class="texto-celula py-3"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>

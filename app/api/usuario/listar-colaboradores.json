@@ -1,0 +1,231 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "auth"
+        },
+        "output": false,
+        "meta": []
+      },
+      {
+        "name": "queryUsuario",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{identity}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.id_usuario",
+                  "field": "usuarios.id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identity}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "uuid",
+                      "default": "gen_random_uuid()",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id_usuario"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"ref_id_empresa_ativa\" from \"usuarios\" where \"usuarios\".\"id_usuario\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "number",
+            "name": "ref_id_empresa_ativa"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "queryColaboradores",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "id_usuario"
+              },
+              {
+                "table": "usuarios",
+                "column": "nome_completo"
+              },
+              {
+                "table": "usuarios",
+                "column": "apelido"
+              },
+              {
+                "table": "usuarios",
+                "column": "email"
+              },
+              {
+                "table": "usuarios",
+                "column": "tipo_usuario"
+              },
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{queryUsuario.ref_id_empresa_ativa}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios_empresas"
+            },
+            "primary": "id_usuario_empresa",
+            "joins": [
+              {
+                "table": "usuarios",
+                "column": "*",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "usuarios",
+                      "column": "id_usuario",
+                      "operation": "=",
+                      "operator": "equal",
+                      "value": {
+                        "table": "usuarios_empresas",
+                        "column": "ref_id_usuario",
+                        "type": "text"
+                      }
+                    }
+                  ]
+                },
+                "primary": "id_usuario"
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios_empresas.ref_id_empresa",
+                  "field": "usuarios_empresas.ref_id_empresa",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{queryUsuario.ref_id_empresa_ativa}}",
+                  "data": {
+                    "table": "usuarios_empresas",
+                    "column": "ref_id_empresa",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "reference",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": false,
+                      "references": "id_empresa",
+                      "inTable": "empresas",
+                      "referenceType": "uuid",
+                      "onUpdate": "NO ACTION",
+                      "onDelete": "CASCADE",
+                      "name": "ref_id_empresa"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"apelido\", \"usuarios\".\"email\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\" from \"usuarios_empresas\" inner join \"usuarios\" on \"usuarios\".\"id_usuario\" = \"usuarios_empresas\".\"ref_id_usuario\" where \"usuarios_empresas\".\"ref_id_empresa\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_usuario"
+          },
+          {
+            "type": "text",
+            "name": "nome_completo"
+          },
+          {
+            "type": "text",
+            "name": "apelido"
+          },
+          {
+            "type": "text",
+            "name": "email"
+          },
+          {
+            "type": "text",
+            "name": "tipo_usuario"
+          },
+          {
+            "type": "number",
+            "name": "ref_id_empresa_ativa"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}
