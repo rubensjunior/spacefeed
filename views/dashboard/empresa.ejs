@@ -70,7 +70,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" dmx-on:click="editarFormEmpresa.reset();data_empresa.select(0)"></button>
             </div>
             <div class="modal-body px-4">
-                <form method="post" id="editarFormEmpresa">
+                <form method="post" id="editarFormEmpresa" is="dmx-serverconnect-form" action="/api/empresa/atualizar-empresa" dmx-on:error="notificacao.danger('Ocorreu um erro: '+editarModalEmpresa.editarFormEmpresa.lastErroreditarModalEmpresa.editarFormEmpresa.lastError.responseeditarModalEmpresa.editarFormEmpresa.lastError.messageeditarModalEmpresa.editarFormEmpresa.lastError.status+'. Entre em contato com o suporte: suporte@spacefeed.app')" dmx-on:success="editarFormEmpresa.reset();data_empresa.select(0);editarModalEmpresa.hide();notificacao.success('Atualização de empresa realizada com sucesso!');minhasEmpresas.load({})">
 
                     <div class="row">
                         <div class="col">
@@ -108,6 +108,21 @@
                         <div class="col">
                             <div class="form-group mb-3"> <label for="editcep" class="form-label">Whatsapp</label>
                                 <input type="text" class="form-control" id="editwhatsapp" name="editwhatsapp" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.whatsapp">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3"> <label for="editcep1" class="form-label">Status<br></label>
+                                <select id="editStatus" class="form-select" name="editStatus" dmx-bind:value="data_empresa.data.status_empresa">
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Desativado">Desativado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <input type="hidden" class="form-control" id="idEmpresa" name="idEmpresa" aria-describedby="input1_help3" required="" data-msg-required="Este é um campo obrigatório!" dmx-bind:value="data_empresa.data.id_empresa">
                             </div>
                         </div>
                     </div>

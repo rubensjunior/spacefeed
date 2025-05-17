@@ -1,0 +1,266 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/dashboard/empresa.ejs",
+      "linkedForm": "editarFormEmpresa"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "editrazaoSocial",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "editrazaoSocial"
+      },
+      {
+        "type": "text",
+        "fieldName": "editnomeFantasia",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "editnomeFantasia"
+      },
+      {
+        "type": "text",
+        "fieldName": "editnomePolo",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "editnomePolo"
+      },
+      {
+        "type": "text",
+        "fieldName": "editcnpj",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "editcnpj"
+      },
+      {
+        "type": "text",
+        "fieldName": "editendereco",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "editendereco"
+      },
+      {
+        "type": "text",
+        "fieldName": "editcep",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "editcep"
+      },
+      {
+        "type": "text",
+        "fieldName": "editwhatsapp",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "editwhatsapp"
+      },
+      {
+        "type": "text",
+        "fieldName": "idEmpresa",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Este é um campo obrigatório!"
+            }
+          }
+        },
+        "name": "idEmpresa"
+      },
+      {
+        "type": "text",
+        "fieldName": "editStatus",
+        "name": "editStatus"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "updateEmpresa",
+      "module": "dbupdater",
+      "action": "update",
+      "options": {
+        "connection": "supabase",
+        "sql": {
+          "type": "update",
+          "values": [
+            {
+              "table": "empresas",
+              "column": "razao_social",
+              "type": "text",
+              "value": "{{$_POST.editrazaoSocial}}"
+            },
+            {
+              "table": "empresas",
+              "column": "nome_fantasia",
+              "type": "text",
+              "value": "{{$_POST.editnomeFantasia}}"
+            },
+            {
+              "table": "empresas",
+              "column": "nome_polo",
+              "type": "text",
+              "value": "{{$_POST.editnomePolo}}"
+            },
+            {
+              "table": "empresas",
+              "column": "cnpj",
+              "type": "text",
+              "value": "{{$_POST.editcnpj}}"
+            },
+            {
+              "table": "empresas",
+              "column": "endereco",
+              "type": "text",
+              "value": "{{$_POST.editendereco}}"
+            },
+            {
+              "table": "empresas",
+              "column": "cep",
+              "type": "text",
+              "value": "{{$_POST.editcep}}"
+            },
+            {
+              "table": "empresas",
+              "column": "whatsapp",
+              "type": "text",
+              "value": "{{$_POST.editwhatsapp}}"
+            },
+            {
+              "table": "empresas",
+              "column": "status_empresa",
+              "type": "text",
+              "value": "{{$_POST.editStatus}}"
+            }
+          ],
+          "table": "empresas",
+          "wheres": {
+            "condition": "AND",
+            "rules": [
+              {
+                "id": "id_empresa",
+                "field": "id_empresa",
+                "type": "string",
+                "operator": "equal",
+                "value": "{{$_POST.idEmpresa}}",
+                "data": {
+                  "column": "id_empresa"
+                },
+                "operation": "="
+              }
+            ],
+            "conditional": null,
+            "valid": true
+          },
+          "returning": "id_empresa",
+          "query": "update \"empresas\" set \"razao_social\" = ?, \"nome_fantasia\" = ?, \"nome_polo\" = ?, \"cnpj\" = ?, \"endereco\" = ?, \"cep\" = ?, \"whatsapp\" = ?, \"status_empresa\" = ? where \"id_empresa\" = ?",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.editrazaoSocial}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.editnomeFantasia}}",
+              "test": ""
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.editnomePolo}}",
+              "test": ""
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_POST.editcnpj}}",
+              "test": ""
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{$_POST.editendereco}}",
+              "test": ""
+            },
+            {
+              "name": ":P6",
+              "type": "expression",
+              "value": "{{$_POST.editcep}}",
+              "test": ""
+            },
+            {
+              "name": ":P7",
+              "type": "expression",
+              "value": "{{$_POST.editwhatsapp}}",
+              "test": ""
+            },
+            {
+              "name": ":P8",
+              "type": "expression",
+              "value": "{{$_POST.editStatus}}",
+              "test": ""
+            },
+            {
+              "operator": "equal",
+              "type": "expression",
+              "name": ":P9",
+              "value": "{{$_POST.idEmpresa}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}
