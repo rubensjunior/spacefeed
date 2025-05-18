@@ -15,8 +15,12 @@
     background-image: url("../assets/images/space-bg.jpg");
     background-size: cover;
 }
-.bg-backoffice{
-    background-color: #F9F9F9;
+.bg-backoffice {
+  background: 
+    linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%),
+    radial-gradient(circle at 80% 20%, rgba(255, 200, 150, 0.12), transparent 60%),
+    radial-gradient(circle at 0% 100%, rgba(180, 170, 160, 0.1), transparent 70%);
+  background-blend-mode: overlay, multiply, normal;
 }
 .texto-menu-sidebar, .texto-empresa-menu{
     font-size: 13px;

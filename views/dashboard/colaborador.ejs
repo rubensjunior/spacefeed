@@ -1,4 +1,38 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaborador" appConnect="local" components="{dmxBootstrap5TableGenerator:{}}" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaborador" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{}}" -->
+<div class="modal" id="criarModalColaborador" is="dmx-bs5-modal" tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header py-4">
+        <h5 class="modal-title">Criar novo colaborador</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4">
+        <form id="criarFormColaborador" is="dmx-serverconnect-form" method="post" action="/api/usuario/adicionar-colaborador" dmx-on:error="notificacao.danger('Ocorreu um erro: '+criarModalColaborador.criarFormColaborador.lastError.responsecriarModalColaborador.criarFormColaborador.lastError.responsecriarModalColaborador.criarFormColaborador.lastError.messagecriarModalColaborador.criarFormColaborador.lastError.messagecriarModalColaborador.criarFormColaborador.lastError.statuscriarModalColaborador.criarFormColaborador.lastError.status+'. Entre em contato com o suporte: suporte@spacefeed.app')" dmx-on:success="notificacao.success('Colaborador adicionado com sucesso!');navegacao.reload()">
+          <div class="row">
+            <div class="col">
+              <div class="form-group mb-3"> <label for="nomeCompleto" class="form-label">Nome completo</label>
+                <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" aria-describedby="input1_help">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mb-3"> <label for="nomeTratamento" class="form-label">Nome de tratamento</label>
+                <input type="text" class="form-control" id="nomeTratamento" name="nomeTratamento" aria-describedby="input1_help1">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group mb-3"> <label for="emailColaborador" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="emailColaborador" name="emailColaborador" aria-describedby="input1_help2">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" dmx-on:click="criarFormColaborador.submit()">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <meta name="ac:route" content="/backoffice/colaborador">
 <main>
   <div class="row mb-4">
@@ -6,7 +40,7 @@
       <h4 class="m-0">Gestão de colaboradores</h4>
     </div>
     <div class="col text-end align-self-center">
-      <button id="btn1" class="btn btn-primary">Adicionar</button>
+      <button id="btn1" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criarModalColaborador">Adicionar</button>
     </div>
 
   </div>

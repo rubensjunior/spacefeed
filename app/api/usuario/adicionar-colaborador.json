@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/dashboard/colaborador.ejs",
+      "linkedForm": "criarFormColaborador"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "nomeCompleto",
+        "name": "nomeCompleto"
+      },
+      {
+        "type": "text",
+        "fieldName": "nomeTratamento",
+        "name": "nomeTratamento"
+      },
+      {
+        "type": "text",
+        "fieldName": "emailColaborador",
+        "options": {
+          "rules": {
+            "core:email": {}
+          }
+        },
+        "name": "emailColaborador"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "auth"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "query",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{identity}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios"
+            },
+            "primary": "id_usuario",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios.id_usuario",
+                  "field": "usuarios.id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identity}}",
+                  "data": {
+                    "table": "usuarios",
+                    "column": "id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "uuid",
+                      "default": "gen_random_uuid()",
+                      "primary": true,
+                      "unique": true,
+                      "nullable": false,
+                      "name": "id_usuario"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"ref_id_empresa_ativa\" from \"usuarios\" where \"usuarios\".\"id_usuario\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "number",
+            "name": "ref_id_empresa_ativa"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "insert",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "usuarios",
+                "column": "nome_completo",
+                "type": "text",
+                "value": "{{$_POST.nomeCompleto}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "apelido",
+                "type": "text",
+                "value": "{{$_POST.nomeTratamento}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "email",
+                "type": "text",
+                "value": "{{$_POST.emailColaborador}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa",
+                "type": "text",
+                "value": "{{query.ref_id_empresa_ativa}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "tipo_usuario",
+                "type": "text",
+                "value": "Colaborador"
+              }
+            ],
+            "table": "usuarios",
+            "returning": "id_usuario",
+            "query": "insert into \"usuarios\" (\"apelido\", \"email\", \"nome_completo\", \"ref_id_empresa_ativa\", \"tipo_usuario\") values (?, ?, ?, ?, ?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.nomeCompleto}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.nomeTratamento}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.emailColaborador}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{query.ref_id_empresa_ativa}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "insert1",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_usuario",
+                "type": "text",
+                "value": "{{insert.identity}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_empresa",
+                "type": "text",
+                "value": "{{query.ref_id_empresa_ativa}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "cargo_usuario_empresa",
+                "type": "text",
+                "value": "Colaborador"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario",
+                "type": "text",
+                "value": "Ativo"
+              }
+            ],
+            "table": "usuarios_empresas",
+            "returning": "id_usuario_empresa",
+            "query": "insert into \"usuarios_empresas\" (\"cargo_usuario_empresa\", \"ref_id_empresa\", \"ref_id_usuario\", \"status_usuario\") values (?, ?, ?, ?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{insert.identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{query.ref_id_empresa_ativa}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  }
+}
