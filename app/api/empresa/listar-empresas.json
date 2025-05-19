@@ -110,7 +110,7 @@
                 "primary": "id_empresa"
               }
             ],
-            "query": "select \"usuarios_empresas\".*, \"empresas\".\"id_empresa\", \"empresas\".\"nome_fantasia\", \"empresas\".\"razao_social\", \"empresas\".\"nome_polo\", \"empresas\".\"cnpj\", \"empresas\".\"endereco\", \"empresas\".\"cep\", \"empresas\".\"whatsapp\", \"empresas\".\"status_empresa\" from \"usuarios_empresas\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios_empresas\".\"ref_id_empresa\" where \"usuarios_empresas\".\"ref_id_usuario\" = ?",
+            "query": "select \"usuarios_empresas\".*, \"empresas\".\"id_empresa\", \"empresas\".\"nome_fantasia\", \"empresas\".\"razao_social\", \"empresas\".\"nome_polo\", \"empresas\".\"cnpj\", \"empresas\".\"endereco\", \"empresas\".\"cep\", \"empresas\".\"whatsapp\", \"empresas\".\"status_empresa\" from \"usuarios_empresas\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios_empresas\".\"ref_id_empresa\" where \"usuarios_empresas\".\"ref_id_usuario\" = ? order by \"empresas\".\"nome_polo\" ASC",
             "wheres": {
               "condition": "AND",
               "rules": [
@@ -143,7 +143,14 @@
               ],
               "conditional": null,
               "valid": true
-            }
+            },
+            "orders": [
+              {
+                "table": "empresas",
+                "column": "nome_polo",
+                "direction": "ASC"
+              }
+            ]
           }
         },
         "output": true,

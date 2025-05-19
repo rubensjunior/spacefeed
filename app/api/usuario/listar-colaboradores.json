@@ -192,13 +192,21 @@
                       "name": "ref_id_empresa"
                     }
                   },
-                  "operation": "="
+                  "operation": "=",
+                  "table": "usuarios_empresas"
                 }
               ],
               "conditional": null,
               "valid": true
             },
-            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"apelido\", \"usuarios\".\"email\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\", \"usuarios_empresas\".\"status_usuario\" from \"usuarios_empresas\" inner join \"usuarios\" on \"usuarios\".\"id_usuario\" = \"usuarios_empresas\".\"ref_id_usuario\" where \"usuarios_empresas\".\"ref_id_empresa\" = ?"
+            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"apelido\", \"usuarios\".\"email\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\", \"usuarios_empresas\".\"status_usuario\" from \"usuarios_empresas\" inner join \"usuarios\" on \"usuarios\".\"id_usuario\" = \"usuarios_empresas\".\"ref_id_usuario\" where \"usuarios_empresas\".\"ref_id_empresa\" = ? order by \"usuarios\".\"nome_completo\" ASC",
+            "orders": [
+              {
+                "table": "usuarios",
+                "column": "nome_completo",
+                "direction": "ASC"
+              }
+            ]
           }
         },
         "output": true,
