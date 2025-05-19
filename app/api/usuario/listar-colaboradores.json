@@ -123,6 +123,10 @@
               {
                 "table": "usuarios",
                 "column": "ref_id_empresa_ativa"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario"
               }
             ],
             "params": [
@@ -194,7 +198,7 @@
               "conditional": null,
               "valid": true
             },
-            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"apelido\", \"usuarios\".\"email\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\" from \"usuarios_empresas\" inner join \"usuarios\" on \"usuarios\".\"id_usuario\" = \"usuarios_empresas\".\"ref_id_usuario\" where \"usuarios_empresas\".\"ref_id_empresa\" = ?"
+            "query": "select \"usuarios\".\"id_usuario\", \"usuarios\".\"nome_completo\", \"usuarios\".\"apelido\", \"usuarios\".\"email\", \"usuarios\".\"tipo_usuario\", \"usuarios\".\"ref_id_empresa_ativa\", \"usuarios_empresas\".\"status_usuario\" from \"usuarios_empresas\" inner join \"usuarios\" on \"usuarios\".\"id_usuario\" = \"usuarios_empresas\".\"ref_id_usuario\" where \"usuarios_empresas\".\"ref_id_empresa\" = ?"
           }
         },
         "output": true,
@@ -222,6 +226,10 @@
           {
             "type": "number",
             "name": "ref_id_empresa_ativa"
+          },
+          {
+            "type": "text",
+            "name": "status_usuario"
           }
         ],
         "outputType": "array"

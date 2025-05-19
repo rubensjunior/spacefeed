@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/dashboard/colaborador.ejs",
+      "linkedForm": "editarFormColaborador"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "editnomeCompleto",
+        "name": "editnomeCompleto"
+      },
+      {
+        "type": "text",
+        "fieldName": "editnomeTratamento",
+        "name": "editnomeTratamento"
+      },
+      {
+        "type": "text",
+        "fieldName": "editemailColaborador",
+        "options": {
+          "rules": {
+            "core:email": {}
+          }
+        },
+        "name": "editemailColaborador"
+      },
+      {
+        "type": "text",
+        "fieldName": "editIdUsuario",
+        "name": "editIdUsuario"
+      },
+      {
+        "type": "text",
+        "fieldName": "editIdEmpresa",
+        "name": "editIdEmpresa"
+      },
+      {
+        "type": "text",
+        "fieldName": "selectStatusUsuario",
+        "name": "selectStatusUsuario"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "updateColaborador",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "usuarios",
+                "column": "nome_completo",
+                "type": "text",
+                "value": "{{$_POST.editnomeCompleto}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "apelido",
+                "type": "text",
+                "value": "{{$_POST.editnomeTratamento}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "email",
+                "type": "text",
+                "value": "{{$_POST.editemailColaborador}}"
+              }
+            ],
+            "table": "usuarios",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "id_usuario",
+                  "field": "id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.editIdUsuario}}",
+                  "data": {
+                    "column": "id_usuario"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "returning": "id_usuario",
+            "query": "update \"usuarios\" set \"nome_completo\" = ?, \"apelido\" = ?, \"email\" = ? where \"id_usuario\" = ? returning \"id_usuario\"",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.editnomeCompleto}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.editnomeTratamento}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.editemailColaborador}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P4",
+                "value": "{{$_POST.editIdUsuario}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "updateUsuario_Empresa",
+        "module": "dbupdater",
+        "action": "update",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "update",
+            "values": [
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario",
+                "type": "text",
+                "value": "{{$_POST.selectStatusUsuario}}"
+              }
+            ],
+            "table": "usuarios_empresas",
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "ref_id_empresa",
+                  "field": "ref_id_empresa",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.editIdEmpresa}}",
+                  "data": {
+                    "column": "ref_id_empresa"
+                  },
+                  "operation": "="
+                },
+                {
+                  "id": "ref_id_usuario",
+                  "field": "ref_id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.editIdUsuario}}",
+                  "data": {
+                    "column": "ref_id_usuario"
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "returning": "id_usuario_empresa",
+            "query": "update \"usuarios_empresas\" set \"status_usuario\" = ? where \"ref_id_empresa\" = ? and \"ref_id_usuario\" = ?",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.selectStatusUsuario}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P2",
+                "value": "{{$_POST.editIdEmpresa}}",
+                "test": ""
+              },
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P3",
+                "value": "{{$_POST.editIdUsuario}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ],
+        "output": false
+      }
+    ]
+  }
+}

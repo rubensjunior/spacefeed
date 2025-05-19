@@ -1,4 +1,53 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaborador" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{}}" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="colaborador" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{},dmxDataTraversal:{}}" -->
+<dmx-data-detail id="data_colaborador" dmx-bind:data="listarColaboradores.data.queryColaboradores" key="id_usuario"></dmx-data-detail>
+<div class="modal" id="editarModalColaborador" is="dmx-bs5-modal" tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header py-4">
+        <h5 class="modal-title">Editando: {{data_colaborador.data.nome_completo}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4">
+        <form method="post" id="editarFormColaborador" is="dmx-serverconnect-form" action="/api/usuario/update-colaborador" dmx-on:error="notificacao.danger('Ocorreu um erro: '+editarModalColaborador.editarFormColaborador.lastError.responseeditarModalColaborador.editarFormColaborador.lastError.messageeditarModalColaborador.editarFormColaborador.lastError.status+'. Entre em contato com o suporte: suporte@spacefeed.app.')" dmx-on:success="listarColaboradores.load({});data_colaborador.select(0);editarFormColaborador.reset();editarModalColaborador.hide();notificacao.success('Cadastro atualizado com sucesso.')">
+          <div class="row">
+            <div class="col">
+              <div class="form-group mb-3"> <label for="editnomeCompleto" class="form-label">Nome completo</label>
+                <input type="text" class="form-control" id="editnomeCompleto" name="editnomeCompleto" aria-describedby="input1_help" dmx-bind:value="data_colaborador.data.nome_completo">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mb-3"> <label for="editnomeTratamento" class="form-label">Nome de tratamento</label>
+                <input type="text" class="form-control" id="editnomeTratamento" name="editnomeTratamento" aria-describedby="input1_help1" dmx-bind:value="data_colaborador.data.apelido">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group mb-3"> <label for="editemailColaborador" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="editemailColaborador" name="editemailColaborador" aria-describedby="input1_help2" dmx-bind:value="data_colaborador.data.email">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mb-3"> <label for="emailColaborador1" class="form-label">Status</label>
+                <select id="selectStatusUsuario" class="form-select" dmx-bind:value="data_colaborador.data.status_usuario" name="selectStatusUsuario">
+                  <option value="Ativo">Ativo</option>
+                  <option value="Desativado">Desativado</option>
+                </select>
+                <input id="editIdUsuario" name="editIdUsuario" type="hidden" class="form-control" dmx-bind:value="data_colaborador.data.id_usuario">
+                <input id="editIdEmpresa" name="editIdEmpresa" type="hidden" class="form-control" dmx-bind:value="data_colaborador.data.ref_id_empresa_ativa">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" dmx-on:click="editarFormColaborador.submit()">Atualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal" id="criarModalColaborador" is="dmx-bs5-modal" tabindex="-1">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -10,19 +59,19 @@
         <form id="criarFormColaborador" is="dmx-serverconnect-form" method="post" action="/api/usuario/adicionar-colaborador" dmx-on:error="notificacao.danger('Ocorreu um erro: '+criarModalColaborador.criarFormColaborador.lastError.responsecriarModalColaborador.criarFormColaborador.lastError.responsecriarModalColaborador.criarFormColaborador.lastError.messagecriarModalColaborador.criarFormColaborador.lastError.messagecriarModalColaborador.criarFormColaborador.lastError.statuscriarModalColaborador.criarFormColaborador.lastError.status+'. Entre em contato com o suporte: suporte@spacefeed.app')" dmx-on:success="notificacao.success('Colaborador adicionado com sucesso!');navegacao.reload()">
           <div class="row">
             <div class="col">
-              <div class="form-group mb-3"> <label for="nomeCompleto" class="form-label">Nome completo</label>
+              <div class="form-group mb-3"> <label for="editnomeCompleto" class="form-label">Nome completo</label>
                 <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" aria-describedby="input1_help">
               </div>
             </div>
             <div class="col">
-              <div class="form-group mb-3"> <label for="nomeTratamento" class="form-label">Nome de tratamento</label>
+              <div class="form-group mb-3"> <label for="editnomeTratamento" class="form-label">Nome de tratamento</label>
                 <input type="text" class="form-control" id="nomeTratamento" name="nomeTratamento" aria-describedby="input1_help1">
               </div>
             </div>
           </div>
 
 
-          <div class="form-group mb-3"> <label for="emailColaborador" class="form-label">E-mail</label>
+          <div class="form-group mb-3"> <label for="editemailColaborador" class="form-label">E-mail</label>
             <input type="email" class="form-control" id="emailColaborador" name="emailColaborador" aria-describedby="input1_help2">
           </div>
         </form>
@@ -52,13 +101,15 @@
             <th class="titulo-tabela py-3">Nome completo</th>
             <th class="titulo-tabela py-3">Apelido</th>
             <th class="titulo-tabela py-3">Email</th>
+            <th class="titulo-tabela py-3">Status</th>
           </tr>
         </thead>
-        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listarColaboradores.data.queryColaboradores" id="tableRepeat1">
+        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="listarColaboradores.data.queryColaboradores" id="tableRepeat2">
           <tr>
-            <td dmx-text="nome_completo" class="texto-celula fw-semibold text-decoration-underline py-3 cursor-pointer"></td>
-            <td dmx-text="apelido" class="texto-celula py-3"></td>
-            <td dmx-text="email" class="texto-celula py-3"></td>
+            <td class="texto-celula fw-semibold text-decoration-underline py-3 cursor-pointer" dmx-on:click="data_colaborador.select(id_usuario);editarModalColaborador.show()" dmx-text="nome_completo"></td>
+            <td class="texto-celula py-3" dmx-text="apelido"></td>
+            <td class="texto-celula py-3" dmx-text="email"></td>
+            <td dmx-text="status_usuario"></td>
           </tr>
         </tbody>
       </table>

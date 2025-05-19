@@ -195,5 +195,36 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "colaborador": {
+    "data_colaborador": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_usuario"
+        },
+        {
+          "type": "text",
+          "name": "nome_completo"
+        },
+        {
+          "type": "text",
+          "name": "apelido"
+        },
+        {
+          "type": "text",
+          "name": "email"
+        },
+        {
+          "type": "text",
+          "name": "tipo_usuario"
+        },
+        {
+          "type": "number",
+          "name": "ref_id_empresa_ativa"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
