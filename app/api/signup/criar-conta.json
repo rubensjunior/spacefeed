@@ -99,6 +99,21 @@
                 }
               },
               "fieldName": "cnpj"
+            },
+            {
+              "name": "validate_2",
+              "value": "{{$_POST.email}}",
+              "rules": {
+                "db:notexists": {
+                  "param": {
+                    "connection": "supabase",
+                    "table": "usuarios",
+                    "column": "email"
+                  },
+                  "message": "Este e-mail já foi usado em uma conta."
+                }
+              },
+              "fieldName": "email"
             }
           ]
         }
