@@ -2,5 +2,13 @@
   "sing-up.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "novo-clientes.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "novo-cliente.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

@@ -25,6 +25,11 @@
       "path": "/backoffice/colaborador",
       "page": "dashboard/colaborador",
       "layout": "backoffice"
+    },
+    {
+      "path": "/novo-cliente",
+      "page": "novo-cliente",
+      "layout": "main"
     }
   ],
   "layouts": {
