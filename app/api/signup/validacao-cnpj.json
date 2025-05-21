@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/novo-cliente.ejs",
+      "linkedForm": "validarFormEmpresa"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "verificaCnpj",
+        "name": "verificaCnpj"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "queryBuscarCNPJ",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "supabase",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "empresas",
+                "column": "cnpj"
+              },
+              {
+                "table": "empresas",
+                "column": "status_empresa"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_POST.verificaCnpj}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "empresas"
+            },
+            "primary": "id_empresa",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "empresas.cnpj",
+                  "field": "empresas.cnpj",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.verificaCnpj}}",
+                  "data": {
+                    "table": "empresas",
+                    "column": "cnpj",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "text",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "cnpj"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"cnpj\", \"status_empresa\" from \"empresas\" where \"empresas\".\"cnpj\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "cnpj"
+          },
+          {
+            "type": "text",
+            "name": "status_empresa"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{queryBuscarCNPJ.cnpj==$_POST.verificaCnpj}}",
+          "then": {
+            "steps": {
+              "name": "",
+              "module": "core",
+              "action": "condition",
+              "options": {
+                "if": "{{queryBuscarCNPJ.status_empresa=='Pagamento Pendente'}}",
+                "then": {
+                  "steps": {
+                    "name": "respostaStatus",
+                    "module": "core",
+                    "action": "setvalue",
+                    "options": {
+                      "value": 1
+                    },
+                    "meta": [],
+                    "outputType": "text",
+                    "output": true
+                  }
+                },
+                "else": {
+                  "steps": {
+                    "name": "",
+                    "module": "core",
+                    "action": "condition",
+                    "options": {
+                      "if": "{{queryBuscarCNPJ.status_empresa=='Ativo'}}",
+                      "then": {
+                        "steps": {
+                          "name": "respostaStatus",
+                          "module": "core",
+                          "action": "setvalue",
+                          "options": {
+                            "value": 2
+                          },
+                          "meta": [],
+                          "outputType": "text",
+                          "output": true
+                        }
+                      },
+                      "else": {
+                        "steps": {
+                          "name": "",
+                          "module": "core",
+                          "action": "condition",
+                          "options": {
+                            "if": "{{queryBuscarCNPJ.status_empresa=='Inativo'}}",
+                            "then": {
+                              "steps": {
+                                "name": "respostaStatus",
+                                "module": "core",
+                                "action": "setvalue",
+                                "options": {
+                                  "value": 3
+                                },
+                                "meta": [],
+                                "output": true,
+                                "outputType": "text"
+                              }
+                            }
+                          },
+                          "outputType": "boolean"
+                        }
+                      }
+                    },
+                    "outputType": "boolean"
+                  }
+                }
+              },
+              "outputType": "boolean"
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "respostaStatus",
+              "module": "core",
+              "action": "setvalue",
+              "options": {
+                "value": 4
+              },
+              "meta": [],
+              "outputType": "text",
+              "output": true
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}

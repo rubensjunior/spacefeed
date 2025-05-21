@@ -9,7 +9,7 @@
 
             <hr dmx-show="resposta.value==0||resposta.value==4">
 
-            <form method="post" id="validarFormEmpresa">
+            <form method="post" id="validarFormEmpresa" is="dmx-serverconnect-form" action="/api/signup/validacao-cnpj" dmx-show="resposta.value==0" dmx-on:success="resposta.setValue(validarFormEmpresa.data.respostaStatus)">
                 <div class="form-group mb-3"> <label for="verificaCnpj" class="form-label">CNPJ</label>
                     <input type="text" class="form-control" id="verificaCnpj" name="verificaCnpj" aria-describedby="input1_help">
                 </div>
