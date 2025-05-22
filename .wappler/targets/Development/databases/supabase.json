@@ -10,6 +10,27 @@
   "direct": true,
   "schema": {
     "tables": {
+      "realtime.messages_2025_04_29": {
+        "db": {}
+      },
+      "realtime.messages_2025_04_30": {
+        "db": {}
+      },
+      "realtime.messages_2025_05_01": {
+        "db": {}
+      },
+      "realtime.messages_2025_04_26": {
+        "db": {}
+      },
+      "realtime.messages_2025_04_25": {
+        "db": {}
+      },
+      "realtime.messages_2025_04_27": {
+        "db": {}
+      },
+      "realtime.messages_2025_04_28": {
+        "db": {}
+      },
       "storage.buckets": {
         "db": {
           "schema": "storage"
@@ -211,16 +232,27 @@
           "comment": "This table holds metadata for derived keys given a key_id and key_context. The raw key is never stored."
         }
       },
-      "realtime.messages_2025_04_29": {
-        "db": {}
-      },
-      "realtime.messages_2025_04_30": {
-        "db": {}
-      },
-      "realtime.messages_2025_05_01": {
-        "db": {}
+      "realtime.messages_2025_05_12": {
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.schema_migrations": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "realtime.messages_2025_05_14": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "realtime.messages_2025_05_13": {
+        "db": {
+          "schema": "realtime"
+        }
+      },
+      "realtime.messages_2025_05_15": {
         "db": {
           "schema": "realtime"
         }
@@ -230,22 +262,15 @@
           "schema": "realtime"
         }
       },
-      "realtime.messages_2025_04_26": {
-        "db": {}
+      "realtime.messages_2025_05_16": {
+        "db": {
+          "schema": "realtime"
+        }
       },
       "realtime.subscription": {
         "db": {
           "schema": "realtime"
         }
-      },
-      "realtime.messages_2025_04_25": {
-        "db": {}
-      },
-      "realtime.messages_2025_04_27": {
-        "db": {}
-      },
-      "realtime.messages_2025_04_28": {
-        "db": {}
       },
       "vault.secrets": {
         "db": {
@@ -275,6 +300,123 @@
       "fcm_tokens": {
         "db": {
           "schema": "public"
+        }
+      },
+      "log_planos_contratados": {
+        "db": {
+          "schema": "public"
+        }
+      },
+      "planos_disponiveis": {
+        "db": {
+          "schema": "public"
+        },
+        "columns": {
+          "id_plano": {
+            "db": {
+              "type": "uuid",
+              "default": "gen_random_uuid()",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "nome": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "descricao": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "valor_base": {
+            "db": {
+              "type": "decimal",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "qtd_polos_incluidos": {
+            "db": {
+              "type": "integer",
+              "default": 1,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "valor_polo_extra": {
+            "db": {
+              "type": "decimal",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "limite_colaboradores_por_polo": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "limite_alunos_por_polo": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "ativo": {
+            "db": {
+              "type": "boolean",
+              "default": "true",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "criado_em": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "odem": {
+            "db": {
+              "type": "bigInteger",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
+        },
+        "refs": {
+          "log_planos_contratados": "ref_id_plano_anterior",
+          "planos_contratados": "ref_id_plano"
+        }
+      },
+      "planos_contratados": {
+        "db": {
+          "schema": "public"
+        },
+        "refs": {
+          "log_planos_contratados": "ref_id_plano_contratado"
         }
       },
       "empresas": {
@@ -472,7 +614,8 @@
         },
         "refs": {
           "comentarios_postagens": "ref_id_usuario",
-          "fcm_tokens": "ref_id_usuario"
+          "fcm_tokens": "ref_id_usuario",
+          "planos_contratados": "ref_id_usuario_admin"
         },
         "sub": {
           "usuarios_empresas": "ref_id_usuario"
@@ -547,34 +690,14 @@
           }
         },
         "parent": "usuarios"
-      },
-      "realtime.messages_2025_05_12": {
-        "db": {
-          "schema": "realtime"
-        }
-      },
-      "realtime.messages_2025_05_14": {
-        "db": {
-          "schema": "realtime"
-        }
-      },
-      "realtime.messages_2025_05_13": {
-        "db": {
-          "schema": "realtime"
-        }
-      },
-      "realtime.messages_2025_05_15": {
-        "db": {
-          "schema": "realtime"
-        }
-      },
-      "realtime.messages_2025_05_16": {
-        "db": {
-          "schema": "realtime"
-        }
       }
     },
     "views": {
+      "vault.decrypted_secrets": {
+        "db": {
+          "schema": "vault"
+        }
+      },
       "pgsodium.valid_key": {
         "db": {
           "schema": "pgsodium"
@@ -603,11 +726,6 @@
       "extensions.pg_stat_statements": {
         "db": {
           "schema": "extensions"
-        }
-      },
-      "vault.decrypted_secrets": {
-        "db": {
-          "schema": "vault"
         }
       }
     },

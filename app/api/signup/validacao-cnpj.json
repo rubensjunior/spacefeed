@@ -154,6 +154,30 @@
                                 "output": true,
                                 "outputType": "text"
                               }
+                            },
+                            "else": {
+                              "steps": {
+                                "name": "",
+                                "module": "core",
+                                "action": "condition",
+                                "options": {
+                                  "if": "{{queryBuscarCNPJ.status_empresa=='Criar Fatura'}}",
+                                  "then": {
+                                    "steps": {
+                                      "name": "respostaStatus",
+                                      "module": "core",
+                                      "action": "setvalue",
+                                      "options": {
+                                        "value": 5
+                                      },
+                                      "meta": [],
+                                      "outputType": "text",
+                                      "output": true
+                                    }
+                                  }
+                                },
+                                "outputType": "boolean"
+                              }
                             }
                           },
                           "outputType": "boolean"

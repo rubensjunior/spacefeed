@@ -226,5 +226,56 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "novocliente": {
+    "data_detail1": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_plano"
+        },
+        {
+          "type": "text",
+          "name": "nome"
+        },
+        {
+          "type": "text",
+          "name": "descricao"
+        },
+        {
+          "type": "number",
+          "name": "valor_base"
+        },
+        {
+          "type": "number",
+          "name": "qtd_polos_incluidos"
+        },
+        {
+          "type": "number",
+          "name": "valor_polo_extra"
+        },
+        {
+          "type": "number",
+          "name": "limite_colaboradores_por_polo"
+        },
+        {
+          "type": "number",
+          "name": "limite_alunos_por_polo"
+        }
+      ],
+      "outputType": "array"
+    },
+    "plano": {
+      "meta": null,
+      "outputType": "number"
+    },
+    "adicional": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "planoBase": {
+      "meta": null,
+      "outputType": "number"
+    }
   }
 });

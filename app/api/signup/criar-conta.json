@@ -262,12 +262,12 @@
                 "table": "empresas",
                 "column": "status_empresa",
                 "type": "text",
-                "value": "Pagamento Pendente"
+                "value": "Criar Fatura"
               }
             ],
             "table": "empresas",
             "returning": "id_empresa",
-            "query": "insert into \"empresas\" (\"cep\", \"cnpj\", \"endereco\", \"nome_fantasia\", \"nome_polo\", \"razao_social\", \"status_empresa\", \"whatsapp\") values (?, ?, ?, ?, ?, ?, ?, ?)",
+            "query": "insert into \"empresas\" (\"cep\", \"cnpj\", \"endereco\", \"nome_fantasia\", \"nome_polo\", \"razao_social\", \"status_empresa\", \"whatsapp\") values (?, ?, ?, ?, ?, ?, ?, ?) returning \"id_empresa\"",
             "params": [
               {
                 "name": ":P1",
@@ -451,12 +451,12 @@
                 "table": "usuarios_empresas",
                 "column": "status_usuario",
                 "type": "text",
-                "value": "Ativo"
+                "value": "Pendente"
               }
             ],
             "table": "usuarios_empresas",
             "returning": "id_usuario_empresa",
-            "query": "insert into \"usuarios_empresas\" (\"cargo_usuario_empresa\", \"ref_id_empresa\", \"ref_id_usuario\", \"status_usuario\") values (?, ?, ?, ?)",
+            "query": "insert into \"usuarios_empresas\" (\"cargo_usuario_empresa\", \"ref_id_empresa\", \"ref_id_usuario\", \"status_usuario\") values (?, ?, ?, ?) returning \"id_usuario_empresa\"",
             "params": [
               {
                 "name": ":P1",
@@ -489,7 +489,7 @@
         "module": "core",
         "action": "setvalue",
         "options": {
-          "value": 1
+          "value": 5
         },
         "meta": [],
         "outputType": "text",
