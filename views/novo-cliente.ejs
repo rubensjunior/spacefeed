@@ -4,6 +4,7 @@
     <div class="row h-100">
         <div class="col-4 style2 h-100"></div>
         <div class="col p-5 overflow-auto h-100">
+
             <h1 dmx-show="resposta.value==0||resposta.value==4">Criar conta</h1>
             <p dmx-show="resposta.value==0||resposta.value==4">O Spacefeed é a plataforma de comunicação institucional que aproxima alunos e equipe do polo por meio de uma experiência moderna, no estilo rede social. Compartilhe comunicados, publique conteúdos importantes e responda dúvidas — tudo em um só lugar.</p>
 
@@ -33,7 +34,7 @@
                 <p>Ela está impedida de acessar o sistema e de se recadastrar até que seja reativada. Se deseja reativar sua conta, entre em contato com o suporte: suporte@spacefeed.app.</p>
                 </p>
             </div>
-            <form id="cadastrarFormEmpresa" dmx-show="resposta.value==4">
+            <form id="cadastrarFormEmpresa" dmx-show="resposta.value==4" is="dmx-serverconnect-form" method="post" action="/api/signup/criar-conta" dmx-on:success="resposta.setValue(cadastrarFormEmpresa.data.respostaStatus)">
                 <div class="row">
                     <div class="col">
                         <div class="form-group mb-3"> <label for="nomeFantasia" class="form-label">Razão social</label>
@@ -115,6 +116,43 @@
                     </div>
                 </div>
             </form>
+            <div class="d-flex flex-column">
+                <h3 class="mb-4">Escolha seu plano</h3>
+                <form id="checkoutForm" class="col-9">
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <select id="plano" class="form-select me-3 w-50" name="plano">
+                            <option value="1">Option One</option>
+                            <option value="2">Option Two</option>
+                            <option value="3">Option Three</option>
+                        </select><input id="poloAdicional" name="poloAdicional" type="number" class="form-control input-80px text-center me-3" dmx-bind:value="0">
+                        <h6 class="m-0">R$ por Polo Adicional.&nbsp;</h6>
+                    </div>
+
+                    <hr dmx-show="resposta.value==0||resposta.value==4" class="my-4">
+
+                    <div class="d-flex flex-row align-items-center justify-content-between  mb-3">
+                        <h6 class="m-0">Assinatura Mensal</h6>
+                        <h6 class="text-end m-0">R$</h6>
+                    </div>
+                    <div class="d-flex flex-row align-items-center justify-content-between  mb-3">
+                        <h6 class="m-0">Polo Adicional</h6>
+                        <h6 class="text-end m-0">R$</h6>
+                    </div>
+
+                    <hr dmx-show="resposta.value==0||resposta.value==4" class="my-4">
+
+                    <div class="d-flex  mb-3 flex-column align-items-start">
+                        <h6 class="mb-3">Total</h6>
+                        <h2 class="m-0">R$</h2>
+                        <button id="btn3" class="btn btn-primary my-3">Processar pagamento</button>
+                        <p>Ao clicar em <b>“Processar pagamento”</b>, você concorda com os <b>Termos de Uso</b> e <b>Política de Privacidade</b> da plataforma.</p>
+                        <p>Pagamento processado de forma segura pelo ASAAS. Não armazenamos nenhuma informação bancaria.</p>
+                    </div>
+                </form>
+
+
+
+            </div>
 
         </div>
     </div>
