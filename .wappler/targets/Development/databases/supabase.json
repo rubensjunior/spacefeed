@@ -32,9 +32,7 @@
         "db": {}
       },
       "storage.buckets": {
-        "db": {
-          "schema": "storage"
-        },
+        "db": {},
         "refs": {
           "storage.objects": "bucket_id",
           "storage.s3_multipart_uploads": "bucket_id",
@@ -42,46 +40,29 @@
         }
       },
       "storage.migrations": {
-        "db": {
-          "schema": "storage"
-        }
+        "db": {}
       },
       "storage.objects": {
-        "db": {
-          "schema": "storage"
-        }
+        "db": {}
       },
       "storage.s3_multipart_uploads": {
-        "db": {
-          "schema": "storage"
-        },
+        "db": {},
         "sub": {
           "storage.s3_multipart_uploads_parts": "upload_id"
         }
       },
       "storage.s3_multipart_uploads_parts": {
-        "db": {
-          "schema": "storage"
-        },
+        "db": {},
         "parent": "s3_multipart_uploads"
       },
       "auth.saml_providers": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Manages SAML Identity Provider connections."
-        }
+        "db": {}
       },
       "auth.saml_relay_states": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Contains SAML Relay State information for each Service Provider initiated login."
-        }
+        "db": {}
       },
       "auth.audit_log_entries": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Audit trail for user actions."
-        },
+        "db": {},
         "columns": {
           "instance_id": {
             "db": {
@@ -129,85 +110,50 @@
         }
       },
       "auth.flow_state": {
-        "db": {
-          "schema": "auth",
-          "comment": "stores metadata for pkce logins"
-        },
+        "db": {},
         "refs": {
           "auth.saml_relay_states": "flow_state_id"
         }
       },
       "auth.identities": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Stores identities associated to a user."
-        }
+        "db": {}
       },
       "auth.instances": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Manages users across multiple sites."
-        }
+        "db": {}
       },
       "auth.mfa_challenges": {
-        "db": {
-          "schema": "auth",
-          "comment": "auth: stores metadata about challenge requests made"
-        }
+        "db": {}
       },
       "auth.schema_migrations": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Manages updates to the auth system."
-        }
+        "db": {}
       },
       "auth.sessions": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Stores session data associated to a user."
-        },
+        "db": {},
         "refs": {
           "auth.refresh_tokens": "session_id",
           "auth.mfa_amr_claims": "session_id"
         }
       },
       "auth.refresh_tokens": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Store of tokens used to refresh JWT tokens once they expire."
-        }
+        "db": {}
       },
       "auth.mfa_factors": {
-        "db": {
-          "schema": "auth",
-          "comment": "auth: stores metadata about factors"
-        },
+        "db": {},
         "refs": {
           "auth.mfa_challenges": "factor_id"
         }
       },
       "auth.one_time_tokens": {
-        "db": {
-          "schema": "auth"
-        }
+        "db": {}
       },
       "auth.mfa_amr_claims": {
-        "db": {
-          "schema": "auth",
-          "comment": "auth: stores authenticator method reference claims for multi factor authentication"
-        }
+        "db": {}
       },
       "auth.sso_domains": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Manages SSO email address domain mapping to an SSO Identity Provider."
-        }
+        "db": {}
       },
       "auth.sso_providers": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Manages SSO identity provider information; see saml_providers for SAML."
-        },
+        "db": {},
         "refs": {
           "auth.saml_providers": "sso_provider_id",
           "auth.saml_relay_states": "sso_provider_id",
@@ -215,10 +161,7 @@
         }
       },
       "auth.users": {
-        "db": {
-          "schema": "auth",
-          "comment": "Auth: Stores user login data within a secure schema."
-        },
+        "db": {},
         "refs": {
           "auth.identities": "user_id",
           "auth.sessions": "user_id",
@@ -227,90 +170,200 @@
         }
       },
       "pgsodium.key": {
-        "db": {
-          "schema": "pgsodium",
-          "comment": "This table holds metadata for derived keys given a key_id and key_context. The raw key is never stored."
-        }
+        "db": {}
       },
       "realtime.messages_2025_05_12": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "realtime.schema_migrations": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "realtime.messages_2025_05_14": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "realtime.messages_2025_05_13": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "realtime.messages_2025_05_15": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "realtime.messages": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "realtime.messages_2025_05_16": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "realtime.subscription": {
-        "db": {
-          "schema": "realtime"
-        }
+        "db": {}
       },
       "vault.secrets": {
-        "db": {
-          "schema": "vault",
-          "comment": "Table with encrypted `secret` column for storing sensitive information on disk."
+        "db": {}
+      },
+      "empresas": {
+        "db": {},
+        "columns": {
+          "id_empresa": {
+            "db": {
+              "type": "uuid",
+              "default": "gen_random_uuid()",
+              "primary": true,
+              "unique": true,
+              "nullable": false
+            }
+          },
+          "created_at_empresa": {
+            "db": {
+              "type": "timestamp",
+              "default": "now()",
+              "useTz": true,
+              "primary": false,
+              "unique": false,
+              "nullable": false
+            }
+          },
+          "razao_social": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "nome_fantasia": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "nome_polo": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "cnpj": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "endereco": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "cep": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "whatsapp": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "status_empresa": {
+            "db": {
+              "type": "string",
+              "maxLength": -5,
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "logradouro": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "numero": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "complemento": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "bairro": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "cidade": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          },
+          "uf": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
+          }
+        },
+        "refs": {
+          "comentarios_postagens": "ref_id_empresa",
+          "postagens": "ref_id_empresa",
+          "planos_contratados": "ref_id_empresa",
+          "usuarios": "ref_id_empresa_ativa",
+          "usuarios_empresas": "ref_id_empresa"
         }
       },
       "comentarios_postagens": {
-        "db": {
-          "schema": "public"
-        }
+        "db": {}
       },
       "postagens": {
-        "db": {
-          "schema": "public"
-        },
+        "db": {},
         "refs": {
           "comentarios_postagens": "ref_id_postagem",
           "midias_postagens": "ref_id_postagem"
         }
       },
       "midias_postagens": {
-        "db": {
-          "schema": "public"
-        }
+        "db": {}
       },
       "fcm_tokens": {
-        "db": {
-          "schema": "public"
-        }
+        "db": {}
       },
       "log_planos_contratados": {
-        "db": {
-          "schema": "public"
-        }
+        "db": {}
       },
       "planos_disponiveis": {
-        "db": {
-          "schema": "public"
-        },
+        "db": {},
         "columns": {
           "id_plano": {
             "db": {
@@ -412,114 +465,13 @@
         }
       },
       "planos_contratados": {
-        "db": {
-          "schema": "public"
-        },
+        "db": {},
         "refs": {
           "log_planos_contratados": "ref_id_plano_contratado"
         }
       },
-      "empresas": {
-        "db": {
-          "schema": "public"
-        },
-        "columns": {
-          "id_empresa": {
-            "db": {
-              "type": "uuid",
-              "default": "gen_random_uuid()",
-              "primary": true,
-              "unique": true,
-              "nullable": false
-            }
-          },
-          "created_at_empresa": {
-            "db": {
-              "type": "timestamp",
-              "default": "now()",
-              "useTz": true,
-              "primary": false,
-              "unique": false,
-              "nullable": false
-            }
-          },
-          "razao_social": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "nome_fantasia": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "nome_polo": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "cnpj": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "endereco": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "cep": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "whatsapp": {
-            "db": {
-              "type": "text",
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          },
-          "status_empresa": {
-            "db": {
-              "type": "string",
-              "maxLength": -5,
-              "primary": false,
-              "unique": false,
-              "nullable": true
-            }
-          }
-        },
-        "refs": {
-          "comentarios_postagens": "ref_id_empresa",
-          "postagens": "ref_id_empresa",
-          "usuarios": "ref_id_empresa_ativa",
-          "usuarios_empresas": "ref_id_empresa"
-        }
-      },
       "usuarios": {
-        "db": {
-          "schema": "public"
-        },
+        "db": {},
         "columns": {
           "id_usuario": {
             "db": {
@@ -610,6 +562,14 @@
               "unique": false,
               "nullable": true
             }
+          },
+          "nome_tratamento": {
+            "db": {
+              "type": "text",
+              "primary": false,
+              "unique": false,
+              "nullable": true
+            }
           }
         },
         "refs": {
@@ -622,9 +582,7 @@
         }
       },
       "usuarios_empresas": {
-        "db": {
-          "schema": "public"
-        },
+        "db": {},
         "columns": {
           "id_usuario_empresa": {
             "db": {

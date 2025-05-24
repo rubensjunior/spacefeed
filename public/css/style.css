@@ -1,47 +1,130 @@
-.style1 {
+/* Estilo de background lateral */
+.style1, .style2 {
     background-image: url("../assets/images/space-bg.jpg");
     background-repeat: no-repeat;
-    background-size: cover
-}
-.form-control, .form-select{
-    min-height: 48px;
-    background-color: #f9f9f9;
-    border: none;
-}
-.cursor-pointer{
-    cursor: pointer;
-}
-.style2 {
-    background-image: url("../assets/images/space-bg.jpg");
     background-size: cover;
 }
-.bg-backoffice {
-  background: 
-    linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%),
-    radial-gradient(circle at 80% 20%, rgba(255, 200, 150, 0.12), transparent 60%),
-    radial-gradient(circle at 0% 100%, rgba(180, 170, 160, 0.1), transparent 70%);
-  background-blend-mode: overlay, multiply, normal;
+
+/* Estilo refinado para inputs e selects */
+.form-control,
+.form-select {
+    min-height: 48px;
+    background-color: #f9f9f9;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    -webkit-transition: border-color 0.2s ease-in-out;
+    transition: border-color 0.2s ease-in-out;
 }
-.texto-menu-sidebar, .texto-empresa-menu{
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #6c63ff;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.25);
+}
+
+/* Estilo visual para botões */
+.btn {
+    -webkit-transition: background-color 0.2s, -webkit-transform 0.2s;
+    transition: background-color 0.2s, -webkit-transform 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
+    transition: background-color 0.2s, transform 0.2s, -webkit-transform 0.2s;
+}
+
+.btn:hover {
+    -webkit-transform: translateY(-1px);
+            transform: translateY(-1px);
+}
+
+/* Aparência moderna para cards */
+.card {
+    border: none;
+    border-radius: 1rem;
+    -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Background de painel administrativo */
+.bg-backoffice {
+    background:
+        linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%),
+        radial-gradient(circle at 80% 20%, rgba(255, 200, 150, 0.12), transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(180, 170, 160, 0.1), transparent 70%);
+    background-blend-mode: overlay, multiply, normal;
+}
+
+/* Tipografia */
+.texto-menu-sidebar, .texto-empresa-menu {
     font-size: 13px;
     color: #99a1b7;
     text-decoration: none;
 }
-.texto-identificacao-menu{
+
+.texto-identificacao-menu {
     font-size: 14px;
     color: #000000;
     font-weight: 500;
     text-decoration: none;
 }
-.titulo-tabela{
+
+.titulo-tabela {
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     color: #99a1b7 !important;
 }
-.texto-celula{
+
+.texto-celula {
     font-size: 14px;
 }
-.input-80px{
+
+/* Campos numéricos estreitos */
+.input-80px {
     width: 80px;
+    text-align: right;
+}
+
+/* Cursor customizado */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Validação amigável */
+.was-validated .form-control:invalid {
+    border-color: #dc3545;
+    background-image: none;
+}
+
+.was-validated .form-control:valid {
+    border-color: #198754;
+    background-image: none;
+}
+
+/* Barra de progresso */
+.progress {
+    background-color: #f1f3f5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-color: #6c63ff;
+    -webkit-transition: width 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Cor personalizada para tema principal */
+.btn-primary {
+    background-color: #6c63ff;
+    border-color: #6c63ff;
+}
+
+.btn-primary:hover {
+    background-color: #5848e2;
+    border-color: #5848e2;
 }

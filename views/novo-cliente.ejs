@@ -1,25 +1,218 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="novocliente" appConnect="local" components="{dmxDataTraversal:{},dmxValidator:{},dmxFormatter:{}}" -->
 <dmx-value id="planoBase"></dmx-value>
 <dmx-data-detail id="data_detail1" dmx-bind:data="listagemPlanos.data.queryPlanos" key="id_plano"></dmx-data-detail>
+<dmx-serverconnect id="cadastroUnificado" url="/api/signup/criar-conta-com-plano"></dmx-serverconnect>
 <dmx-serverconnect id="listagemPlanos" url="/api/financeiro/listar-planos"></dmx-serverconnect>
 <dmx-value id="resposta" dmx-bind:value="0"></dmx-value>
+<dmx-value id="currentStep" dmx-bind:value="1"></dmx-value>
+
 <div class="container-fluid vh-100">
     <div class="row h-100">
         <div class="col-4 style2 h-100"></div>
         <div class="col p-5 overflow-auto h-100">
-
             <h1 dmx-show="resposta.value==0||resposta.value==4">Criar conta</h1>
             <p dmx-show="resposta.value==0||resposta.value==4">O Spacefeed é a plataforma de comunicação institucional que aproxima alunos e equipe do polo por meio de uma experiência moderna, no estilo rede social. Compartilhe comunicados, publique conteúdos importantes e responda dúvidas — tudo em um só lugar.</p>
 
             <hr dmx-show="resposta.value==0||resposta.value==4">
 
-            <form method="post" id="validarFormEmpresa" is="dmx-serverconnect-form" action="/api/signup/validacao-cnpj" dmx-show="resposta.value==0" dmx-on:success="resposta.setValue(validarFormEmpresa.data.respostaStatus)">
-                <div class="form-group mb-3"> <label for="verificaCnpj" class="form-label">CNPJ</label>
-                    <input type="text" class="form-control" id="verificaCnpj" name="verificaCnpj" aria-describedby="input1_help">
+            <!-- Multi-step Form -->
+            <form id="cadastroUnificadoForm" dmx-show="resposta.value==4" is="dmx-serverconnect-form" method="post" action="/api/signup/criar-conta-com-plano" dmx-on:success="resposta.setValue(cadastroUnificadoForm.data.respostaStatus)" class="needs-validation">
+
+
+                <!-- Step 1: Company Information -->
+                <div class="card mb-4" dmx-show="currentStep.value == 1">
+                    <div class="card-header">
+                        <h5 class="mb-0">Informações da Empresa</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="razaoSocial" class="form-label">Razão Social</label>
+                                <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" required data-msg-required="Por favor, informe a razão social.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nomeFantasia" class="form-label">Nome Fantasia</label>
+                                <input type="text" class="form-control" id="nomeFantasia" name="nomeFantasia" required data-msg-required="Por favor, informe o nome fantasia.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nome_polo" class="form-label">Nome do Polo</label>
+                                <input type="text" class="form-control" id="nome_polo" name="nome_polo" required data-msg-required="Por favor, informe o nome do polo.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cnpj" class="form-label">CNPJ</label>
+                                <input type="text" class="form-control" id="cnpj" name="cnpj" required data-msg-required="Por favor, informe o CNPJ.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="whatsapp" class="form-label">WhatsApp</label>
+                                <input type="text" class="form-control" id="whatsapp" name="whatsapp" required data-msg-required="Por favor, informe o WhatsApp.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary" dmx-on:click="currentStep.setValue(2)">Próximo</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group mb-3"> <button id="btn1" class="btn btn-primary" type="submit">Continuar</button>
+
+                <!-- Step 2: Address -->
+                <div class="card mb-4" dmx-show="currentStep.value == 2">
+                    <div class="card-header">
+                        <h5 class="mb-0">Endereço</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="cep" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="cep" name="cep" required data-msg-required="Por favor, informe o CEP.">
+                            </div>
+                            <div class="col-md-8">
+                                <label for="logradouro" class="form-label">Logradouro</label>
+                                <input type="text" class="form-control" id="logradouro" name="logradouro" required data-msg-required="Por favor, informe o logradouro.">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="numero" class="form-label">Número</label>
+                                <input type="text" class="form-control" id="numero" name="numero" required data-msg-required="Por favor, informe o número.">
+                            </div>
+                            <div class="col-md-8">
+                                <label for="complemento" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" id="complemento" name="complemento">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="bairro" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="bairro" name="bairro" required data-msg-required="Por favor, informe o bairro.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" name="cidade" required data-msg-required="Por favor, informe a cidade.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="uf" class="form-label">UF</label>
+                                <input type="text" class="form-control" id="uf" name="uf" required data-msg-required="Por favor, informe a UF.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-primary" dmx-on:click="currentStep.setValue(1)">Voltar</button>
+                            <button type="button" class="btn btn-primary" dmx-on:click="currentStep.setValue(3)">Próximo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Admin User -->
+                <div class="card mb-4" dmx-show="currentStep.value == 3">
+                    <div class="card-header">
+                        <h5 class="mb-0">Usuário Administrador</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" required data-msg-required="Por favor, informe o e-mail." data-msg-email="Por favor, informe um e-mail válido.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required data-msg-required="Por favor, informe o nome.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="nome_tratamento" class="form-label">Nome de Tratamento</label>
+                                <input type="text" class="form-control" id="nome_tratamento" name="nome_tratamento" required data-msg-required="Por favor, informe o nome de tratamento.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required data-msg-required="Por favor, informe a senha.">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="confirmarSenha" class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" required data-rule-equalto="#senha" data-msg-equalto="As senhas não conferem." data-msg-required="Por favor, confirme a senha.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-primary" dmx-on:click="currentStep.setValue(2)">Voltar</button>
+                            <button type="button" class="btn btn-primary" dmx-on:click="currentStep.setValue(4)">Próximo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Plan Selection -->
+                <div class="card mb-4" dmx-show="currentStep.value == 4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Escolha seu Plano</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <select id="plano" class="form-select me-3" name="plano" style="max-width: 300px" optionvalue="id_plano" dmx-bind:options="listagemPlanos.data.queryPlanos" optiontext="nome+' - '+valor_base" dmx-on:changed="data_detail1.select(selectedValue);planoBase.setValue(data_detail1.data.valor_polo_extra)" required="" data-msg-required="Por favor, selecione um plano.">
+                                        <option value="">Selecione um plano</option>
+                                    </select>
+                                    <div class="d-flex align-items-center">
+                                        <label for="poloAdicional" class="me-2">Polos Adicionais:</label>
+                                        <input id="poloAdicional" name="poloAdicional" type="number" min="0" class="form-control input-80px text-center me-3" value="0" required data-rule-number="true" data-rule-digits="true" data-rule-min="0" data-msg-required="Por favor, informe o número de polos adicionais." data-msg-number="Por favor, digite um número válido." data-msg-digits="Por favor, digite apenas números inteiros." data-msg-min="O número de polos adicionais não pode ser negativo.">
+                                        <span class="text-muted" dmx-text="(data_detail1.data ? data_detail1.data.valor_polo_extra : 0).formatCurrency('R$ ', '.', ',', 2) + ' por Polo'"></span>
+                                    </div>
+                                </div>
+                                <p class="bolder">{{data_detail1.data.descricao}}</p>
+
+                                <hr class="my-4">
+
+                                <!-- Pricing Summary -->
+                                <div class="bg-light p-3 rounded">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Assinatura Mensal</span>
+                                        <div class="d-flex align-items-center">
+                                            <input id="planoAtual" name="planoAtual" type="hidden" dmx-bind:value="data_detail1.data ? data_detail1.data.valor_base*1 : 0">
+                                            <span dmx-text="(data_detail1.data ? data_detail1.data.valor_base*1 : 0).formatCurrency('R$ ', '.', ',', 2)"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Polos Adicionais</span>
+                                        <div class="d-flex align-items-center">
+                                            <input id="totalPolos" name="totalPolos" type="hidden" dmx-bind:value="data_detail1.data ? data_detail1.data.valor_polo_extra*poloAdicional.value : 0">
+                                            <span dmx-text="(data_detail1.data ? data_detail1.data.valor_polo_extra*poloAdicional.value : 0).formatCurrency('R$ ', '.', ',', 2)"></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Total Mensal</strong>
+                                        <div class="d-flex align-items-center">
+                                            <input id="valorFinal" name="valorFinal" type="hidden" dmx-bind:value="data_detail1.data ? (data_detail1.data.valor_polo_extra*poloAdicional.value+data_detail1.data.valor_base*1) : 0">
+                                            <strong dmx-text="(data_detail1.data ? (data_detail1.data.valor_polo_extra*poloAdicional.value+data_detail1.data.valor_base*1) : 0).formatCurrency('R$ ', '.', ',', 2)"></strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-outline-primary" dmx-on:click="currentStep.setValue(3)">Voltar</button>
+                            <div>
+                                <button type="submit" class="btn btn-primary" dmx-bind:disabled="!valorFinal.value">Finalizar Cadastro e Pagamento</button>
+
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <p class="text-muted small mt-2 mb-0">Ao clicar em "Finalizar Cadastro e Pagamento", você concorda com os <a href="#" class="text-decoration-none">Termos de Uso</a> e <a href="#" class="text-decoration-none">Política de Privacidade</a>.</p>
+                        </div>
+                    </div>
                 </div>
             </form>
+
+            <!-- Other Forms and Messages -->
+            <form method="post" id="validarFormEmpresa" is="dmx-serverconnect-form" action="/api/signup/validacao-cnpj" dmx-show="resposta.value==0" dmx-on:success="resposta.setValue(validarFormEmpresa.data.respostaStatus)">
+                <div class="form-group mb-3">
+                    <label for="verificaCnpj" class="form-label">CNPJ</label>
+                    <input type="text" class="form-control" id="verificaCnpj" name="verificaCnpj" required data-msg-required="Por favor, informe o CNPJ para verificação.">
+                </div>
+                <div class="form-group mb-3">
+                    <button id="btn1" class="btn btn-primary" type="submit">Continuar</button>
+                </div>
+            </form>
+
             <div class="d-flex flex-column" dmx-show="resposta.value==1">
                 <h3>Pagamento pendente: aguarde a confirmação ou conclua o pagamento para ativar o acesso.</h3>
                 <p>A empresa foi cadastrada com sucesso e a cobrança foi gerada no Asaas. Agora o sistema aguarda a confirmação do pagamento.
@@ -36,53 +229,6 @@
                 <p>A empresa foi desativada manualmente ou por razões administrativas (como inadimplência, encerramento de contrato ou outras ações internas).
                 <p>Ela está impedida de acessar o sistema e de se recadastrar até que seja reativada. Se deseja reativar sua conta, entre em contato com o suporte: suporte@spacefeed.app.</p>
                 </p>
-            </div>
-            <form id="cadastrarFormEmpresa" dmx-show="resposta.value==4" is="dmx-serverconnect-form" method="post" action="/api/signup/criar-conta" dmx-on:success="resposta.setValue(cadastrarFormEmpresa.data.respostaStatus)">
-                <!-- ... (mantendo todo o conteúdo do formulário de cadastro como está) ... -->
-            </form>
-            <div class="d-flex flex-column" dmx-show="resposta.value==5">
-                <h3 class="mb-4">Escolha seu plano</h3>
-                <form id="checkoutForm" class="col-9">
-                    <div class="d-flex flex-row align-items-center mb-4">
-                        <select id="plano" class="form-select me-3 w-50" name="plano" optionvalue="id_plano" dmx-bind:options="listagemPlanos.data.queryPlanos" optiontext="nome" dmx-on:changed="data_detail1.select(selectedValue);planoBase.setValue(data_detail1.data.valor_polo_extra)">
-                            <option value="null">Selecione um plano</option>
-                        </select>
-                        <input id="poloAdicional" name="poloAdicional" type="number" min="0" class="form-control input-80px text-center me-3" value="0" required data-rule-number="true" data-rule-digits="true" data-rule-min="0" data-msg-required="Este campo é obrigatório" data-msg-number="Digite um número válido" data-msg-digits="Digite apenas números inteiros" data-msg-min="O número de polos adicionais não pode ser negativo">
-                        <h6 class="m-0" dmx-text="(data_detail1.data ? data_detail1.data.valor_polo_extra : 0).formatCurrency('R$ ', '.', ',', 2) + ' por Polo Adicional'"></h6>
-                    </div>
-
-                    <hr dmx-show="resposta.value==0||resposta.value==4" class="my-4">
-
-                    <div class="d-flex flex-row align-items-center justify-content-between mb-3">
-                        <h6 class="m-0">Assinatura Mensal</h6>
-                        <div class="d-flex align-items-center">
-                            <input id="planoAtual" name="planoAtual" type="hidden" dmx-bind:value="data_detail1.data ? data_detail1.data.valor_base*1 : 0">
-                            <span dmx-text="(data_detail1.data ? data_detail1.data.valor_base*1 : 0).formatCurrency('R$ ', '.', ',', 2)"></span>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-row align-items-center justify-content-between mb-3">
-                        <h6 class="m-0">Polo Adicional</h6>
-                        <div class="d-flex align-items-center">
-                            <input id="totalPolos" name="totalPolos" type="hidden" dmx-bind:value="data_detail1.data ? data_detail1.data.valor_polo_extra*poloAdicional.value : 0">
-                            <span dmx-text="(data_detail1.data ? data_detail1.data.valor_polo_extra*poloAdicional.value : 0).formatCurrency('R$ ', '.', ',', 2)"></span>
-                        </div>
-                    </div>
-
-                    <hr dmx-show="resposta.value==0||resposta.value==4" class="my-4">
-
-                    <div class="d-flex flex-row align-items-center justify-content-between mb-3">
-                        <h3 class="m-0">Total</h3>
-                        <div class="d-flex align-items-center">
-                            <input id="valorFinal" name="valorFinal" type="hidden" dmx-bind:value="data_detail1.data ? (data_detail1.data.valor_polo_extra*poloAdicional.value+data_detail1.data.valor_base*1) : 0">
-                            <span class="fw-bold" dmx-text="(data_detail1.data ? (data_detail1.data.valor_polo_extra*poloAdicional.value+data_detail1.data.valor_base*1) : 0).formatCurrency('R$ ', '.', ',', 2)"></span>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3 flex-column align-items-start">
-                        <button id="btn3" class="btn btn-primary my-3">Processar pagamento</button>
-                        <p>Ao clicar em <b>"Processar pagamento"</b>, você concorda com os <b>Termos de Uso</b> e <b>Política de Privacidade</b> da plataforma.</p>
-                        <p>Pagamento processado de forma segura pelo ASAAS. Não armazenamos nenhuma informação bancaria.</p>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
