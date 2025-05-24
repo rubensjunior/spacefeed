@@ -8,6 +8,13 @@
 
 <div class="auth-container d-flex align-items-center">
     <div class="auth-content">
+        <!-- Logo - Always visible -->
+        <div class="container">
+            <div class="text-center mb-4">
+                <img src="/assets/images/spacefeed-white.png" alt="Spacefeed Logo" class="img-fluid" style="max-width: 200px;" width="160">
+            </div>
+        </div>
+
         <div class="container">
             <div class="auth-header" dmx-show="resposta.value == 0">
                 <h1>Criar conta</h1>
@@ -17,7 +24,7 @@
             <!-- Progress Bar (só aparece após validação do CNPJ) -->
             <div class="progress-steps mb-4" dmx-show="resposta.value == 4">
                 <div class="progress" role="progressbar">
-                    <div class="progress-bar" dmx-bind:style="'width: ' + ((currentStep.value - 1) * 25) + '%'"></div>
+                    <div class="progress-bar" dmx-bind:style="'width: ' + ((currentStep.value - 1) * 33.33) + '%'"></div>
                 </div>
                 <div class="steps">
                     <div class="step" dmx-class:active="currentStep.value >= 1" dmx-class:completed="currentStep.value > 1">
@@ -48,7 +55,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="verificaCnpj" class="form-label">CNPJ</label>
-                            <input type="text" class="form-control form-control-lg" id="verificaCnpj" name="verificaCnpj" required data-msg-required="Por favor, informe o CNPJ para verificação.">
+                            <input type="text" class="form-control form-control-lg" id="verificaCnpj" name="verificaCnpj" required="" data-msg-required="Por favor, informe o CNPJ para verificação.">
                         </div>
                     </div>
                 </div>
@@ -192,7 +199,7 @@
                                 <label for="poloAdicional" class="form-label">Polos Adicionais</label>
                                 <div class="input-group">
                                     <input id="poloAdicional" name="poloAdicional" type="number" min="0" class="form-control form-control-lg" value="0" required="" data-rule-number="true" data-rule-digits="true" data-rule-min="0" data-msg-required="Por favor, informe o número de polos adicionais." data-msg-number="Por favor, digite um número válido." data-msg-digits="Por favor, digite apenas números inteiros." data-msg-min="O número de polos adicionais não pode ser negativo.">
-                                    <span class="input-group-text" dmx-text="(data_detail1.data ? data_detail1.data.valor_polo_extra : 0).formatCurrency('R$ ', '.', ',', 2) + ' /polo'"></span>
+                                    <span class="input-group-text" dmx-text="(data_detail1.data ? data_detail1.data.valor_polo_extra * poloAdicional.value : 0).formatCurrency('R$ ', '.', ',', 2)"></span>
                                 </div>
                             </div>
                         </div>
