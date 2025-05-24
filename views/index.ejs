@@ -1,29 +1,77 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appConnect="local" components="{dmxValidator:{}}" -->
-<meta name="ac:route" content="/">
-<div class="container-fluid vh-100">
-    <div class="row h-100">
-        <div class="col-4 align-self-center">
-            <div class="row justify-content-center">
-                <div class="col-8">
-                    <h1 class="mb-4 fw-bold">Bem-vindo(a)</h1>
-                    <form id="loginForm" is="dmx-serverconnect-form" method="post" credentials="true" action="/api/usuario/login" dmx-on:invalid="notifies1.warning('Login ou senha não conferem!');loginForm.reset()" dmx-on:unauthorized="loginForm.reset();notifies1.warning('Acesso negado! Entre em contato com o suporte: suporte@spacefeed.app.')" dmx-on:success="navegacao.goto('/backoffice/')">
-                        <div class="form-group mb-3"> <label for="email" class="form-label mb-1">E-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" aria-describedby="input1_help" required="" data-msg-required="Este é um campo obrigatório." data-rule-email="" data-msg-email="Insira um e-mail válido.">
-                        </div>
-                        <div class="form-group mb-3"> <label for="senha" class="form-label mb-1">Senha</label>
-                            <input type="password" class="form-control" id="senha" name="senha" aria-describedby="input1_help1" required="" data-msg-required="Este é um campo obrigatório.">
-                        </div>
-                        <div class="form-group mb-3"> <label class="form-label">Recuperar senha&nbsp;</label>
-                            <label class="form-label">&nbsp;|&nbsp;</label>
-                            <label class="form-label cursor-pointer" dmx-on:click="navegacao.goto('/novo-cliente')">&nbsp;Criar conta</label>
-                        </div>
-                        <div class="form-group mb-3"> <button id="btn2" class="btn w-100 py-2 btn-primary" type="submit">Fazer login</button>
-                        </div>
-                    </form>
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" is="dmx-app" id="index" appConnect="local" components="{dmxBrowser:{},dmxNotifications:{},dmxValidator:{},dmxDataTraversal:{},dmxFormatter:{}}" bootstrap5="local" -->
+
+<div class="auth-container d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <div class="auth-header">
+                    <img src="/assets/images/spacefeed-white.png" class="img-fluid mb-2" width="200">
+                </div>
+
+                <div class="card">
+                    <div class="card-body p-4">
+                        <form id="loginForm" is="dmx-serverconnect-form" method="post" action="/api/auth/login">
+                            <div class="form-group mb-4">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" id="email" class="form-control form-control-lg" name="email" required data-msg-required="Por favor, informe seu e-mail" data-msg-email="Por favor, informe um e-mail válido">
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" id="senha" class="form-control form-control-lg" name="senha" required data-msg-required="Por favor, informe sua senha">
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div>
+                                        <a href="/recuperar-senha" class="text-decoration-none">Recuperar senha</a>
+                                    </div>
+                                    <div>
+                                        <span class="mx-2 text-muted">|</span>
+                                        <a href="/novo-cliente" class="text-decoration-none">Criar conta</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Error message -->
+                            <div class="alert alert-danger d-none" id="loginError" role="alert">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-exclamation-circle mt-1"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <span id="errorMessage">Erro ao fazer login. Verifique suas credenciais.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button id="submitButton" class="btn btn-primary btn-lg w-100" type="submit">
+                                    <span dmx-hide="loginForm.state.executing">Fazer login</span>
+                                    <span dmx-show="loginForm.state.executing">
+                                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        Entrando...
+                                    </span>
+                                </button>
+                            </div>
+
+                            <!-- Error message -->
+                            <div class="mt-3 text-danger text-center" dmx-show="loginForm.lastError">
+                                <small dmx-text="loginForm.lastError.message"></small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Links úteis -->
+                <div class="text-center mt-4">
+                    <p class="text-white mb-0">
+                        <small>Problemas para acessar? Entre em contato com o <a href="mailto:suporte@spacefeed.app" class="text-white text-decoration-underline">suporte</a></small>
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="col bg-black style1 p-5">
-        </div>
     </div>
 </div>
+
+<meta name="ac:route" content="/">

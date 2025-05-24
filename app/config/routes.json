@@ -7,11 +7,6 @@
       "layout": "main"
     },
     {
-      "path": "/sing-up",
-      "page": "sing-up",
-      "layout": "main"
-    },
-    {
       "path": "/backoffice/",
       "page": "dashboard/dashboard",
       "layout": "backoffice"
