@@ -161,7 +161,7 @@
                           "module": "core",
                           "action": "condition",
                           "options": {
-                            "if": "{{queryEmpresa.status_empresa=='Ativo'}}",
+                            "if": "{{queryEmpresa.status_empresa=='Inativo'}}",
                             "then": {
                               "steps": {
                                 "name": "respostaStatus",

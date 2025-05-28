@@ -30,6 +30,56 @@
 
 
             </div>
+            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="validarCNPJ.data.respostaStatus==1">
+                <section>
+                    <div class="jumbotron text-light">
+                        <h1 class="display-3">Seu pagamento ainda está sendo processado!</h1>
+                        <p class="lead">Este CNPJ já está cadastrado em nossa plataforma e o pagamento da fatura está em fase de processamento.</p>
+                        <hr class="my-4">
+                        <p>Assim que a confirmação for concluída, sua conta será ativada automaticamente.
+                        <p>Caso a confirmação demore mais de 1 dia útil, entre em contato com o suporte para verificar a situação.</p>
+                        </p>
+                        <p class="lead">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de suporte!</a>
+                        </p>
+                    </div>
+                </section>
+
+
+            </div>
+            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="validarCNPJ.data.respostaStatus==2">
+                <section>
+                    <div class="jumbotron text-light">
+                        <h1 class="display-3">Esta empresa já está ativa!</h1>
+                        <p class="lead">Este CNPJ já está cadastrado em nossa plataforma com status ativo.
+                        <p>Caso você precise acessar a conta, utilize a opção de login. Se tiver dificuldades, entre em contato com o suporte.</p>
+                        </p>
+                        <hr class="my-4">
+                        <p class="lead">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de suporte!</a>
+                        </p>
+                    </div>
+                </section>
+
+
+            </div>
+            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="validarCNPJ.data.respostaStatus==3">
+                <section>
+                    <div class="jumbotron text-light">
+                        <h1 class="display-3">Esta empresa está inativa!</h1>
+                        <p class="lead">Este CNPJ já está cadastrado em nossa plataforma, mas encontra-se com status inativo.</p>
+                        <hr class="my-4">
+                        <p>Para reativar a conta ou obter mais informações, entre em contato com o suporte.</p>
+                        <p class="lead">
+                            <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de suporte!</a>
+                        </p>
+                    </div>
+                </section>
+
+
+            </div>
+
+
             <div class="col-12 col-lg-8 col-xl-7" dmx-show="validarCNPJ.data.respostaStatus==4">
 
                 <!-- Progress Bar -->
