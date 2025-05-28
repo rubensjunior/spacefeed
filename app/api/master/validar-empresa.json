@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/signup.ejs",
+      "linkedForm": "validarCNPJ"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "validacnpj",
+        "options": {
+          "rules": {
+            "core:required": {
+              "param": "",
+              "message": "Por favor, informe o CNPJ"
+            },
+            "core:pattern": {
+              "param": "^[0-9]{2}\\.?[0-9]{3}\\.?[0-9]{3}\\/?[0-9]{4}\\-?[0-9]{2}$"
+            }
+          }
+        },
+        "name": "validacnpj"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "queryEmpresa",
+        "module": "dbconnector",
+        "action": "single",
+        "options": {
+          "connection": "feedPolo",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "empresas",
+                "column": "id_empresa"
+              },
+              {
+                "table": "empresas",
+                "column": "status_empresa"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{$_POST.validacnpj}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "empresas"
+            },
+            "primary": "id_empresa",
+            "joins": [],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "empresas.cnpj",
+                  "field": "empresas.cnpj",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{$_POST.validacnpj}}",
+                  "data": {
+                    "table": "empresas",
+                    "column": "cnpj",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "text",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": true,
+                      "name": "cnpj"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"id_empresa\", \"status_empresa\" from \"empresas\" where \"empresas\".\"cnpj\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_empresa"
+          },
+          {
+            "type": "text",
+            "name": "status_empresa"
+          }
+        ],
+        "outputType": "object"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{queryEmpresa.id_empresa==$_POST.validacnpj}}",
+          "then": {
+            "steps": {
+              "name": "",
+              "module": "core",
+              "action": "condition",
+              "options": {
+                "if": "{{queryEmpresa.status_empresa=='Pagamento Pendente'}}",
+                "then": {
+                  "steps": {
+                    "name": "respostaStatus",
+                    "module": "core",
+                    "action": "setvalue",
+                    "options": {
+                      "value": 1
+                    },
+                    "meta": [],
+                    "outputType": "number",
+                    "output": true
+                  }
+                },
+                "else": {
+                  "steps": {
+                    "name": "",
+                    "module": "core",
+                    "action": "condition",
+                    "options": {
+                      "if": "{{queryEmpresa.status_empresa=='Ativo'}}",
+                      "then": {
+                        "steps": {
+                          "name": "respostaStatus",
+                          "module": "core",
+                          "action": "setvalue",
+                          "options": {
+                            "value": 2
+                          },
+                          "meta": [],
+                          "output": true,
+                          "outputType": "number"
+                        }
+                      },
+                      "else": {
+                        "steps": {
+                          "name": "",
+                          "module": "core",
+                          "action": "condition",
+                          "options": {
+                            "if": "{{queryEmpresa.status_empresa=='Ativo'}}",
+                            "then": {
+                              "steps": {
+                                "name": "respostaStatus",
+                                "module": "core",
+                                "action": "setvalue",
+                                "options": {
+                                  "value": 3
+                                },
+                                "meta": [],
+                                "outputType": "number",
+                                "output": true
+                              }
+                            }
+                          },
+                          "outputType": "boolean"
+                        }
+                      }
+                    },
+                    "outputType": "boolean"
+                  }
+                }
+              },
+              "outputType": "boolean"
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "respostaStatus",
+              "module": "core",
+              "action": "setvalue",
+              "options": {
+                "value": 4
+              },
+              "meta": [],
+              "output": true,
+              "outputType": "number"
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}
