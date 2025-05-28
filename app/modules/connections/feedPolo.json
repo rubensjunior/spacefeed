@@ -1,0 +1,19 @@
+{
+  "name": "feedPolo",
+  "module": "dbconnector",
+  "action": "connect",
+  "options": {
+    "client": "postgres",
+    "connection": {
+      "host": "aws-0-sa-east-1.pooler.supabase.com",
+      "port": 6543,
+      "user": "postgres.qwxqwcyrgwogyyjengbo",
+      "password": "@Bakihamma025@",
+      "database": "postgres"
+    },
+    "meta": {}
+  },
+  "actionFilePath": "file:///C:/Users/Rubens%20Bentes/Documents/Projetos/spacefeed/app/modules/connections/feedPolo.json",
+  "serverType": "node",
+  "fileName": "feedPolo.json"
+}

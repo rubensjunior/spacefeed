@@ -1,0 +1,171 @@
+/* Login page gradient background */
+.login-bg {
+    background: linear-gradient(-45deg, 
+        rgba(94, 37, 45, 0.9) 0%,
+        rgba(116, 37, 77, 0.9) 25%,
+        rgba(81, 46, 95, 0.9) 50%,
+        rgba(0, 78, 146, 0.9) 75%,
+        rgba(0, 4, 40, 0.9) 100%
+    );
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    min-height: 100vh;
+}
+
+/* Card and initial animations */
+.animate__fadeIn {
+    animation-duration: 0.5s;
+}
+
+/* Orange button styling */
+.btn-orange {
+    background-color: #FF6B2B;
+    border-color: #FF6B2B;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-orange:hover, .btn-orange:focus {
+    background-color: #FF844F;
+    border-color: #FF844F;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 107, 43, 0.2);
+}
+
+.btn-orange:active {
+    background-color: #FF5722;
+    border-color: #FF5722;
+    transform: translateY(0);
+}
+
+/* Outline light button enhancement */
+.btn-outline-light {
+    border-width: 2px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-outline-light:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.9);
+    color: white;
+}
+
+.btn-outline-light:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(0);
+}
+
+/* Progress bar */
+.progress {
+    overflow: visible;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.progress-bar.bg-white {
+    background-color: #FFFFFF;
+    transition: width 0.6s ease;
+}
+
+/* Step text styling */
+.step-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    text-align: center;
+    padding: 0 8px;
+}
+
+.step-text.active, .step-text.completed {
+    color: #FFFFFF;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.card.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+
+/* Form styling */
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #E9ECEF;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #FF6B2B;
+    box-shadow: 0 0 0 0.25rem rgba(255, 107, 43, 0.25);
+}
+
+.form-control-lg, .form-select-lg {
+    border-radius: 12px;
+    font-size: 1.1rem;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.form-text {
+    color: #6c757d;
+}
+
+/* Form validation styling */
+.form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: none;
+    padding-right: 1rem;
+}
+
+.invalid-feedback {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Animations */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .step-text {
+        font-size: 0.75rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem!important;
+    }
+    
+    .form-control-lg, .form-select-lg, .btn-lg {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}

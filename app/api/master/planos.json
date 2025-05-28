@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "queryPlanos",
+      "module": "dbconnector",
+      "action": "select",
+      "options": {
+        "connection": "feedPolo",
+        "sql": {
+          "type": "SELECT",
+          "columns": [
+            {
+              "table": "planos_disponiveis",
+              "column": "id_plano"
+            },
+            {
+              "table": "planos_disponiveis",
+              "column": "nome"
+            },
+            {
+              "table": "planos_disponiveis",
+              "column": "descricao"
+            },
+            {
+              "table": "planos_disponiveis",
+              "column": "valor_base"
+            },
+            {
+              "table": "planos_disponiveis",
+              "column": "qtd_polos_incluidos"
+            },
+            {
+              "table": "planos_disponiveis",
+              "column": "valor_polo_extra"
+            },
+            {
+              "table": "planos_disponiveis",
+              "column": "limite_colaboradores_por_polo"
+            },
+            {
+              "table": "planos_disponiveis",
+              "column": "limite_alunos_por_polo"
+            }
+          ],
+          "params": [],
+          "table": {
+            "name": "planos_disponiveis"
+          },
+          "primary": "id_plano",
+          "joins": [],
+          "query": "select \"id_plano\", \"nome\", \"descricao\", \"valor_base\", \"qtd_polos_incluidos\", \"valor_polo_extra\", \"limite_colaboradores_por_polo\", \"limite_alunos_por_polo\" from \"planos_disponiveis\" order by \"odem\" ASC",
+          "orders": [
+            {
+              "table": "planos_disponiveis",
+              "column": "odem",
+              "direction": "ASC"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "type": "text",
+          "name": "id_plano"
+        },
+        {
+          "type": "text",
+          "name": "nome"
+        },
+        {
+          "type": "text",
+          "name": "descricao"
+        },
+        {
+          "type": "number",
+          "name": "valor_base"
+        },
+        {
+          "type": "number",
+          "name": "qtd_polos_incluidos"
+        },
+        {
+          "type": "number",
+          "name": "valor_polo_extra"
+        },
+        {
+          "type": "number",
+          "name": "limite_colaboradores_por_polo"
+        },
+        {
+          "type": "number",
+          "name": "limite_alunos_por_polo"
+        }
+      ],
+      "outputType": "array"
+    }
+  }
+}

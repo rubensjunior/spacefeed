@@ -1,0 +1,18 @@
+{
+  "criar-conta.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "sign-up.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "sing-up.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "signup.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  }
+}

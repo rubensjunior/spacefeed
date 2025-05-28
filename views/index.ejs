@@ -1,0 +1,53 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appConnect="local" components="{dmxValidator:{},dmxBootstrap5Modal:{}}" -->
+<meta name="ac:route" content="/">
+
+<div class="login-bg">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6 col-lg-5 text-center">
+                <img class="img-fluid mb-4" src="/assets/images/spacefeed-white.png" width="240">
+                <div class="card border-0 shadow-lg rounded-4 fade-in-up">
+                    <div class="card-body p-5">
+                        <form is="dmx-serverconnect-form" id="login_form" method="post" action="api/auth/login" dmx-on:success="if(login_form.data.success){$('body').toast('Login successful!');document.location = '/feed';}">
+                            <!-- Email input -->
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required data-rule-email="true" data-msg-required="Por favor, informe seu email" data-msg-email="Por favor, informe um email válido">
+                                <label for="email">Email</label>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-floating mb-4">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required data-msg-required="Por favor, informe sua senha">
+                                <label for="password">Senha</label>
+                            </div>
+
+                            <!-- Forgot password link -->
+                            <div class="text-end mb-4">
+                                <a href="/forgot-password" class="text-decoration-none">Esqueceu sua senha?</a>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary w-100 py-2 mb-4" dmx-bind:disabled="state.executing">
+                                <span dmx-show="!state.executing">Entrar</span>
+                                <span dmx-show="state.executing">
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Entrando...
+                                </span>
+                            </button>
+
+                            <!-- Register link -->
+                            <div class="text-center">
+                                <p class="mb-0">Não tem uma conta? <a href="/criar-conta" class="text-decoration-none">Criar conta</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Support text - now part of the centered column but below the card -->
+                <div class="text-center mt-4 fade-in">
+                    <p class="text-white mb-0">Problemas para acessar? <a href="/support" class="text-white text-decoration-none">Entre em contato com o suporte</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,655 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/signup.ejs",
+      "linkedForm": "cadastrarEmpresa"
+    },
+    "$_POST": [
+      {
+        "type": "text",
+        "fieldName": "razao_social",
+        "name": "razao_social"
+      },
+      {
+        "type": "text",
+        "fieldName": "nome_fantasia",
+        "name": "nome_fantasia"
+      },
+      {
+        "type": "text",
+        "fieldName": "nome_polo",
+        "name": "nome_polo"
+      },
+      {
+        "type": "text",
+        "fieldName": "cnpj",
+        "name": "cnpj"
+      },
+      {
+        "type": "text",
+        "fieldName": "whatsapp",
+        "name": "whatsapp"
+      },
+      {
+        "type": "text",
+        "fieldName": "logradouro",
+        "name": "logradouro"
+      },
+      {
+        "type": "text",
+        "fieldName": "numero",
+        "name": "numero"
+      },
+      {
+        "type": "text",
+        "fieldName": "cep",
+        "name": "cep"
+      },
+      {
+        "type": "text",
+        "fieldName": "complemento",
+        "name": "complemento"
+      },
+      {
+        "type": "text",
+        "fieldName": "bairro",
+        "name": "bairro"
+      },
+      {
+        "type": "text",
+        "fieldName": "cidade",
+        "name": "cidade"
+      },
+      {
+        "type": "text",
+        "fieldName": "nome_completo",
+        "name": "nome_completo"
+      },
+      {
+        "type": "text",
+        "fieldName": "nome_tratamento",
+        "name": "nome_tratamento"
+      },
+      {
+        "type": "text",
+        "fieldName": "email",
+        "options": {
+          "rules": {
+            "core:email": {}
+          }
+        },
+        "name": "email"
+      },
+      {
+        "type": "text",
+        "fieldName": "senha",
+        "name": "senha"
+      },
+      {
+        "type": "text",
+        "fieldName": "confirmar_senha",
+        "name": "confirmar_senha"
+      },
+      {
+        "type": "text",
+        "fieldName": "estado",
+        "name": "estado"
+      },
+      {
+        "type": "text",
+        "name": "cargo_usuario_empresa"
+      },
+      {
+        "type": "text",
+        "name": "status_usuario"
+      },
+      {
+        "type": "number",
+        "fieldName": "polosAdicionais",
+        "options": {
+          "rules": {
+            "core:number": {}
+          }
+        },
+        "name": "polosAdicionais"
+      },
+      {
+        "type": "number",
+        "fieldName": "valorPlanoEscolhido",
+        "options": {
+          "rules": {
+            "core:number": {}
+          }
+        },
+        "name": "valorPlanoEscolhido"
+      },
+      {
+        "type": "number",
+        "fieldName": "valorPolosAdicionais",
+        "options": {
+          "rules": {
+            "core:number": {}
+          }
+        },
+        "name": "valorPolosAdicionais"
+      },
+      {
+        "type": "text",
+        "fieldName": "planoEscolhido",
+        "name": "planoEscolhido"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "hash",
+        "module": "crypto",
+        "action": "passwordHash",
+        "options": {
+          "password": "{{$_POST.confirmar_senha}}"
+        },
+        "outputType": "text"
+      },
+      {
+        "name": "insertEmpresa",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "feedPolo",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "empresas",
+                "column": "razao_social",
+                "type": "text",
+                "value": "{{$_POST.razao_social}}"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_fantasia",
+                "type": "text",
+                "value": "{{$_POST.nome_fantasia}}"
+              },
+              {
+                "table": "empresas",
+                "column": "nome_polo",
+                "type": "text",
+                "value": "{{$_POST.nome_polo}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cnpj",
+                "type": "text",
+                "value": "{{$_POST.cnpj}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cep",
+                "type": "text",
+                "value": "{{$_POST.cep}}"
+              },
+              {
+                "table": "empresas",
+                "column": "whatsapp",
+                "type": "text",
+                "value": "{{$_POST.whatsapp}}"
+              },
+              {
+                "table": "empresas",
+                "column": "status_empresa",
+                "type": "text",
+                "value": "{{'Pagamento Pendente'}}"
+              },
+              {
+                "table": "empresas",
+                "column": "logradouro",
+                "type": "text",
+                "value": "{{$_POST.logradouro}}"
+              },
+              {
+                "table": "empresas",
+                "column": "numero",
+                "type": "text",
+                "value": "{{$_POST.numero}}"
+              },
+              {
+                "table": "empresas",
+                "column": "complemento",
+                "type": "text",
+                "value": "{{$_POST.complemento}}"
+              },
+              {
+                "table": "empresas",
+                "column": "bairro",
+                "type": "text",
+                "value": "{{$_POST.bairro}}"
+              },
+              {
+                "table": "empresas",
+                "column": "cidade",
+                "type": "text",
+                "value": "{{$_POST.cidade}}"
+              },
+              {
+                "table": "empresas",
+                "column": "uf",
+                "type": "text",
+                "value": "{{$_POST.estado}}"
+              }
+            ],
+            "table": "empresas",
+            "returning": "id_empresa",
+            "query": "insert into \"empresas\" (\"bairro\", \"cep\", \"cidade\", \"cnpj\", \"complemento\", \"logradouro\", \"nome_fantasia\", \"nome_polo\", \"numero\", \"razao_social\", \"status_empresa\", \"uf\", \"whatsapp\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.razao_social}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.nome_fantasia}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{$_POST.nome_polo}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{$_POST.cnpj}}",
+                "test": ""
+              },
+              {
+                "name": ":P5",
+                "type": "expression",
+                "value": "{{$_POST.cep}}",
+                "test": ""
+              },
+              {
+                "name": ":P6",
+                "type": "expression",
+                "value": "{{$_POST.whatsapp}}",
+                "test": ""
+              },
+              {
+                "name": ":P7",
+                "type": "expression",
+                "value": "{{'Pagamento Pendente'}}",
+                "test": ""
+              },
+              {
+                "name": ":P8",
+                "type": "expression",
+                "value": "{{$_POST.logradouro}}",
+                "test": ""
+              },
+              {
+                "name": ":P9",
+                "type": "expression",
+                "value": "{{$_POST.numero}}",
+                "test": ""
+              },
+              {
+                "name": ":P10",
+                "type": "expression",
+                "value": "{{$_POST.complemento}}",
+                "test": ""
+              },
+              {
+                "name": ":P11",
+                "type": "expression",
+                "value": "{{$_POST.bairro}}",
+                "test": ""
+              },
+              {
+                "name": ":P12",
+                "type": "expression",
+                "value": "{{$_POST.cidade}}",
+                "test": ""
+              },
+              {
+                "name": ":P13",
+                "type": "expression",
+                "value": "{{$_POST.estado}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "insertUsuario",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "feedPolo",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "usuarios",
+                "column": "nome_completo",
+                "type": "text",
+                "value": "{{$_POST.nome_completo}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "email",
+                "type": "text",
+                "value": "{{$_POST.email}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "ref_id_empresa_ativa",
+                "type": "text",
+                "value": "{{insertEmpresa.identity}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "senha",
+                "type": "text",
+                "value": "{{hash}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "tipo_usuario",
+                "type": "text",
+                "value": "{{'Colaborador'}}"
+              },
+              {
+                "table": "usuarios",
+                "column": "nome_tratamento",
+                "type": "text",
+                "value": "{{$_POST.nome_tratamento}}"
+              }
+            ],
+            "table": "usuarios",
+            "returning": "id_usuario",
+            "query": "insert into \"usuarios\" (\"email\", \"nome_completo\", \"nome_tratamento\", \"ref_id_empresa_ativa\", \"senha\", \"tipo_usuario\") values (?, ?, ?, ?, ?, ?) returning \"id_usuario\"",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.nome_completo}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.email}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{insertEmpresa.identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{hash}}",
+                "test": ""
+              },
+              {
+                "name": ":P5",
+                "type": "expression",
+                "value": "{{'Colaborador'}}",
+                "test": ""
+              },
+              {
+                "name": ":P6",
+                "type": "expression",
+                "value": "{{$_POST.nome_tratamento}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "insertUsuarioEmpresa",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "feedPolo",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_usuario",
+                "type": "text",
+                "value": "{{insertUsuario.identity}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "ref_id_empresa",
+                "type": "text",
+                "value": "{{insertEmpresa.identity}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "cargo_usuario_empresa",
+                "type": "text",
+                "value": "{{'Administrador'}}"
+              },
+              {
+                "table": "usuarios_empresas",
+                "column": "status_usuario",
+                "type": "text",
+                "value": "{{'Ativo'}}"
+              }
+            ],
+            "table": "usuarios_empresas",
+            "returning": "id_usuario_empresa",
+            "query": "insert into \"usuarios_empresas\" (\"cargo_usuario_empresa\", \"ref_id_empresa\", \"ref_id_usuario\", \"status_usuario\") values (?, ?, ?, ?) returning \"id_usuario_empresa\"",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{insertUsuario.identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{insertEmpresa.identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{'Administrador'}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{'Ativo'}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "insertFatura",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "feedPolo",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "planos_contratados",
+                "column": "ref_id_usuario_admin",
+                "type": "text",
+                "value": "{{insertUsuario.identity}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "ref_id_plano",
+                "type": "text",
+                "value": "{{$_POST.planoEscolhido}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "qtd_polos_incluidos",
+                "type": "number",
+                "value": "{{1}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "qtd_polos_adicionais",
+                "type": "number",
+                "value": "{{$_POST.polosAdicionais}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "limite_colaboradores_por_polo",
+                "type": "number",
+                "value": "{{7}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "limite_alunos_por_polo",
+                "type": "number",
+                "value": "{{500}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "valor_base_mensal",
+                "type": "number",
+                "value": "{{$_POST.valorPlanoEscolhido}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "valor_polo_extra",
+                "type": "number",
+                "value": "{{$_POST.valorPolosAdicionais}}"
+              },
+              {
+                "table": "planos_contratados",
+                "column": "ref_id_empresa",
+                "type": "text",
+                "value": "{{insertEmpresa.identity}}"
+              }
+            ],
+            "table": "planos_contratados",
+            "returning": "id_plano_contratado",
+            "query": "insert into \"planos_contratados\" (\"limite_alunos_por_polo\", \"limite_colaboradores_por_polo\", \"qtd_polos_adicionais\", \"qtd_polos_incluidos\", \"ref_id_empresa\", \"ref_id_plano\", \"ref_id_usuario_admin\", \"valor_base_mensal\", \"valor_polo_extra\") values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{insertUsuario.identity}}",
+                "test": ""
+              },
+              {
+                "name": ":P2",
+                "type": "expression",
+                "value": "{{$_POST.planoEscolhido}}",
+                "test": ""
+              },
+              {
+                "name": ":P3",
+                "type": "expression",
+                "value": "{{1}}",
+                "test": ""
+              },
+              {
+                "name": ":P4",
+                "type": "expression",
+                "value": "{{$_POST.polosAdicionais}}",
+                "test": ""
+              },
+              {
+                "name": ":P5",
+                "type": "expression",
+                "value": "{{7}}",
+                "test": ""
+              },
+              {
+                "name": ":P6",
+                "type": "expression",
+                "value": "{{500}}",
+                "test": ""
+              },
+              {
+                "name": ":P7",
+                "type": "expression",
+                "value": "{{$_POST.valorPlanoEscolhido}}",
+                "test": ""
+              },
+              {
+                "name": ":P8",
+                "type": "expression",
+                "value": "{{$_POST.valorPolosAdicionais}}",
+                "test": ""
+              },
+              {
+                "name": ":P9",
+                "type": "expression",
+                "value": "{{insertEmpresa.identity}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  },
+  "usedModules": {
+    "argon2": "^0.30.2"
+  }
+}
