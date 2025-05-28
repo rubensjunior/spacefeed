@@ -6,41 +6,62 @@
 <div class="min-vh-100 login-bg py-5">
     <div class="container">
         <div class="row justify-content-center">
+            <div class="d-flex justify-content-center mb-5"><img class="img-fluid" src="/assets/images/spacefeed-white.png" width="200"></div>
+            <div class="col-12 col-lg-8 col-xl-7 mb-4">
+                <div class="card shadow-sm mb-4 rounded-4" dmx-show="currentStep.value === 1">
+                    <div class="card-header bg-white py-3">
+                        <h4 class="mb-0 text-primary">Consulta CNPJ</h4>
+                    </div>
+                    <div class="card-body bg-light rounded-3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group mb-3"> <label for="nome_polo" class="form-label">CNPJ</label>
+                                    <input type="text" class="form-control" id="validacnpj" name="validacnpj" required="" data-msg-required="Por favor, informe o CNPJ" pattern="^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$" data-msg-pattern="Por favor, informe um CNPJ válido">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white text-end">
+                        <button type="button" class="btn btn-primary">Validar</button>
+                    </div>
+                </div>
+
+            </div>
             <div class="col-12 col-lg-8 col-xl-7">
-                <div class="d-flex justify-content-center mb-5"><img class="img-fluid" src="/assets/images/spacefeed-white.png" width="200"></div>
+
                 <!-- Progress Bar -->
 
-                <div class="d-flex justify-content-between mb-4">
-                    <div class="d-flex align-items-center text-white">
-                        <div class="rounded-circle border border-white d-flex align-items-center justify-content-center bg-transparent" style="width: 30px; height: 30px;" dmx-class:bg-white="currentStep.value &gt;= 1" dmx-class:text-white="currentStep.value &gt;= 1">1</div>
-                        <span class="ms-2">Empresa</span>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="step-item d-flex align-items-center">
+                        <div class="step-circle" dmx-class:active="currentStep.value >= 1">1</div>
+                        <span class="step-label" dmx-class:active="currentStep.value >= 1">Empresa</span>
                     </div>
                     <div class="flex-grow-1 px-3">
-                        <div class="progress" style="height: 2px; margin-top: 15px;">
+                        <div class="progress">
                             <div class="progress-bar bg-white" dmx-class:w-100="currentStep.value >= 2"></div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center text-white">
-                        <div class="rounded-circle border border-white d-flex align-items-center justify-content-center bg-transparent" style="width: 30px; height: 30px;" dmx-class:bg-white="currentStep.value &gt;= 2" dmx-class:text-white="currentStep.value &gt;= 2">2</div>
-                        <span class="ms-2">Endereço</span>
+                    <div class="step-item d-flex align-items-center">
+                        <div class="step-circle" dmx-class:active="currentStep.value >= 2">2</div>
+                        <span class="step-label" dmx-class:active="currentStep.value >= 2">Endereço</span>
                     </div>
                     <div class="flex-grow-1 px-3">
-                        <div class="progress" style="height: 2px; margin-top: 15px;">
+                        <div class="progress">
                             <div class="progress-bar bg-white" dmx-class:w-100="currentStep.value >= 3"></div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center text-white">
-                        <div class="rounded-circle border border-white d-flex align-items-center justify-content-center bg-transparent" style="width: 30px; height: 30px;" dmx-class:bg-white="currentStep.value &gt;= 3" dmx-class:text-white="currentStep.value &gt;= 3">3</div>
-                        <span class="ms-2">Usuário</span>
+                    <div class="step-item d-flex align-items-center">
+                        <div class="step-circle" dmx-class:active="currentStep.value >= 3">3</div>
+                        <span class="step-label" dmx-class:active="currentStep.value >= 3">Usuário</span>
                     </div>
                     <div class="flex-grow-1 px-3">
-                        <div class="progress" style="height: 2px; margin-top: 15px;">
+                        <div class="progress">
                             <div class="progress-bar bg-white" dmx-class:w-100="currentStep.value >= 4"></div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center text-white">
-                        <div class="rounded-circle border border-white d-flex align-items-center justify-content-center bg-transparent" style="width: 30px; height: 30px;" dmx-class:bg-white="currentStep.value &gt;= 4" dmx-class:text-white="currentStep.value &gt;= 4">4</div>
-                        <span class="ms-2">Plano</span>
+                    <div class="step-item d-flex align-items-center">
+                        <div class="step-circle" dmx-class:active="currentStep.value >= 4">4</div>
+                        <span class="step-label" dmx-class:active="currentStep.value >= 4">Plano</span>
                     </div>
                 </div>
 
@@ -268,12 +289,51 @@
 </div>
 
 <style>
+    /* Barra de progresso mais fina */
     .progress-bar {
         transition: width 0.3s ease-in-out;
     }
 
+    .progress {
+        height: 2px;
+    }
+
     .rounded-circle {
-        transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease;
+    }
+
+    /* Novo estilo para o progresso */
+    .step-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: transparent;
+        transition: all 0.3s ease;
+    }
+
+    .step-circle.active {
+        background: #fff;
+        color: #000;
+    }
+
+    .step-label {
+        margin-left: 0.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+    }
+
+    .step-label.active {
+        color: #fff;
+    }
+
+    .step-item {
+        margin-top: -7px;
+        /* Ajuste para alinhar com a linha fina */
     }
 </style>
 
