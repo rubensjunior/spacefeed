@@ -41,6 +41,10 @@
               {
                 "table": "empresas",
                 "column": "status_empresa"
+              },
+              {
+                "table": "empresas",
+                "column": "cnpj"
               }
             ],
             "params": [
@@ -78,13 +82,14 @@
                       "name": "cnpj"
                     }
                   },
-                  "operation": "="
+                  "operation": "=",
+                  "table": "empresas"
                 }
               ],
               "conditional": null,
               "valid": true
             },
-            "query": "select \"id_empresa\", \"status_empresa\" from \"empresas\" where \"empresas\".\"cnpj\" = ?"
+            "query": "select \"id_empresa\", \"status_empresa\", \"cnpj\" from \"empresas\" where \"empresas\".\"cnpj\" = ?"
           }
         },
         "output": true,
@@ -96,6 +101,10 @@
           {
             "type": "text",
             "name": "status_empresa"
+          },
+          {
+            "type": "text",
+            "name": "cnpj"
           }
         ],
         "outputType": "object"
@@ -105,7 +114,7 @@
         "module": "core",
         "action": "condition",
         "options": {
-          "if": "{{queryEmpresa.id_empresa==$_POST.validacnpj}}",
+          "if": "{{$_POST.validacnpj==queryEmpresa.cnpj}}",
           "then": {
             "steps": {
               "name": "",
