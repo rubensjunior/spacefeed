@@ -7,7 +7,7 @@
 <div class="min-vh-100 login-bg">
     <div class="container min-vh-100">
         <div class="row justify-content-center align-items-center min-vh-100">
-            <div class="d-flex justify-content-center mb-4 flex-column align-items-center"><img class="img-fluid mb-5" src="/assets/images/spacefeed-white.png" width="200">
+            <div class="d-flex justify-content-center mb-4 flex-column align-items-center"><img class="img-fluid mb-5 logo-fade-in" src="/assets/images/spacefeed-white.png" width="200">
                 <div class="col-12 col-lg-6 col-xl-5 mb-4" dmx-show="status.value.isEmpty()">
                     <form id="validarCNPJ" is="dmx-serverconnect-form" method="post" action="/api/master/validar-empresa" dmx-on:success="status.setValue(validarCNPJ.data.respostaStatus)">
                         <div class="card shadow-sm mb-4 rounded-4" dmx-show="currentStep.value === 1">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-3" dmx-show="currentStep.value === 1">
-                            <button type="submit" class="btn btn-warning btn-lg px-5">Validar</button>
+                            <button type="submit" class="btn btn-warning btn-lg px-5 w-100">Validar</button>
                         </div>
                     </form>
 
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value==1">
                     <section>
-                        <div class="jumbotron text-light">
+                        <div class="jumbotron text-light fade-in">
                             <h1 class="display-3">Seu pagamento ainda está sendo processado!</h1>
                             <p class="lead">Este CNPJ já está cadastrado em nossa plataforma e o pagamento da fatura está em fase de processamento.</p>
                             <hr class="my-4">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value==2">
                     <section>
-                        <div class="jumbotron text-light">
+                        <div class="jumbotron text-light fade-in">
                             <h1 class="display-3">Esta empresa já está ativa!</h1>
                             <p class="lead">Este CNPJ já está cadastrado em nossa plataforma com status ativo.
                             <p>Caso você precise acessar a conta, utilize a opção de login. Se tiver dificuldades, entre em contato com o suporte.</p>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value==3">
                     <section>
-                        <div class="jumbotron text-light">
+                        <div class="jumbotron text-light fade-in">
                             <h1 class="display-3">Esta empresa está inativa!</h1>
                             <p class="lead">Este CNPJ já está cadastrado em nossa plataforma, mas encontra-se com status inativo.</p>
                             <hr class="my-4">
@@ -80,7 +80,7 @@
 
                     <!-- Progress Bar -->
 
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4 step-animation">
                         <div class="step-item d-flex align-items-center">
                             <div class="step-circle" dmx-class:active="currentStep.value >= 1">1</div>
                             <span class="step-label" dmx-class:active="currentStep.value >= 1">Empresa</span>
@@ -151,7 +151,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-3" dmx-show="currentStep.value === 1">
-                            <button type="button" class="btn btn-warning btn-lg px-5" dmx-on:click="currentStep.setValue(2)">Próximo</button>
+                            <button type="button" class="btn btn-warning btn-lg px-5 w-50" dmx-on:click="currentStep.setValue(2)">Próximo</button>
                         </div>
 
                         <!-- Step 2: Dados de Endereço -->
@@ -230,8 +230,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3" dmx-show="currentStep.value === 2">
-                            <button type="button" class="btn btn-light btn-lg px-5" dmx-on:click="currentStep.setValue(1)">Anterior</button>
-                            <button type="button" class="btn btn-warning btn-lg px-5" dmx-on:click="currentStep.setValue(3)">Próximo</button>
+                            <button type="button" class="btn btn-light btn-lg w-100 me-1 ps-5 pe-5" dmx-on:click="currentStep.setValue(1)">Anterior</button>
+                            <button type="button" class="btn btn-warning btn-lg w-100 ms-1 ps-5 pe-5" dmx-on:click="currentStep.setValue(3)">Próximo</button>
                         </div>
 
                         <!-- Step 3: Dados do Usuário -->
@@ -269,8 +269,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3" dmx-show="currentStep.value === 3">
-                            <button type="button" class="btn btn-light btn-lg px-5" dmx-on:click="currentStep.setValue(2)">Anterior</button>
-                            <button type="button" class="btn btn-warning btn-lg px-5" dmx-on:click="currentStep.setValue(4)">Próximo</button>
+                            <button type="button" class="btn btn-light btn-lg w-100 me-1 ps-5 pe-5" dmx-on:click="currentStep.setValue(2)">Anterior</button>
+                            <button type="button" class="btn btn-warning btn-lg w-100 ms-1 ps-5 pe-5" dmx-on:click="currentStep.setValue(4)">Próximo</button>
                         </div>
 
                         <!-- Step 4: Escolha um plano -->
@@ -314,8 +314,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mt-3" dmx-show="currentStep.value === 4">
-                            <button type="button" class="btn btn-light btn-lg px-5" dmx-on:click="currentStep.setValue(3)">Anterior</button>
-                            <button id="btn2" class="btn btn-warning btn-lg px-5" type="button" dmx-on:click="cadastrarEmpresa.submit()">Finalizar Cadastro</button>
+                            <button type="button" class="btn btn-light btn-lg w-100 me-1 ps-5 pe-5" dmx-on:click="currentStep.setValue(3)">Anterior</button>
+                            <button id="btn2" class="btn btn-warning btn-lg w-100 ms-1 ps-5 pe-5" type="button" dmx-on:click="cadastrarEmpresa.submit()">Finalizar Cadastro</button>
                         </div>
                     </form>
 

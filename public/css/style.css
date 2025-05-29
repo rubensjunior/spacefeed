@@ -1,3 +1,23 @@
+/* Animation Control Variables */
+:root {
+    /* Base timing for animations */
+    --animation-speed-slow: 1.2s;
+    --animation-speed-medium: 0.8s;
+    --animation-speed-fast: 0.4s;
+    
+    /* Delay increments for sequential animations */
+    --delay-increment: 0.1s;
+    
+    /* Base delays */
+    --delay-base: 0.2s;
+    --delay-content: 0.5s;
+    
+    /* Easing functions */
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.6, 1);
+}
+
 /* Login page gradient background */
 .login-bg {
     background: linear-gradient(-45deg, 
@@ -8,12 +28,138 @@
         rgba(0, 4, 40, 0.9) 100%
     );
     background-size: 400% 400%;
-    -webkit-animation: gradient 15s ease infinite;
-            animation: gradient 15s ease infinite;
+    -webkit-animation: gradient calc(var(--animation-speed-slow) * 15) ease infinite;
+            animation: gradient calc(var(--animation-speed-slow) * 15) ease infinite;
     min-height: 100vh;
 }
 
-/* Enhanced Form Styles */
+/* Logo animation */
+.logo-fade-in {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown var(--animation-speed-medium) var(--ease-bounce) forwards;
+    animation-delay: var(--delay-base);
+}
+
+/* Progress steps animation */
+.step-animation {
+    opacity: 0;
+    animation: fadeIn var(--animation-speed-medium) var(--ease-default) forwards;
+    animation-delay: calc(var(--delay-base) + var(--delay-increment) * 2);
+}
+
+/* Card animation */
+.card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp var(--animation-speed-medium) var(--ease-bounce) forwards;
+    animation-delay: calc(var(--delay-content));
+}
+
+/* Form groups sequential animation */
+.form-group {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideInUp var(--animation-speed-fast) var(--ease-default) forwards;
+}
+
+.form-group:nth-child(1) { animation-delay: calc(var(--delay-content) + var(--delay-increment) * 1); }
+.form-group:nth-child(2) { animation-delay: calc(var(--delay-content) + var(--delay-increment) * 2); }
+.form-group:nth-child(3) { animation-delay: calc(var(--delay-content) + var(--delay-increment) * 3); }
+.form-group:nth-child(4) { animation-delay: calc(var(--delay-content) + var(--delay-increment) * 4); }
+.form-group:nth-child(5) { animation-delay: calc(var(--delay-content) + var(--delay-increment) * 5); }
+
+/* Button animation */
+.btn {
+    opacity: 0;
+    animation: fadeIn var(--animation-speed-fast) var(--ease-default) forwards;
+    animation-delay: calc(var(--delay-content) + var(--delay-increment) * 6);
+}
+
+/* Jumbotron animation */
+.jumbotron {
+    opacity: 0;
+    animation: fadeIn var(--animation-speed-medium) var(--ease-default) forwards;
+    animation-delay: var(--delay-content);
+}
+
+/* Form validation feedback animation */
+.invalid-feedback {
+    animation: fadeIn var(--animation-speed-fast) var(--ease-default) forwards;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Form Styles */
 .form-control {
     height: 45px;
     padding: 0.375rem 0.75rem;
@@ -21,7 +167,7 @@
     background-color: #ffffff;
     border: 1px solid #ced4da;
     border-radius: 0.375rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: all var(--animation-speed-fast) var(--ease-default);
     color: #212529;
 }
 
@@ -29,7 +175,6 @@
     background-color: #fff;
     border-color: #ffc107;
     box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
-    color: #212529;
 }
 
 .form-select {
@@ -39,7 +184,7 @@
     background-color: #ffffff;
     border: 1px solid #ced4da;
     border-radius: 0.375rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: all var(--animation-speed-fast) var(--ease-default);
     color: #212529;
 }
 
@@ -48,52 +193,9 @@
     box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
 }
 
-/* Label styling */
-.form-label {
-    font-weight: 500;
-    color: #212529;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-}
-
-/* Card styling with dark text */
-.card.bg-light {
-    background-color: rgba(255, 255, 255, 0.98) !important;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    border: none;
-    border-radius: 0.5rem;
-}
-
-.card .card-body {
-    padding: 1.5rem;
-}
-
-/* Form Groups */
-.form-group {
-    margin-bottom: 1rem;
-}
-
-/* Invalid state styling */
-.form-control.is-invalid,
-.form-select.is-invalid {
-    border-color: #dc3545;
-    padding-right: calc(1.5em + 0.75rem);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right calc(0.375em + 0.1875rem) center;
-    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-}
-
-.invalid-feedback {
-    display: none;
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 0.875em;
-    color: #dc3545;
-}
-
 /* Button styles */
 .btn {
+    height: 45px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -102,17 +204,12 @@
     font-weight: 500;
     line-height: 1.5;
     text-align: center;
-    text-decoration: none;
     vertical-align: middle;
     cursor: pointer;
     user-select: none;
     border: 1px solid transparent;
     border-radius: 0.375rem;
-    transition: color 0.15s ease-in-out, 
-                background-color 0.15s ease-in-out, 
-                border-color 0.15s ease-in-out, 
-                box-shadow 0.15s ease-in-out;
-    height: 45px;
+    transition: all var(--animation-speed-fast) var(--ease-default);
 }
 
 .btn-warning {
@@ -139,15 +236,9 @@
     color: #fff;
 }
 
-.btn-lg {
-    padding: 0.5rem 2rem;
-    font-size: 1.1rem;
-    height: 48px;
-}
-
-/* Progress bar and steps styling */
+/* Progress bar and steps */
 .progress-bar {
-    transition: width 0.3s ease-in-out;
+    transition: width var(--animation-speed-medium) var(--ease-default);
     background-color: #fff;
 }
 
@@ -166,9 +257,7 @@
     justify-content: center;
     color: #fff;
     background: transparent;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 500;
+    transition: all var(--animation-speed-fast) var(--ease-default);
 }
 
 .step-circle.active {
@@ -176,102 +265,14 @@
     color: #000;
 }
 
-.step-label {
-    margin-left: 0.5rem;
-    color: rgba(255, 255, 255, 0.7);
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.step-label.active {
-    color: #fff;
-}
-
-.step-item {
-    margin-top: -7px;
-}
-
-/* Card content typography */
-.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
-    color: #212529;
-    margin-bottom: 1rem;
-}
-
-.card p {
-    color: #212529;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-}
-
-/* Form row spacing */
-.row {
-    margin-bottom: -1rem;
-}
-
-.row > [class^="col-"] {
-    margin-bottom: 1rem;
-}
-
-/* Utility classes */
-.mb-4 {
-    margin-bottom: 1.5rem !important;
-}
-
-.mt-3 {
-    margin-top: 1rem !important;
-}
-
-/* Jumbotron styles */
-.jumbotron {
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 0.5rem;
-}
-
-.jumbotron h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.jumbotron .lead {
-    font-size: 1.25rem;
-    font-weight: 300;
-}
-
-.jumbotron hr {
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Animations */
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Loading spinner */
-.spinner-border {
-    vertical-align: middle;
-    margin-right: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-width: 0.2em;
-}
-
-/* Additional form-specific styles */
-input[type="number"] {
-    text-align: right;
-    padding-right: 0.5rem;
-}
-
-/* Total value display */
-.bg-white {
-    background-color: #fff !important;
-    border-radius: 0.375rem;
-}
-
-.form-control[readonly] {
-    background-color: #f8f9fa;
-    opacity: 1;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    :root {
+        --animation-speed-slow: 0.8s;
+        --animation-speed-medium: 0.6s;
+        --animation-speed-fast: 0.3s;
+        --delay-increment: 0.08s;
+        --delay-base: 0.1s;
+        --delay-content: 0.3s;
+    }
 }
