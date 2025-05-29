@@ -12,7 +12,9 @@
             animation: gradient 15s ease infinite;
     min-height: 100vh;
 }
-
+.cursor-selecionar{
+    cursor: pointer;
+}
 /* Card and initial animations */
 .animate__fadeIn {
     -webkit-animation-duration: 0.5s;

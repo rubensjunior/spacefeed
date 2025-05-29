@@ -14,7 +14,8 @@
     {
       "path": "/escolha-empresa",
       "page": "escolha-empresa",
-      "layout": "main"
+      "layout": "main",
+      "exec": "/api/autenticacao/pagina-restrita"
     },
     {
       "path": "/conta-criada",
