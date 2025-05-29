@@ -12,248 +12,192 @@
             animation: gradient 15s ease infinite;
     min-height: 100vh;
 }
-.cursor-selecionar{
-    cursor: pointer;
-}
-/* Card and initial animations */
-.animate__fadeIn {
-    -webkit-animation-duration: 0.5s;
-            animation-duration: 0.5s;
-}
 
-/* Orange button styling */
-.btn-orange {
-    background-color: #FF6B2B;
-    border-color: #FF6B2B;
-    color: white;
-    font-weight: 500;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.btn-orange:hover, .btn-orange:focus {
-    background-color: #FF844F;
-    border-color: #FF844F;
-    color: white;
-    -webkit-transform: translateY(-1px);
-            transform: translateY(-1px);
-    -webkit-box-shadow: 0 4px 12px rgba(255, 107, 43, 0.2);
-            box-shadow: 0 4px 12px rgba(255, 107, 43, 0.2);
-}
-
-.btn-orange:active {
-    background-color: #FF5722;
-    border-color: #FF5722;
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-}
-
-/* Status indicators */
-.status-badge {
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-weight: 500;
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-}
-
-.status-pending {
-    color: #fd7e14;
-    background-color: rgba(253, 126, 20, 0.1);
-}
-
-.status-active {
-    color: #198754;
-    background-color: rgba(25, 135, 84, 0.1);
-}
-
-.status-inactive {
-    color: #6c757d;
-    background-color: rgba(108, 117, 125, 0.1);
-}
-
-/* Card link styles */
-.card-link {
-    color: inherit;
-    text-decoration: none;
-}
-
-.card-link .card {
+/* Enhanced Form Styles */
+.form-control {
+    height: calc(3rem + 2px);
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
     color: #212529;
 }
 
-.card-link:hover:not(.disabled) .card {
-    -webkit-transform: translateY(-4px);
-            transform: translateY(-4px);
-    -webkit-box-shadow: 0 1.5rem 4rem rgba(0,0,0,.2)!important;
-            box-shadow: 0 1.5rem 4rem rgba(0,0,0,.2)!important;
+.form-control:focus {
+    background-color: #fff;
+    border-color: #ffc107;
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+    color: #212529;
 }
 
-.card-link.disabled {
-    pointer-events: none;
-    cursor: not-allowed;
+.form-select {
+    height: calc(3rem + 2px);
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    color: #212529;
 }
 
-.card-link .card-title {
-    color: #2c3e50;
-    font-weight: 600;
-    margin-bottom: 1rem;
+.form-select:focus {
+    background-color: #fff;
+    border-color: #ffc107;
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+    color: #212529;
 }
 
-.inactive-card {
-    opacity: 0.7;
-    -webkit-filter: grayscale(100%);
-            filter: grayscale(100%);
-}
-
-/* Outline light button enhancement */
-.btn-outline-light {
-    border-width: 2px;
-    font-weight: 500;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.btn-outline-light:hover {
-    -webkit-transform: translateY(-1px);
-            transform: translateY(-1px);
-    -webkit-box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.9);
-    color: white;
-}
-
-.btn-outline-light:active {
-    background-color: rgba(255, 255, 255, 0.2);
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-}
-
-/* Progress bar */
-.progress {
-    overflow: visible;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-}
-
-.progress-bar.bg-white {
-    background-color: #FFFFFF;
-    -webkit-transition: width 0.6s ease;
-    transition: width 0.6s ease;
-}
-
-/* Step text styling */
-.step-text {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    text-align: center;
-    padding: 0 8px;
-}
-
-.step-text.active, .step-text.completed {
-    color: #FFFFFF;
-}
-
-/* Card styling */
-.card {
-    border: none;
-    border-radius: 16px;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.card.shadow-lg {
-    -webkit-box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
-            box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
-}
-
-/* Form styling */
-.form-control, .form-select {
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    border: 2px solid #E9ECEF;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.form-control:focus, .form-select:focus {
-    border-color: #FF6B2B;
-    -webkit-box-shadow: 0 0 0 0.25rem rgba(255, 107, 43, 0.25);
-            box-shadow: 0 0 0 0.25rem rgba(255, 107, 43, 0.25);
-}
-
-.form-control-lg, .form-select-lg {
-    border-radius: 12px;
-    font-size: 1.1rem;
-}
-
+/* Label styling */
 .form-label {
     font-weight: 500;
+    color: #212529;
     margin-bottom: 0.5rem;
-    color: #495057;
 }
 
-.form-text {
-    color: #6c757d;
+/* Card styling with dark text */
+.card.bg-light {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #212529;
 }
 
-/* Form validation styling */
-.form-control.is-invalid {
+.card .form-label {
+    color: #212529;
+}
+
+.card .form-control,
+.card .form-select {
+    background-color: #ffffff;
+    color: #212529;
+}
+
+/* Invalid state styling */
+.form-control.is-invalid,
+.form-select.is-invalid {
     border-color: #dc3545;
-    background-image: none;
-    padding-right: 1rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5rem;
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
 
 .invalid-feedback {
+    color: #dc3545;
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
 
-/* Animations */
-@-webkit-keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+/* Button styles */
+.btn-warning {
+    height: calc(3rem + 2px);
+    padding: 0.8rem 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .step-text {
-        font-size: 0.75rem;
-    }
-    
-    .card-body {
-        padding: 1.5rem!important;
-    }
-    
-    .form-control-lg, .form-select-lg, .btn-lg {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-    }
+.btn-light {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    height: calc(3rem + 2px);
+    padding: 0.8rem 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-light:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+}
+
+/* Progress bar and steps styling */
+.progress-bar {
+    transition: width 0.3s ease-in-out;
+}
+
+.progress {
+    height: 2px;
+}
+
+.step-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.step-circle.active {
+    background: #fff;
+    color: #000;
+}
+
+.step-label {
+    margin-left: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.step-label.active {
+    color: #fff;
+}
+
+.step-item {
+    margin-top: -7px;
+}
+
+/* Animations */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Loading spinner enhancements */
+.spinner-border {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    animation-duration: 1.2s;
+}
+
+/* Button loading state */
+.btn-warning, .btn-light {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-warning:disabled, .btn-light:disabled {
+    opacity: 0.8;
+    cursor: wait;
+    transform: scale(0.98);
+}
+
+/* Card specific styles */
+.card .status-badge {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Text color override for card content */
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6, 
+.card p, .card span, .card div {
+    color: #212529;
 }

@@ -24,11 +24,11 @@
 
                             <!-- Forgot password link -->
                             <div class="text-end mb-4">
-                                <a href="/forgot-password" class="text-decoration-none">Esqueceu sua senha?</a>
+                                <a href="/forgot-password" class="text-decoration-none text-black">Esqueceu sua senha?</a>
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn w-100 py-2 mb-4 btn-warning" dmx-bind:disabled="state.executing">
+                            <button type="submit" class="btn w-100 py-2 mb-4 btn-warning btn-lg" dmx-bind:disabled="state.executing">
                                 <span dmx-show="!state.executing">Entrar</span>
                                 <span dmx-show="state.executing">
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -38,7 +38,7 @@
 
                             <!-- Register link -->
                             <div class="text-center">
-                                <p class="mb-0">Não tem uma conta? <a href="/signup" class="text-decoration-none">Criar conta</a></p>
+                                <p class="mb-0">Não tem uma conta? <a href="/signup" class="text-decoration-none fw-bolder text-black">Criar conta</a></p>
                             </div>
                         </form>
                     </div>
