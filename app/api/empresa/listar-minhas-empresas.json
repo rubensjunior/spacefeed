@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "identity",
+        "module": "auth",
+        "action": "identify",
+        "options": {
+          "provider": "auth"
+        },
+        "output": true,
+        "meta": []
+      },
+      {
+        "name": "queryMinhasEmpresas",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "feedPolo",
+          "sql": {
+            "type": "SELECT",
+            "columns": [
+              {
+                "table": "usuarios_empresas",
+                "column": "*"
+              },
+              {
+                "table": "empresas",
+                "column": "*"
+              }
+            ],
+            "params": [
+              {
+                "operator": "equal",
+                "type": "expression",
+                "name": ":P1",
+                "value": "{{identity}}",
+                "test": ""
+              }
+            ],
+            "table": {
+              "name": "usuarios_empresas"
+            },
+            "primary": "id_usuario_empresa",
+            "joins": [
+              {
+                "table": "empresas",
+                "column": "*",
+                "type": "INNER",
+                "clauses": {
+                  "condition": "AND",
+                  "rules": [
+                    {
+                      "table": "empresas",
+                      "column": "id_empresa",
+                      "operation": "=",
+                      "operator": "equal",
+                      "value": {
+                        "table": "usuarios_empresas",
+                        "column": "ref_id_empresa",
+                        "type": "text"
+                      }
+                    }
+                  ]
+                },
+                "primary": "id_empresa"
+              }
+            ],
+            "wheres": {
+              "condition": "AND",
+              "rules": [
+                {
+                  "id": "usuarios_empresas.ref_id_usuario",
+                  "field": "usuarios_empresas.ref_id_usuario",
+                  "type": "string",
+                  "operator": "equal",
+                  "value": "{{identity}}",
+                  "data": {
+                    "table": "usuarios_empresas",
+                    "column": "ref_id_usuario",
+                    "type": "text",
+                    "columnObj": {
+                      "type": "reference",
+                      "primary": false,
+                      "unique": false,
+                      "nullable": false,
+                      "references": "id_usuario",
+                      "inTable": "usuarios",
+                      "referenceType": "uuid",
+                      "onUpdate": "NO ACTION",
+                      "onDelete": "CASCADE",
+                      "name": "ref_id_usuario"
+                    }
+                  },
+                  "operation": "="
+                }
+              ],
+              "conditional": null,
+              "valid": true
+            },
+            "query": "select \"usuarios_empresas\".*, \"empresas\".* from \"usuarios_empresas\" inner join \"empresas\" on \"empresas\".\"id_empresa\" = \"usuarios_empresas\".\"ref_id_empresa\" where \"usuarios_empresas\".\"ref_id_usuario\" = ?"
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "type": "text",
+            "name": "id_usuario_empresa"
+          },
+          {
+            "type": "datetime",
+            "name": "created_at_usuario_empresa"
+          },
+          {
+            "type": "number",
+            "name": "ref_id_usuario"
+          },
+          {
+            "type": "number",
+            "name": "ref_id_empresa"
+          },
+          {
+            "type": "text",
+            "name": "cargo_usuario_empresa"
+          },
+          {
+            "type": "text",
+            "name": "status_usuario"
+          },
+          {
+            "type": "text",
+            "name": "id_empresa"
+          },
+          {
+            "type": "datetime",
+            "name": "created_at_empresa"
+          },
+          {
+            "type": "text",
+            "name": "razao_social"
+          },
+          {
+            "type": "text",
+            "name": "nome_fantasia"
+          },
+          {
+            "type": "text",
+            "name": "nome_polo"
+          },
+          {
+            "type": "text",
+            "name": "cnpj"
+          },
+          {
+            "type": "text",
+            "name": "cep"
+          },
+          {
+            "type": "text",
+            "name": "whatsapp"
+          },
+          {
+            "type": "text",
+            "name": "status_empresa"
+          },
+          {
+            "type": "text",
+            "name": "logradouro"
+          },
+          {
+            "type": "text",
+            "name": "numero"
+          },
+          {
+            "type": "text",
+            "name": "complemento"
+          },
+          {
+            "type": "text",
+            "name": "bairro"
+          },
+          {
+            "type": "text",
+            "name": "cidade"
+          },
+          {
+            "type": "text",
+            "name": "uf"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  }
+}

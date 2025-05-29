@@ -155,6 +155,10 @@ dmx.config({
         "name": "valor",
         "type": "number"
       }
-    ]
+    ],
+    "status": {
+      "meta": [],
+      "outputType": "number"
+    }
   }
 });

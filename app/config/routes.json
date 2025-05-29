@@ -10,6 +10,16 @@
       "path": "/signup",
       "page": "signup",
       "layout": "main"
+    },
+    {
+      "path": "/escolha-empresa",
+      "page": "escolha-empresa",
+      "layout": "main"
+    },
+    {
+      "path": "/conta-criada",
+      "page": "conta-criada",
+      "layout": "main"
     }
   ]
 }

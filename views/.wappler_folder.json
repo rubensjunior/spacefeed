@@ -14,5 +14,13 @@
   "signup.ejs": {
     "layoutPage": "main",
     "description": ""
+  },
+  "escolha-empresa.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "conta-criada.ejs": {
+    "layoutPage": "main",
+    "description": ""
   }
 }

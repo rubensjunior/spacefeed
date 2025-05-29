@@ -1,0 +1,120 @@
+[
+  {
+    "name": "identity",
+    "module": "auth",
+    "action": "identify",
+    "options": {
+      "provider": "auth"
+    },
+    "output": true,
+    "meta": []
+  },
+  {
+    "name": "queryDados",
+    "module": "dbconnector",
+    "action": "single",
+    "options": {
+      "connection": "feedPolo",
+      "sql": {
+        "type": "SELECT",
+        "columns": [
+          {
+            "table": "usuarios",
+            "column": "id_usuario"
+          },
+          {
+            "table": "usuarios",
+            "column": "nome_completo"
+          },
+          {
+            "table": "usuarios",
+            "column": "email"
+          },
+          {
+            "table": "usuarios",
+            "column": "tipo_usuario"
+          },
+          {
+            "table": "usuarios",
+            "column": "nome_tratamento"
+          },
+          {
+            "table": "usuarios",
+            "column": "ref_id_empresa_ativa"
+          }
+        ],
+        "params": [
+          {
+            "operator": "equal",
+            "type": "expression",
+            "name": ":P1",
+            "value": "{{identity}}",
+            "test": ""
+          }
+        ],
+        "table": {
+          "name": "usuarios"
+        },
+        "primary": "id_usuario",
+        "joins": [],
+        "query": "select \"id_usuario\", \"nome_completo\", \"email\", \"tipo_usuario\", \"nome_tratamento\", \"ref_id_empresa_ativa\" from \"usuarios\" where \"usuarios\".\"id_usuario\" = ?",
+        "wheres": {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "usuarios.id_usuario",
+              "field": "usuarios.id_usuario",
+              "type": "string",
+              "operator": "equal",
+              "value": "{{identity}}",
+              "data": {
+                "table": "usuarios",
+                "column": "id_usuario",
+                "type": "text",
+                "columnObj": {
+                  "type": "uuid",
+                  "default": "gen_random_uuid()",
+                  "primary": true,
+                  "unique": true,
+                  "nullable": false,
+                  "name": "id_usuario"
+                }
+              },
+              "operation": "="
+            }
+          ],
+          "conditional": null,
+          "valid": true
+        }
+      }
+    },
+    "output": true,
+    "meta": [
+      {
+        "type": "text",
+        "name": "id_usuario"
+      },
+      {
+        "type": "text",
+        "name": "nome_completo"
+      },
+      {
+        "type": "text",
+        "name": "email"
+      },
+      {
+        "type": "text",
+        "name": "tipo_usuario"
+      },
+      {
+        "type": "text",
+        "name": "nome_tratamento"
+      },
+      {
+        "type": "number",
+        "name": "ref_id_empresa_ativa"
+      }
+    ],
+    "outputType": "object"
+  }
+]

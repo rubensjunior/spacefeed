@@ -1,4 +1,5 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="signup" appConnect="local" components="{dmxDataTraversal:{},dmxFormatter:{},dmxValidator:{}}" -->
+<dmx-value id="status" dmx-bind:value="validarCNPJ.data.respostaStatus"></dmx-value>
 <dmx-data-detail id="data_detail_plano_escolhido" dmx-bind:data="listagemPlanos.data.queryPlanos" key="id_plano"></dmx-data-detail>
 <dmx-serverconnect id="listagemPlanos" url="/api/master/planos"></dmx-serverconnect>
 <dmx-value id="currentStep" dmx-bind:value="1"></dmx-value>
@@ -7,8 +8,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="d-flex justify-content-center mb-5"><img class="img-fluid" src="/assets/images/spacefeed-white.png" width="200"></div>
-            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="validarCNPJ.data.respostaStatus.isEmpty()">
-                <form id="validarCNPJ" is="dmx-serverconnect-form" method="post" action="/api/master/validar-empresa">
+            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value.isEmpty()">
+                <form id="validarCNPJ" is="dmx-serverconnect-form" method="post" action="/api/master/validar-empresa" dmx-on:success="status.setValue(validarCNPJ.data.respostaStatus)">
                     <div class="card shadow-sm mb-4 rounded-4" dmx-show="currentStep.value === 1">
                         <div class="card-header bg-white py-3">
                             <h4 class="mb-0 text-black">Consulta CNPJ</h4>
@@ -30,7 +31,7 @@
 
 
             </div>
-            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="validarCNPJ.data.respostaStatus==1">
+            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value==1">
                 <section>
                     <div class="jumbotron text-light">
                         <h1 class="display-3">Seu pagamento ainda está sendo processado!</h1>
@@ -47,7 +48,7 @@
 
 
             </div>
-            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="validarCNPJ.data.respostaStatus==2">
+            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value==2">
                 <section>
                     <div class="jumbotron text-light">
                         <h1 class="display-3">Esta empresa já está ativa!</h1>
@@ -63,7 +64,7 @@
 
 
             </div>
-            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="validarCNPJ.data.respostaStatus==3">
+            <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value==3">
                 <section>
                     <div class="jumbotron text-light">
                         <h1 class="display-3">Esta empresa está inativa!</h1>
@@ -80,7 +81,7 @@
             </div>
 
 
-            <div class="col-12 col-lg-8 col-xl-7" dmx-show="validarCNPJ.data.respostaStatus==4">
+            <div class="col-12 col-lg-8 col-xl-7" dmx-show="status.value==4">
 
                 <!-- Progress Bar -->
 
@@ -119,7 +120,7 @@
                 </div>
 
                 <!-- Form -->
-                <form id="cadastrarEmpresa" is="dmx-serverconnect-form" method="post" action="/api/master/signup" dmx-on:error="notifies1.danger('erro')" dmx-on:success="notifies1.success('sucesso')" dmx-on:invalid="notifies1.danger('Por favor, preencha todos os campos obrigatórios.')">
+                <form id="cadastrarEmpresa" is="dmx-serverconnect-form" method="post" action="/api/master/signup" dmx-on:error="notifies1.danger('erro')" dmx-on:success="browser1.goto('/conta-criada')" dmx-on:invalid="notifies1.danger('Por favor, preencha todos os campos obrigatórios.')">
                     <!-- Step 1: Dados da Empresa -->
                     <div class="card shadow-sm mb-4 rounded-4" dmx-show="currentStep.value === 1">
                         <div class="card-header bg-white py-3">

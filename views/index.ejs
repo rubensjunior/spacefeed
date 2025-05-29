@@ -8,16 +8,16 @@
                 <img class="img-fluid mb-4" src="/assets/images/spacefeed-white.png" width="240">
                 <div class="card border-0 shadow-lg rounded-4 fade-in-up">
                     <div class="card-body p-5">
-                        <form is="dmx-serverconnect-form" id="login_form" method="post" action="api/auth/login" dmx-on:success="if(login_form.data.success){$('body').toast('Login successful!');document.location = '/feed';}">
+                        <form is="dmx-serverconnect-form" id="login_form" method="post" action="/api/autenticacao/login" dmx-on:error="notifies1.danger('Ocorreu um erro, entre em contato com o suporte!')" dmx-on:invalid="notifies1.warning('Login ou senha errados!')" dmx-on:success="browser1.goto('/escolha-empresa')" dmx-on:unauthorized="notifies1.warning('E-mail ou senha errado!')">
                             <!-- Email input -->
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required data-rule-email="true" data-msg-required="Por favor, informe seu email" data-msg-email="Por favor, informe um email válido">
+                                <input type="email" class="form-control" id="email" name="email" required="" data-rule-email="true" data-msg-required="Por favor, informe seu email" data-msg-email="Por favor, informe um email válido">
                                 <label for="email">Email</label>
                             </div>
 
                             <!-- Password input -->
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required data-msg-required="Por favor, informe sua senha">
+                                <input type="password" class="form-control" id="password" name="password" required="" data-msg-required="Por favor, informe sua senha">
                                 <label for="password">Senha</label>
                             </div>
 
@@ -37,7 +37,7 @@
 
                             <!-- Register link -->
                             <div class="text-center">
-                                <p class="mb-0">Não tem uma conta? <a href="/criar-conta" class="text-decoration-none">Criar conta</a></p>
+                                <p class="mb-0">Não tem uma conta? <a href="/signup" class="text-decoration-none">Criar conta</a></p>
                             </div>
                         </form>
                     </div>
