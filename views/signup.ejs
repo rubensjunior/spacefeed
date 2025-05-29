@@ -11,9 +11,6 @@
                 <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value.isEmpty()">
                     <form id="validarCNPJ" is="dmx-serverconnect-form" method="post" action="/api/master/validar-empresa" dmx-on:success="status.setValue(validarCNPJ.data.respostaStatus)">
                         <div class="card shadow-sm mb-4 rounded-4" dmx-show="currentStep.value === 1">
-                            <div class="card-header bg-white py-3">
-                                <h4 class="mb-0 text-black">Consulta CNPJ</h4>
-                            </div>
                             <div class="card-body bg-light rounded-3">
                                 <div class="row">
                                     <div class="col">
@@ -23,9 +20,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer bg-white text-end">
-                                <button type="submit" class="btn btn-primary">Validar</button>
-                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3" dmx-show="currentStep.value === 1">
+                            <button type="submit" class="btn btn-warning btn-lg px-5">Validar</button>
                         </div>
                     </form>
 
@@ -41,7 +38,7 @@
                             <p>Caso a confirmação demore mais de 1 dia útil, entre em contato com o suporte para verificar a situação.</p>
                             </p>
                             <p class="lead">
-                                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de suporte!</a>
+                                <a class="btn btn-warning btn-lg" href="#" role="button">Preciso de suporte!</a>
                             </p>
                         </div>
                     </section>
@@ -57,7 +54,7 @@
                             </p>
                             <hr class="my-4">
                             <p class="lead">
-                                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de suporte!</a>
+                                <a class="btn btn-warning btn-lg" href="#" role="button">Preciso de suporte!</a>
                             </p>
                         </div>
                     </section>
@@ -72,7 +69,7 @@
                             <hr class="my-4">
                             <p>Para reativar a conta ou obter mais informações, entre em contato com o suporte.</p>
                             <p class="lead">
-                                <a class="btn btn-primary btn-lg" href="#" role="button">Preciso de suporte!</a>
+                                <a class="btn btn-warning btn-lg" href="#" role="button">Preciso de suporte!</a>
                             </p>
                         </div>
                     </section>
@@ -120,10 +117,7 @@
                     <!-- Form -->
                     <form id="cadastrarEmpresa" is="dmx-serverconnect-form" method="post" action="/api/master/signup" dmx-on:error="notifies1.danger('erro')" dmx-on:success="browser1.goto('/conta-criada')" dmx-on:invalid="notifies1.danger('Por favor, preencha todos os campos obrigatórios.')">
                         <!-- Step 1: Dados da Empresa -->
-                        <div class="card shadow-sm mb-4 rounded-4" dmx-show="currentStep.value === 1">
-                            <div class="card-header bg-white py-3">
-                                <h4 class="mb-0 text-black">Dados da Empresa</h4>
-                            </div>
+                        <div class="card shadow-sm rounded-4" dmx-show="currentStep.value === 1">
                             <div class="card-body bg-light rounded-3">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -155,16 +149,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer bg-white text-end">
-                                <button type="button" class="btn btn-primary" dmx-on:click="currentStep.setValue(2)">Próximo</button>
-                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3" dmx-show="currentStep.value === 1">
+                            <button type="button" class="btn btn-warning btn-lg px-5" dmx-on:click="currentStep.setValue(2)">Próximo</button>
                         </div>
 
                         <!-- Step 2: Dados de Endereço -->
-                        <div class="card shadow-sm mb-4 rounded-3" dmx-show="currentStep.value === 2">
-                            <div class="card-header bg-white py-3">
-                                <h4 class="mb-0 text-black">Dados de Endereço</h4>
-                            </div>
+                        <div class="card shadow-sm rounded-3" dmx-show="currentStep.value === 2">
                             <div class="card-body bg-light rounded-4">
                                 <div class="row">
                                     <div class="col-md-7">
@@ -237,17 +228,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer bg-white">
-                                <button type="button" class="btn btn-secondary" dmx-on:click="currentStep.setValue(1)">Anterior</button>
-                                <button type="button" class="btn btn-primary float-end" dmx-on:click="currentStep.setValue(3)">Próximo</button>
-                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3" dmx-show="currentStep.value === 2">
+                            <button type="button" class="btn btn-light btn-lg px-5" dmx-on:click="currentStep.setValue(1)">Anterior</button>
+                            <button type="button" class="btn btn-warning btn-lg px-5" dmx-on:click="currentStep.setValue(3)">Próximo</button>
                         </div>
 
                         <!-- Step 3: Dados do Usuário -->
-                        <div class="card shadow-sm mb-4 rounded-3" dmx-show="currentStep.value === 3">
-                            <div class="card-header bg-white py-3">
-                                <h4 class="mb-0 text-black">Dados do Usuário</h4>
-                            </div>
+                        <div class="card shadow-sm rounded-3" dmx-show="currentStep.value === 3">
                             <div class="card-body bg-light  rounded-4">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -279,17 +267,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer bg-white">
-                                <button type="button" class="btn btn-secondary" dmx-on:click="currentStep.setValue(2)">Anterior</button>
-                                <button type="button" class="btn btn-primary float-end" dmx-on:click="currentStep.setValue(4)">Próximo</button>
-                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3" dmx-show="currentStep.value === 3">
+                            <button type="button" class="btn btn-light btn-lg px-5" dmx-on:click="currentStep.setValue(2)">Anterior</button>
+                            <button type="button" class="btn btn-warning btn-lg px-5" dmx-on:click="currentStep.setValue(4)">Próximo</button>
                         </div>
 
                         <!-- Step 4: Escolha um plano -->
-                        <div class="card shadow-sm mb-4 rounded-3" dmx-show="currentStep.value === 4">
-                            <div class="card-header bg-white py-3">
-                                <h4 class="mb-0 text-black">Escolha um plano</h4>
-                            </div>
+                        <div class="card shadow-sm rounded-3" dmx-show="currentStep.value === 4">
                             <div class="card-body bg-light  rounded-4">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -326,15 +311,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12 mt-4">
-                                        <button type="button" class="btn btn-secondary" dmx-on:click="currentStep.setValue(3)">Anterior</button>
-                                        <button id="btn2" class="btn btn-primary px-5 float-end" type="button" dmx-on:click="cadastrarEmpresa.submit()">Finalizar Cadastro</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-between mt-3" dmx-show="currentStep.value === 4">
+                            <button type="button" class="btn btn-light btn-lg px-5" dmx-on:click="currentStep.setValue(3)">Anterior</button>
+                            <button id="btn2" class="btn btn-warning btn-lg px-5" type="button" dmx-on:click="cadastrarEmpresa.submit()">Finalizar Cadastro</button>
+                        </div>
                     </form>
+
                 </div>
             </div>
 
@@ -394,6 +378,19 @@
     .step-item {
         margin-top: -7px;
         /* Ajuste para alinhar com a linha fina */
+    }
+
+    /* Estilo personalizado para botões brancos semi-transparentes */
+    .btn-light {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: #fff;
+    }
+
+    .btn-light:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.4);
+        color: #fff;
     }
 </style>
 
