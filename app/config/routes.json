@@ -20,6 +20,11 @@
       "path": "/conta-criada",
       "page": "conta-criada",
       "layout": "main"
+    },
+    {
+      "path": "/backoffice/",
+      "page": "dashboard/inicial",
+      "layout": "backoffice"
     }
   ]
 }

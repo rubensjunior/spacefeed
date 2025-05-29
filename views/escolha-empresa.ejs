@@ -1,26 +1,22 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="escolhaempresa" appConnect="local" -->
+<dmx-serverconnect id="listaEmpresas" url="/api/empresa/listar-minhas-empresas"></dmx-serverconnect>
 <meta name="ac:route" content="/escolha-empresa">
 
 <div class="min-vh-100 login-bg py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="d-flex justify-content-center mb-5">
-                <img class="img-fluid" src="/assets/images/spacefeed-white.png" width="200">
+            <div class="d-flex justify-content-center mb-5 flex-column align-items-center">
+                <img class="img-fluid mb-4" src="/assets/images/spacefeed-white.png" width="200">
+                <h4 class="text-white">Bem-vindo(a) <b>{{usuario.data.queryDados.nome_tratamento}}</b>. Escolha uma empresa.</h4>
             </div>
-            <div class="col-12 col-lg-8 col-xl-7">
-                <div class="card shadow-sm rounded-4">
-                    <div class="card-header bg-white py-3">
-                        <h4 class="mb-0 text-black">Bem-vindo(a) {{usuario.data.queryDados.nome_tratamento}}. Escolha uma Empresa</h4>
-                    </div>
-                    <div class="card-body bg-light rounded-3">
-                        <div class="row">
-                            <div class="col">
-                                <p>Please select your company here...</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-white text-end">
-                        <button type="button" class="btn btn-primary">Confirmar</button>
+        </div>
+        <div class="row justify-content-center g-3" is="dmx-repeat" id="repeatEmpresas" dmx-bind:repeat="listaEmpresas.data.queryMinhasEmpresas" key="id_empresa">
+            <div class="col-12 col-sm-6 col-lg-3 mb-3">
+                <!-- Wrapper condicional: link se ativo, div se inativo -->
+                <div class="card shadow-lg h-100" dmx-class:inactive-card="status_empresa == 'Inativo'" dmx-on:click="run({condition:{outputType:'boolean',if:`status_empresa!=\'Inativo\'`,then:{steps:{run:{outputType:'text',action:`browser1.goto(\'/backoffice/\')`}}}}})">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3 text-center">{{nome_polo}}</h5>
+                        <div class="status-badge text-center" dmx-class:status-pending="status_empresa == 'Pagamento Pendente'" dmx-class:status-active="status_empresa == 'Ativo'" dmx-class:status-inactive="status_empresa == 'Inativo'">{{status_empresa}}</div>
                     </div>
                 </div>
             </div>
