@@ -8,7 +8,7 @@
     <div class="container min-vh-100">
         <div class="row justify-content-center align-items-center min-vh-100">
             <div class="d-flex justify-content-center mb-4 flex-column align-items-center"><img class="img-fluid mb-5" src="/assets/images/spacefeed-white.png" width="200">
-                <div class="col-12 col-lg-8 col-xl-7 mb-4" dmx-show="status.value.isEmpty()">
+                <div class="col-12 col-lg-6 col-xl-5 mb-4" dmx-show="status.value.isEmpty()">
                     <form id="validarCNPJ" is="dmx-serverconnect-form" method="post" action="/api/master/validar-empresa" dmx-on:success="status.setValue(validarCNPJ.data.respostaStatus)">
                         <div class="card shadow-sm mb-4 rounded-4" dmx-show="currentStep.value === 1">
                             <div class="card-body bg-light rounded-3">
