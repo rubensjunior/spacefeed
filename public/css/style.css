@@ -20,7 +20,9 @@
     /* Custom Colors */
     --menu-text: #B8C3E6;  /* Cinza azulado elegante */
 }
-
+.bar-profile{
+    background-color: #000428!important; 
+}
 /* Gradient Backgrounds */
 .login-bg {
     background: linear-gradient(-45deg, 
