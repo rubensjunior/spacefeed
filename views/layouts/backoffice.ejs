@@ -15,12 +15,80 @@
 </head>
 
 <body is="dmx-app" id="backoffice">
-  <div class="wappler-block container-fluid vh-100">
-    <div class="row h-100">
-      <div class="col-12 col-md-4 col-xl-3 bg-primary"></div>
-      <div class="col-12 col-md-8 col-xl-9"><%- await include(content, locals); %></div>
-    </div>
-  </div>
+  <header>
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-backoffice navbar-top">
+      <div class="container">
+        <!-- Logo and Company Selector Group -->
+        <div class="d-flex align-items-center gap-3">
+          <a class="navbar-brand" href="/">
+            <img src="/assets/images/spacefeed-white.png" alt="Logo" class="img-fluid">
+          </a>
+          <select class="form-select" id="company_selector">
+            <option value="">Selecione a Empresa</option>
+            <option value="1">Empresa 1</option>
+            <option value="2">Empresa 2</option>
+            <option value="3">Empresa 3</option>
+          </select>
+        </div>
+
+        <!-- User Profile -->
+        <div class="dropdown">
+          <button class="btn btn-link text-white text-decoration-none dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle me-2"></i>
+            <span>John Doe</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i>Perfil</a></li>
+            <li><a class="dropdown-item" href="/settings"><i class="fas fa-cog me-2"></i>Configurações</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt me-2"></i>Sair</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Bottom Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-backoffice">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item mb-2 mb-md-0">
+              <a class="nav-link active px-3" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item mb-2 mb-md-0">
+              <a class="nav-link px-3" href="/users">Usuários</a>
+            </li>
+            <li class="nav-item mb-2 mb-md-0">
+              <a class="nav-link px-3" href="/products">Produtos</a>
+            </li>
+            <li class="nav-item mb-2 mb-md-0">
+              <a class="nav-link px-3" href="/reports">Relatórios</a>
+            </li>
+          </ul>
+
+          <form class="search-form d-none d-md-flex">
+            <div class="position-relative">
+              <input class="form-control pe-4" type="search" placeholder="Buscar..." aria-label="Search">
+              <i class="fas fa-search position-absolute search-icon"></i>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="py-4 container">
+    <%- await include(content, locals); %>
+  </main>
+
   <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
 </body>
 
