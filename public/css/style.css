@@ -28,7 +28,8 @@
         #004e92 100%
     );
     background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    -webkit-animation: gradient 15s ease infinite;
+            animation: gradient 15s ease infinite;
 }
 
 .navbar-gradient {
@@ -38,8 +39,21 @@
     );
     min-height: 100vh;
 }
-
+.bg-profile{
+    background-color: orange;
+}
 /* Animation */
+@-webkit-keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
@@ -52,14 +66,29 @@
     }
 }
 
-@keyframes dropdownFade {
+@-webkit-keyframes dropdownFade {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        -webkit-transform: translateY(-10px);
+                transform: translateY(-10px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+    }
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(-10px);
+                transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
     }
 }
 
@@ -67,7 +96,8 @@
 .navbar-backoffice {
     background-color: transparent;
     padding: 0.75rem 0;
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
 }
 
 .navbar-backoffice.navbar-top {
@@ -77,30 +107,52 @@
 }
 
 .navbar-backoffice.navbar-bottom {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    -webkit-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     position: relative;
     z-index: 1020;
+}
+
+.navbar-backoffice.navbar-bottom .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
 }
 
 /* Logo */
 .navbar-backoffice .navbar-brand {
     padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .navbar-backoffice .navbar-brand img {
     width: 140px;
     height: auto;
-    object-fit: contain;
+    -o-object-fit: contain;
+       object-fit: contain;
 }
 
 /* Company Select */
 .company-select-wrapper {
-    margin-right: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     gap: 0.5rem;
+    margin-left: auto;
 }
 
 .navbar-backoffice .form-select {
@@ -112,11 +164,14 @@
     padding-top: 0.375rem;
     padding-bottom: 0.375rem;
     height: auto;
+    /* Ícone branco do select */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
 }
 
 .navbar-backoffice .form-select:focus {
     border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
     background-color: rgba(0, 4, 40, 0.3);
 }
 
@@ -135,24 +190,32 @@
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    -webkit-transition: background-color var(--animation-speed-fast) var(--ease-default);
     transition: background-color var(--animation-speed-fast) var(--ease-default);
     white-space: nowrap;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .user-profile-trigger:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: orange;
 }
 
 .user-profile-dropdown .dropdown-menu {
     margin-top: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     border: none;
-    animation: dropdownFade var(--animation-speed-fast) var(--ease-default);
+    -webkit-animation: dropdownFade var(--animation-speed-fast) var(--ease-default);
+            animation: dropdownFade var(--animation-speed-fast) var(--ease-default);
 }
 
 .user-profile-dropdown .list-group-item {
+    -webkit-transition: all var(--animation-speed-fast) var(--ease-default);
     transition: all var(--animation-speed-fast) var(--ease-default);
     padding: 0.75rem 0;
 }
@@ -168,8 +231,12 @@
 
 /* Navigation Links */
 .navbar-backoffice .navbar-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .navbar-backoffice .navbar-nav .nav-item {
@@ -178,8 +245,10 @@
 
 .navbar-backoffice .navbar-nav .nav-link {
     color: var(--menu-text);
+    -webkit-transition: all var(--animation-speed-fast) var(--ease-default);
     transition: all var(--animation-speed-fast) var(--ease-default);
     font-size: 14px;
+    font-weight: 500;
     letter-spacing: 0.3px;
     padding: 0.5rem 1.25rem;
     line-height: 1;
@@ -197,16 +266,20 @@
     bottom: 0;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50rem;
-    transform-origin: center;
-    transform: scale(0.85);
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: scale(0.85);
+            transform: scale(0.85);
     opacity: 0;
+    -webkit-transition: all var(--animation-speed-fast) var(--ease-default);
     transition: all var(--animation-speed-fast) var(--ease-default);
     z-index: -1;
 }
 
 .navbar-backoffice .navbar-nav .nav-link:hover::before,
 .navbar-backoffice .navbar-nav .nav-link.active::before {
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
     opacity: 1;
 }
 
@@ -220,10 +293,12 @@
     padding: 0.25rem;
     border: none;
     color: var(--menu-text);
+    margin-right: 1rem;
 }
 
 .navbar-backoffice .navbar-toggler:focus {
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 /* Responsive Styles */
@@ -255,24 +330,10 @@
         margin: 0 !important;
     }
 
-    /* Mantém select e botão na mesma linha */
-    .company-select-wrapper {
-        width: auto;
-        margin-bottom: 0;
-        flex-wrap: nowrap;
-    }
-
-    /* Reduz tamanho do select em mobile */
-    .company-select-wrapper .form-select {
-        width: 140px;
-        font-size: 0.875rem;
-        padding: 0.25rem 1.75rem 0.25rem 0.5rem;
-    }
-
-    /* Reduz tamanho do botão em mobile */
-    .company-select-wrapper .btn {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
+    /* Layout do navbar inferior em mobile */
+    .navbar-backoffice.navbar-bottom .container {
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
     }
 
     .navbar-backoffice .navbar-collapse {
@@ -284,7 +345,24 @@
         padding: 1rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         z-index: 1000;
-        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+                backdrop-filter: blur(8px);
+    }
+
+    /* Ajustes do select em mobile */
+    .company-select-wrapper {
+        margin-left: 0;
+    }
+
+    .company-select-wrapper .form-select {
+        width: 140px;
+        font-size: 0.875rem;
+        padding: 0.25rem 1.75rem 0.25rem 0.5rem;
+    }
+
+    .company-select-wrapper .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
     }
 
     .user-profile-dropdown .dropdown-menu {
@@ -292,7 +370,8 @@
         top: auto !important;
         left: 50% !important;
         right: auto !important;
-        transform: translateX(-50%) !important;
+        -webkit-transform: translateX(-50%) !important;
+                transform: translateX(-50%) !important;
         width: calc(100% - 2rem) !important;
         max-width: 280px;
         margin: 0.5rem auto !important;
@@ -300,7 +379,10 @@
 
     .navbar-backoffice .navbar-nav {
         margin-top: 1rem;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         width: 100%;
     }
 
