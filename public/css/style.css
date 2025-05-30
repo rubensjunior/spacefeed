@@ -39,40 +39,7 @@
     min-height: 100vh;
 }
 
-/* Company Selector Button */
-.btn-selector {
-    color: var(--menu-text);
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.375rem 1rem;
-    font-size: 0.875rem;
-    border-radius: 0.5rem;
-    transition: all var(--animation-speed-fast) var(--ease-default);
-}
-
-.btn-selector:hover {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
-}
-
-.btn-selector:active {
-    transform: translateY(0);
-}
-
-.btn-selector:focus {
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
-}
-
-.btn-selector i {
-    transition: transform var(--animation-speed-fast) var(--ease-default);
-}
-
-.btn-selector:hover i {
-    transform: scale(1.1);
-}
-
+/* Animation */
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
@@ -85,6 +52,17 @@
     }
 }
 
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Backoffice Navbar Styles */
 .navbar-backoffice {
     background-color: transparent;
@@ -94,12 +72,17 @@
 
 .navbar-backoffice.navbar-top {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1030;
 }
 
 .navbar-backoffice.navbar-bottom {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1020;
 }
 
+/* Logo */
 .navbar-backoffice .navbar-brand {
     padding: 0;
     display: flex;
@@ -112,14 +95,16 @@
     object-fit: contain;
 }
 
-.navbar-backoffice .selector-group {
+/* Company Select */
+.company-select-wrapper {
+    margin-right: 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
 .navbar-backoffice .form-select {
-    max-width: 200px;
+    width: 200px;
     background-color: rgba(0, 4, 40, 0.2);
     color: #fff;
     border-style: dashed;
@@ -143,6 +128,7 @@
 /* User Profile Dropdown */
 .user-profile-dropdown {
     position: relative;
+    z-index: 1031;
 }
 
 .user-profile-trigger {
@@ -150,6 +136,9 @@
     padding: 0.5rem;
     border-radius: 0.5rem;
     transition: background-color var(--animation-speed-fast) var(--ease-default);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .user-profile-trigger:hover {
@@ -175,28 +164,6 @@
 
 .user-profile-dropdown .list-group-item.text-danger:hover {
     background-color: rgba(220, 53, 69, 0.1);
-}
-
-@keyframes dropdownFade {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Navbar Toggle Button */
-.navbar-backoffice .navbar-toggler {
-    padding: 0.25rem;
-    border: none;
-    color: var(--menu-text);
-}
-
-.navbar-backoffice .navbar-toggler:focus {
-    box-shadow: none;
 }
 
 /* Navigation Links */
@@ -248,8 +215,66 @@
     color: #fff;
 }
 
-/* Mobile Menu */
+/* Navbar Toggle Button */
+.navbar-backoffice .navbar-toggler {
+    padding: 0.25rem;
+    border: none;
+    color: var(--menu-text);
+}
+
+.navbar-backoffice .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+    .navbar-backoffice .navbar-brand img {
+        width: 120px;
+    }
+
+    .company-select-wrapper .form-select {
+        width: 180px;
+    }
+}
+
 @media (max-width: 767.98px) {
+    .navbar-backoffice .navbar-brand img {
+        width: 100px;
+    }
+
+    /* Oculta nome e seta do perfil em mobile */
+    .user-profile-trigger span,
+    .user-profile-trigger i {
+        display: none;
+    }
+
+    /* Ajusta avatar do perfil */
+    .user-profile-trigger .rounded-circle {
+        width: 32px !important;
+        height: 32px !important;
+        margin: 0 !important;
+    }
+
+    /* Mantém select e botão na mesma linha */
+    .company-select-wrapper {
+        width: auto;
+        margin-bottom: 0;
+        flex-wrap: nowrap;
+    }
+
+    /* Reduz tamanho do select em mobile */
+    .company-select-wrapper .form-select {
+        width: 140px;
+        font-size: 0.875rem;
+        padding: 0.25rem 1.75rem 0.25rem 0.5rem;
+    }
+
+    /* Reduz tamanho do botão em mobile */
+    .company-select-wrapper .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
     .navbar-backoffice .navbar-collapse {
         position: absolute;
         top: 100%;
@@ -262,15 +287,21 @@
         backdrop-filter: blur(8px);
     }
 
-    .navbar-backoffice .navbar-collapse.collapse:not(.show) {
-        display: none !important;
+    .user-profile-dropdown .dropdown-menu {
+        position: fixed !important;
+        top: auto !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: calc(100% - 2rem) !important;
+        max-width: 280px;
+        margin: 0.5rem auto !important;
     }
 
     .navbar-backoffice .navbar-nav {
+        margin-top: 1rem;
         flex-direction: column;
         width: 100%;
-        padding: 0;
-        margin: 0;
     }
 
     .navbar-backoffice .navbar-nav .nav-item {
@@ -281,70 +312,8 @@
     .navbar-backoffice .navbar-nav .nav-link {
         padding: 0.75rem 1.25rem;
         display: block;
-        text-align: left;
+        text-align: center;
     }
-
-    .navbar-backoffice .navbar-nav .nav-link::before {
-        transform: scale(0.97);
-    }
-}
-
-/* Desktop Menu */
-@media (min-width: 768px) {
-    .navbar-backoffice .navbar-collapse {
-        display: flex !important;
-        align-items: center;
-        height: 40px;
-    }
-
-    .navbar-backoffice .navbar-nav {
-        flex-direction: row;
-        gap: 0.75rem;
-    }
-}
-
-/* Search Form */
-.navbar-backoffice .search-form {
-    width: 300px;
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-backoffice .search-form .position-relative {
-    width: 100%;
-}
-
-.navbar-backoffice .search-form .form-control {
-    background-color: rgba(0, 4, 40, 0.2);
-    border-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    padding: 0.5rem 0.75rem;
-    height: 36px;
-    width: 100%;
-}
-
-.navbar-backoffice .search-form .search-icon {
-    color: rgba(255, 255, 255, 0.5);
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    font-size: 0.875rem;
-}
-
-.navbar-backoffice .search-form .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.navbar-backoffice .search-form .form-control:focus {
-    background-color: rgba(0, 4, 40, 0.3);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: none;
-}
-
-.navbar-backoffice .search-form .form-control:focus + .search-icon {
-    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Main Content Area */

@@ -16,28 +16,18 @@
 
 <body is="dmx-app" id="backoffice" class="navbar-gradient min-vh-100">
   <header class="mb-3">
-    <!-- Top Navbar -->
+    <!-- Top Navbar - Logo e Perfil -->
     <nav class="navbar navbar-backoffice navbar-top">
-      <div class="container">
-        <!-- Logo and Company Selector Group -->
-        <div class="d-flex align-items-center gap-3">
-          <a class="navbar-brand" href="/">
-            <img src="/assets/images/spacefeed-white.png" alt="Logo" class="img-fluid">
-          </a>
-          <select class="form-select" id="company_selector">
-            <option value="">Selecione a Empresa</option>
-            <option value="1">Empresa 1</option>
-            <option value="2">Empresa 2</option>
-            <option value="3">Empresa 3</option>
-          </select>
-          <button id="btn1" class="btn btn-warning"><i class="fas fa-plus"></i></button>
-        </div>
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="/">
+          <img src="/assets/images/spacefeed-white.png" alt="Logo" class="img-fluid">
+        </a>
 
         <!-- User Profile -->
         <div class="dropdown user-profile-dropdown">
           <div class="d-flex align-items-center text-white user-profile-trigger" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="rounded-circle overflow-hidden me-2" style="width: 40px; height: 40px;">
-              <img src="https://via.placeholder.com/80" alt="User Avatar" class="img-fluid">
+              <img src="/assets/images/avatar.png" alt="User Avatar" class="img-fluid">
             </div>
             <span class="me-2">John Doe</span>
             <i class="fas fa-chevron-down"></i>
@@ -48,7 +38,7 @@
               <div class="card-body p-3">
                 <div class="d-flex align-items-center mb-3">
                   <div class="rounded-circle overflow-hidden me-3" style="width: 64px; height: 64px;">
-                    <img src="https://via.placeholder.com/128" alt="User Avatar" class="img-fluid">
+                    <img src="/assets/images/avatar.png" alt="User Avatar" class="img-fluid">
                   </div>
                   <div>
                     <h6 class="mb-1">John Doe</h6>
@@ -73,15 +63,25 @@
         </div>
       </div>
     </nav>
-    <!-- Bottom Navbar -->
+
+    <!-- Bottom Navbar - Select e Links -->
     <nav class="navbar navbar-expand-md navbar-dark navbar-backoffice navbar-bottom">
       <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="d-flex align-items-center company-select-wrapper">
+          <select class="form-select me-2" id="company_selector">
+            <option value="">Selecione a Empresa</option>
+            <option value="1">Empresa 1</option>
+            <option value="2">Empresa 2</option>
+            <option value="3">Empresa 3</option>
+          </select>
+        </div>
+
+        <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars text-white"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMenu">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
             <li class="nav-item mb-2 mb-md-0">
               <a class="nav-link active px-3" href="/dashboard">Dashboard</a>
             </li>
@@ -95,13 +95,6 @@
               <a class="nav-link px-3" href="/reports">Relatórios</a>
             </li>
           </ul>
-
-          <form class="search-form d-none d-md-flex">
-            <div class="position-relative">
-              <input class="form-control pe-4" type="search" placeholder="Buscar..." aria-label="Search">
-              <i class="fas fa-search position-absolute search-icon"></i>
-            </div>
-          </form>
         </div>
       </div>
     </nav>
