@@ -17,9 +17,11 @@
                     <div class="card-body cursor-selecionar">
                         <h5 class="card-title mb-3 text-center text-truncate">{{nome_polo}}</h5>
                         <div class="d-flex justify-content-center">
-                            <span class="badge rounded-pill text-center px-3 d-inline-flex align-items-center" dmx-class:bg-warning="status_empresa == 'Pagamento Pendente'" dmx-class:bg-success="status_empresa == 'Ativo'" dmx-class:bg-secondary="status_empresa == 'Inativo'">
-                                <i class="fas fa-circle me-1" dmx-class:text-warning="status_empresa == 'Pagamento Pendente'" dmx-class:text-success="status_empresa == 'Ativo'" dmx-class:text-secondary="status_empresa == 'Inativo'"></i>
-                                {{status_empresa}}
+                            <span class="badge rounded-pill" dmx-class:bg-warning="status_empresa == 'Pagamento Pendente'" dmx-class:bg-success="status_empresa == 'Ativo'" dmx-class:bg-secondary="status_empresa == 'Inativo'">
+                                <div class="d-flex align-items-center justify-content-center px-3">
+                                    <i class="fas fa-circle me-1" dmx-class:text-warning="status_empresa == 'Pagamento Pendente'" dmx-class:text-success="status_empresa == 'Ativo'" dmx-class:text-secondary="status_empresa == 'Inativo'"></i>
+                                    <span>{{status_empresa}}</span>
+                                </div>
                             </span>
                         </div>
                     </div>
