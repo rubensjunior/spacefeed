@@ -31,8 +31,18 @@
       "remoteURL": "http://localhost:3000/",
       "access": "local",
       "targetType": "wappler"
+    },
+    {
+      "name": "Producai",
+      "remoteURL": "https://sun.spacefeed.app",
+      "access": "ftp",
+      "usage": "production",
+      "ftpServer": "ftp.rubensbentes.com.br",
+      "ftpUser": "master@sun.spacefeed.app",
+      "ftpPassword": "v2:221a419388b2e2adc77f8849d69c7da3a0af05c976f78f2d"
     }
   ],
   "activeTarget": "Development",
-  "projectType": "web"
+  "projectType": "web",
+  "extensions": []
 }

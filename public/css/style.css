@@ -19,10 +19,59 @@
 
     /* Custom Colors */
     --menu-text: #B8C3E6;  /* Cinza azulado elegante */
+    --menu-active: #0011A8; /* Cor de fundo quando ativo */
+}
+
+.bg-blue{
+    background-color: #0f1838;
+}
+
+
+/* Loading Overlay */
+.view-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 17, 168, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    -webkit-animation: fadeIn 0.3s ease-out forwards;
+            animation: fadeIn 0.3s ease-out forwards;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .bar-profile{
-    background-color: #000428!important; 
+    background-color: #010B1B!important; 
 }
 
 /* Gradient Backgrounds */
@@ -37,11 +86,12 @@
 }
 
 .navbar-gradient {
-    background: linear-gradient(135deg, 
+    /*background: linear-gradient(135deg, 
         #000428 0%,
         #004e92 100%
     );
-    min-height: 100vh;
+    min-height: 100vh;*/
+    background-color: #000428;
 }
 
 .bg-profile{
@@ -108,12 +158,12 @@
 }
 
 .navbar-backoffice.navbar-top {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     z-index: 1030;
 }
 
 .navbar-backoffice.navbar-bottom {
+    padding: 0.875rem 0;
     -webkit-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     position: relative;
@@ -140,9 +190,9 @@
     font-size: 15px;
     font-weight: 400;
     letter-spacing: 0.3px;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1.5rem;
     line-height: 1;
-    border-radius: 50rem;
+    border-radius: 0.5rem;
     position: relative;
     z-index: 1;
     cursor: pointer;
@@ -150,7 +200,15 @@
 
 .nav-text:hover {
     color: #fff;
+    padding: 0.75rem 1.5rem;
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active .nav-text,
+.nav-text.active {
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--menu-active);
 }
 
 /* Logo */
