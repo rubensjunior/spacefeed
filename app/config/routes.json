@@ -27,5 +27,10 @@
       "page": "dashboard/inicial",
       "layout": "backoffice"
     }
-  ]
+  ],
+  "layouts": {
+    "backoffice": {
+      "exec": "/api/autenticacao/pagina-restrita"
+    }
+  }
 }
