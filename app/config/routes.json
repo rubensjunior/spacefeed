@@ -26,6 +26,31 @@
       "path": "/backoffice/",
       "page": "dashboard/inicial",
       "layout": "backoffice"
+    },
+    {
+      "path": "/backoffice/unidades",
+      "page": "dashboard/unidades",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/backoffice/colaboradores",
+      "page": "dashboard/colaboradores",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/backoffice/postagens",
+      "page": "dashboard/postagens",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/backoffice/notificacoes-push",
+      "page": "dashboard/notificacoes-push",
+      "layout": "backoffice"
+    },
+    {
+      "path": "/backoffice/suporte",
+      "page": "dashboard/suporte",
+      "layout": "backoffice"
     }
   ],
   "layouts": {

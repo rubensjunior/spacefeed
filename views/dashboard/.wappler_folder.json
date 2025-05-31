@@ -2,5 +2,25 @@
   "inicial.ejs": {
     "layoutPage": "backoffice",
     "description": ""
+  },
+  "unidades.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "colaboradores.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "postagens.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "notificacoes-push.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
+  },
+  "suporte.ejs": {
+    "layoutPage": "backoffice",
+    "description": ""
   }
 }
