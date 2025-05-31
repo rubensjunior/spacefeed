@@ -3,7 +3,6 @@
 
 <head>
   <base href="/">
-  <script src="/dmxAppConnect/dmxAppConnect.js"></script>
   <meta charset="UTF-8">
   <title>Backoffice</title>
 
@@ -11,19 +10,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/bootstrap/5/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/style.css" />
+  <script src="/dmxAppConnect/dmxAppConnect.js"></script>
+
   <script src="/dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
   <script src="/dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
+  <script src="/dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
 </head>
 
 <body is="dmx-app" id="backoffice" class="navbar-gradient min-vh-100">
 
+
   <div is="dmx-browser" id="navegacao"></div>
   <dmx-serverconnect id="deslogar" url="/api/autenticacao/sair" credentials="true" noload="true" dmx-on:success="navegacao.reload()"></dmx-serverconnect><dmx-serverconnect id="usuarioLogado" url="/api/autenticacao/identificar-usuario"></dmx-serverconnect>
+  <dmx-serverconnect id="listarMinhasEmpresa" url="/api/empresa/listar-minhas-empresas"></dmx-serverconnect>
   <header class="mb-3">
     <!-- Top Navbar - Logo e Perfil -->
-    <nav class="navbar navbar-backoffice navbar-top bar-profile">
+    <nav class="navbar navbar-backoffice navbar-top">
       <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="/backoffice/">
+        <a class="navbar-brand" href="/backoffice/" internal="true">
           <img src="/assets/images/spacefeed-white.png" alt="Logo" class="img-fluid">
         </a>
 
@@ -69,7 +73,7 @@
     </nav>
 
     <!-- Bottom Navbar - Links e Select -->
-    <nav class="navbar navbar-expand-md navbar-dark navbar-backoffice navbar-bottom">
+    <nav class="navbar navbar-expand-md navbar-dark navbar-backoffice navbar-bottom bar-profile">
       <div class="container ">
         <!-- Links -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,19 +83,19 @@
         <div class="collapse navbar-collapse" id="navbarMenu">
           <ul class="navbar-nav">
             <li class="nav-item mb-2 mb-md-0">
-              <a class="nav-link active px-3" href="/backoffice/unidades">Unidades</a>
+              <a href="/backoffice/unidades" class="nav-link nav-text" internal="true">Unidades</a>
             </li>
             <li class="nav-item mb-2 mb-md-0">
-              <a class="nav-link px-3" href="/backoffice/colaboradores">Colaboradores</a>
+              <a href="/backoffice/colaboradores" class="nav-link nav-text" internal="true">Colaboradores</a>
             </li>
             <li class="nav-item mb-2 mb-md-0">
-              <a class="nav-link px-3" href="/backoffice/postagens">Postagens</a>
+              <a href="/backoffice/postagens" class="nav-link nav-text" internal="true">Postagens</a>
             </li>
             <li class="nav-item mb-2 mb-md-0">
-              <a class="nav-link px-3" href="/backoffice/notificacoes-push">Notificações Push</a>
+              <a href="/backoffice/notificacoes-push" class="nav-link nav-text" internal="true">Notificações Push</a>
             </li>
             <li class="nav-item mb-2 mb-md-0">
-              <a class="nav-link px-3" href="/backoffice/suporte">Suporte</a>
+              <a href="/backoffice/suporte" class="nav-link nav-text" internal="true">Suporte</a>
             </li>
           </ul>
         </div>
@@ -110,11 +114,14 @@
   </header>
 
   <!-- Main Content Area -->
-  <main class="py-4 container">
+  <main is="dmx-view" id="content" class="py-4 container">
     <%- await include(content, locals); %>
   </main>
 
+
+
   <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

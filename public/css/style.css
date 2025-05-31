@@ -20,9 +20,11 @@
     /* Custom Colors */
     --menu-text: #B8C3E6;  /* Cinza azulado elegante */
 }
+
 .bar-profile{
     background-color: #000428!important; 
 }
+
 /* Gradient Backgrounds */
 .login-bg {
     background: linear-gradient(-45deg, 
@@ -41,9 +43,11 @@
     );
     min-height: 100vh;
 }
+
 .bg-profile{
     background-color: orange;
 }
+
 /* Animation */
 @-webkit-keyframes gradient {
     0% {
@@ -56,6 +60,7 @@
         background-position: 0% 50%;
     }
 }
+
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
@@ -125,6 +130,27 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
+}
+
+/* Style for navigation text items */
+.nav-text {
+    color: var(--menu-text);
+    -webkit-transition: all var(--animation-speed-fast) var(--ease-default);
+    transition: all var(--animation-speed-fast) var(--ease-default);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    padding: 0.5rem 2rem;
+    line-height: 1;
+    border-radius: 50rem;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.nav-text:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Logo */
@@ -245,51 +271,6 @@
     position: relative;
 }
 
-.navbar-backoffice .navbar-nav .nav-link {
-    color: var(--menu-text);
-    -webkit-transition: all var(--animation-speed-fast) var(--ease-default);
-    transition: all var(--animation-speed-fast) var(--ease-default);
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    padding: 0.5rem 2rem;
-    line-height: 1;
-    border-radius: 50rem;
-    position: relative;
-    z-index: 1;
-}
-
-.navbar-backoffice .navbar-nav .nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50rem;
-    -webkit-transform-origin: center;
-            transform-origin: center;
-    -webkit-transform: scale(0.85);
-            transform: scale(0.85);
-    opacity: 0;
-    -webkit-transition: all var(--animation-speed-fast) var(--ease-default);
-    transition: all var(--animation-speed-fast) var(--ease-default);
-    z-index: -1;
-}
-
-.navbar-backoffice .navbar-nav .nav-link:hover::before,
-.navbar-backoffice .navbar-nav .nav-link.active::before {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 1;
-}
-
-.navbar-backoffice .navbar-nav .nav-link:hover,
-.navbar-backoffice .navbar-nav .nav-link.active {
-    color: #fff;
-}
-
 /* Navbar Toggle Button */
 .navbar-backoffice .navbar-toggler {
     padding: 0.25rem;
@@ -393,10 +374,11 @@
         margin-bottom: 0.5rem;
     }
 
-    .navbar-backoffice .navbar-nav .nav-link {
+    .nav-text {
         padding: 0.75rem 1.25rem;
         display: block;
         text-align: center;
+        width: 100%;
     }
 }
 

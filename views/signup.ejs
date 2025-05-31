@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group mb-3"> <label for="nome_polo" class="form-label">CNPJ</label>
-                                            <input type="text" class="form-control form-control-lg" id="cnpj" name="cnpj" required="" data-msg-required="Por favor, informe o CNPJ" pattern="^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$" data-msg-pattern="Por favor, informe um CNPJ válido">
+                                            <input type="text" class="form-control form-control-lg" id="cnpj" name="cnpj" required="" data-msg-required="Por favor, informe o CNPJ" pattern="^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$" data-msg-pattern="Por favor, informe um CNPJ válido" readonly="true" dmx-bind:value="validarCNPJ.validacnpj.value">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
