@@ -28,18 +28,21 @@
   "targets": [
     {
       "name": "Development",
-      "remoteURL": "http://localhost:3000/",
-      "access": "local",
-      "targetType": "wappler"
+      "remoteURL": "https://sun.spacefeed.app/",
+      "access": "ftp",
+      "usage": "production",
+      "ftpServer": "ftp.rubensbentes.com.br",
+      "ftpUser": "master@sun.spacefeed.app",
+      "ftpPassword": "v2:fbb9a1e0ce851af9f445f1d3f7450dc696b78bf01a85a19b"
     },
     {
-      "name": "Producai",
+      "name": "Producao",
       "remoteURL": "https://sun.spacefeed.app",
       "access": "ftp",
       "usage": "production",
       "ftpServer": "ftp.rubensbentes.com.br",
       "ftpUser": "master@sun.spacefeed.app",
-      "ftpPassword": "v2:221a419388b2e2adc77f8849d69c7da3a0af05c976f78f2d"
+      "ftpPassword": "v2:289ff7c5ca1e3cd0987dd39746a64a66bacc080ecee18214"
     }
   ],
   "activeTarget": "Development",

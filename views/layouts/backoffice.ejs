@@ -15,9 +15,11 @@
   <script src="/dmxAppConnect/dmxRouting/dmxRouting.js" defer></script>
   <script src="/dmxAppConnect/dmxBrowser/dmxBrowser.js" defer></script>
   <script src="/dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
+  <link rel="stylesheet" href="/dmxAppConnect/dmxValidator/dmxValidator.css" />
+  <script src="/dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
 </head>
 
-<body is="dmx-app" id="backoffice" class="navbar-gradient min-vh-100">
+<body is="dmx-app" id="backoffice" class="navbar-gradient">
 
 
   <div is="dmx-browser" id="navegacao"></div>
@@ -116,7 +118,7 @@
   </header>
 
   <!-- Main Content Area -->
-  <main is="dmx-view" id="content" class="py-4 container position-relative">
+  <main is="dmx-view" id="content" class="py-4 container">
     <!-- Loading Overlay -->
     <div class="view-loading-overlay" dmx-show="content.loading">
       <div class="d-flex flex-column align-items-center">

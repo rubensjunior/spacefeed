@@ -1,2 +1,216 @@
-<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="unidades" appConnect="local" -->
+<!-- Wappler include head-page="layouts/backoffice" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="unidades" appConnect="local" components="{dmxValidator:{}}" -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 bar-profile p-4 text-white rounded-4">
+            <dmx-value id="currentStep" dmx-bind:value="1"></dmx-value>
+
+            <!-- Progress Bar -->
+
+            <!-- Form -->
+            <form id="cadastrarUnidade" is="dmx-serverconnect-form" method="post" action="/api/backoffice/unidades/adicionar" dmx-on:error="notifies1.danger('erro')" dmx-on:invalid="notifies1.danger('Por favor, preencha todos os campos obrigatórios.')">
+                <!-- Step 1: Dados da Empresa -->
+                <div class="card bg-transparent border-0" dmx-show="currentStep.value === 1">
+                    <div class="card-body px-0">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label for="nome_polo" class="form-label">Nome do Polo</label>
+                                    <input type="text" class="form-control form-control-lg" id="nome_polo" name="nome_polo" required="" data-msg-required="Por favor, informe o Nome do Polo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="nome_polo" class="form-label">CNPJ</label>
+                                    <input type="text" class="form-control form-control-lg" id="cnpj" name="cnpj" required="" data-msg-required="Por favor, informe o CNPJ" pattern="^[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}$" data-msg-pattern="Por favor, informe um CNPJ válido">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="whatsapp" class="form-label">Whatspp</label>
+                                    <input type="text" class="form-control form-control-lg" id="whatsapp" name="whatsapp" required="" data-msg-required="Por favor, informe o WhatsApp" pattern="^\([0-9]{2}\) [0-9] [0-9]{4}\-[0-9]{4}$" data-msg-pattern="Por favor, informe um número de WhatsApp válido">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end mt-3" dmx-show="currentStep.value === 1">
+                    <button type="button" class="btn btn-warning btn-lg w-100" dmx-on:click="currentStep.setValue(2)">Próximo</button>
+                </div>
+
+                <!-- Step 2: Dados de Endereço -->
+                <div class="card bg-transparent border-0" dmx-show="currentStep.value === 2">
+                    <div class="card-body px-0">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-group mb-3">
+                                    <label for="logradouro" class="form-label">Logradouro</label>
+                                    <input type="text" class="form-control form-control-lg" id="logradouro" name="logradouro" required="" data-msg-required="Por favor, informe o Logradouro">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-3">
+                                    <label for="numero" class="form-label">Número</label>
+                                    <input type="text" class="form-control form-control-lg" id="numero" name="numero" required="" data-msg-required="Por favor, informe o Número">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label for="cep" class="form-label">CEP</label>
+                                    <input type="text" class="form-control form-control-lg" id="cep" name="cep" required="" data-msg-required="Por favor, informe o CEP" pattern="^[0-9]{5}\-[0-9]{3}$" data-msg-pattern="Por favor, informe um CEP válido">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <label for="complemento" class="form-label">Complemento</label>
+                                    <input type="text" class="form-control form-control-lg" id="complemento" name="complemento">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="bairro" class="form-label">Bairro</label>
+                                    <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" required="" data-msg-required="Por favor, informe o Bairro">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="cidade" class="form-label">Cidade</label>
+                                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" required="" data-msg-required="Por favor, informe a Cidade">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                    <label for="nome_completo" class="form-label">Estado</label>
+                                    <select id="estado" class="form-select form-select-lg" name="estado" required="" data-msg-required="Por favor, selecione um Estado">
+                                        <option value="">Selecione um estado</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="TO">Tocantins</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3" dmx-show="currentStep.value === 2">
+                    <button type="button" class="btn btn-light btn-lg w-100 me-2" dmx-on:click="currentStep.setValue(1)">Anterior</button>
+                    <button type="submit" class="btn btn-warning btn-lg w-100">Adicionar Unidade</button>
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<!-- Add styles -->
+<style>
+    /* Progress bar styling */
+    .progress-bar {
+        transition: width 0.3s ease-in-out;
+    }
+
+    .progress {
+        height: 2px;
+    }
+
+    .rounded-circle {
+        transition: all 0.3s ease;
+    }
+
+    /* Step progress styling */
+    .step-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: transparent;
+        transition: all 0.3s ease;
+    }
+
+    .step-circle.active {
+        background: #fff;
+        color: #000;
+    }
+
+    .step-label {
+        margin-left: 0.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+    }
+
+    .step-label.active {
+        color: #fff;
+    }
+
+    .step-item {
+        margin-top: -7px;
+    }
+
+    /* Button styling */
+    .btn-light {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+
+    .btn-light:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: #fff;
+    }
+
+    /* Cards */
+    .card {
+        background-color: transparent;
+        border: none;
+    }
+
+    .card-body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+</style>
+
 <meta name="ac:route" content="/backoffice/unidades">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#cep').mask('00000-000');
+        $('#cnpj').mask('00.000.000/0000-00');
+        $('#whatsapp').mask('(00) 0 0000-0000');
+    });
+</script>
